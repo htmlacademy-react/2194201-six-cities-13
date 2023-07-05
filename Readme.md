@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
-* Студент: [Денис Левчев](https://up.htmlacademy.ru/react/13/user/2194201).
-* Наставник: `Неизвестно`.
+- Студент: [Денис Левчев](https://up.htmlacademy.ru/react/13/user/2194201).
+- Наставник: [Павел Севостьянов](https://htmlacademy.ru/profile/pavel).
 
 ---
 
