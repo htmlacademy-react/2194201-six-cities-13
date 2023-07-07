@@ -1,5 +1,5 @@
 import PlaceCard from '../../components/place-card/place-card';
-import { Setting } from '../../components/consts';
+import { CardList } from '../../components/consts';
 
 function MainScreen() {
   return (
@@ -112,7 +112,9 @@ function MainScreen() {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCard maxCards={Setting.maxCards} />
+                {CardList.map((card) => (
+                  <PlaceCard card={card} key={Math.random()} />
+                ))}
               </div>
             </section>
             <div className="cities__right-section">

@@ -1,8 +1,10 @@
-type AppCardsProps = {
-  maxCards: number;
+import { Cards } from '../../types/card-data';
+
+type Add = {
+  card: Cards;
 };
 
-function PlaceCard({ maxCards }: AppCardsProps): JSX.Element {
+function PlaceCard({ card }: Add): JSX.Element {
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">
@@ -12,7 +14,7 @@ function PlaceCard({ maxCards }: AppCardsProps): JSX.Element {
         <a href="#">
           <img
             className="place-card__image"
-            src="img/apartment-01.jpg"
+            src={card.previewImage}
             width={260}
             height={200}
             alt="Place image"
@@ -22,7 +24,7 @@ function PlaceCard({ maxCards }: AppCardsProps): JSX.Element {
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">€120</b>
+            <b className="place-card__price-value">€{card.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button className="place-card__bookmark-button button" type="button">
@@ -39,9 +41,9 @@ function PlaceCard({ maxCards }: AppCardsProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">Beautiful &amp; luxurious apartment at great location</a>
+          <a href="#">{card.title}</a>
         </h2>
-        <p className="place-card__type">Apartment</p>
+        <p className="place-card__type">{card.type}</p>
       </div>
     </article>
   );
