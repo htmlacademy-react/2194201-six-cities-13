@@ -1,4 +1,5 @@
 import PlaceCard from '../../components/place-card/place-card';
+import { Setting } from '../../components/consts';
 
 function MainScreen() {
   return (
@@ -111,7 +112,7 @@ function MainScreen() {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCard />
+                <PlaceCard maxCards={Setting.maxCards} />
               </div>
             </section>
             <div className="cities__right-section">

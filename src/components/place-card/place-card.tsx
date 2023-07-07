@@ -1,4 +1,8 @@
-function PlaceCard(): JSX.Element {
+type AppCardsProps = {
+  maxCards: number;
+};
+
+function PlaceCard({ maxCards }: AppCardsProps): JSX.Element {
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">
