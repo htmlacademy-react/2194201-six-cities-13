@@ -1,6 +1,10 @@
 import { Cards } from '../types/card-data';
 
-export const CardList: Cards[] = [
+const Settings = {
+  numberOffers: 312,
+} as const;
+
+const CardList: Cards[] = [
   {
     title: 'Beautiful & luxurious apartment at great location',
     type: 'Apartment',
@@ -47,3 +51,5 @@ export const CardList: Cards[] = [
     previewImage: 'img/room.jpg',
   },
 ];
+
+export { Settings, CardList };

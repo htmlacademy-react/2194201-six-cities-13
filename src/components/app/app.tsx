@@ -1,7 +1,8 @@
+import { NumberOffersProps } from '../../types/offers';
 import MainScreen from '../../pages/main-screen/main-screen';
 
-function App(): JSX.Element {
-  return <MainScreen />;
+function App({ numberOffers }: NumberOffersProps): JSX.Element {
+  return <MainScreen numberOffers={numberOffers} />;
 }
 
 export default App;
