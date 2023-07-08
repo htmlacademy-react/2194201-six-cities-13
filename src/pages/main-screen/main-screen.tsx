@@ -3,7 +3,7 @@ import Tabs from '../../components/tabs/tabs';
 import PlaceCard from '../../components/place-card/place-card';
 import { CardList } from '../../components/consts';
 
-function MainScreen() {
+function MainScreen(): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header />

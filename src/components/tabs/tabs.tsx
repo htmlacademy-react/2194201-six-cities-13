@@ -1,4 +1,4 @@
-function Tabs() {
+function Tabs(): JSX.Element {
   return (
     <div className="tabs">
       <section className="locations container">
