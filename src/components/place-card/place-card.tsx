@@ -1,10 +1,10 @@
 import { Cards } from '../../types/card-data';
 
-type Add = {
+type PropsCards = {
   card: Cards;
 };
 
-function PlaceCard({ card }: Add): JSX.Element {
+function PlaceCard({ card }: PropsCards): JSX.Element {
   const { title, type, price, isFavorite, isPremium, rating, previewImage } =
     card;
 
@@ -50,7 +50,7 @@ function PlaceCard({ card }: Add): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: '80%' }} />
+            <span style={{ width: `${rating * 20}%` }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
