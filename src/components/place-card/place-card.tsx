@@ -5,8 +5,12 @@ type PropsCards = {
 };
 
 function PlaceCard({ card }: PropsCards): JSX.Element {
+  const ONE_STAR_RATIO = 20;
   const { title, type, price, isFavorite, isPremium, rating, previewImage } =
     card;
+  const favoriteActiveClass = isFavorite
+    ? 'place-card__bookmark-button--active'
+    : '';
 
   return (
     <article className="cities__card place-card">
@@ -33,11 +37,7 @@ function PlaceCard({ card }: PropsCards): JSX.Element {
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
-            className={
-              isFavorite
-                ? 'place-card__bookmark-button place-card__bookmark-button--active button'
-                : 'place-card__bookmark-button button'
-            }
+            className={`place-card__bookmark-button ${favoriteActiveClass} button`}
             type="button"
           >
             <svg className="place-card__bookmark-icon" width={18} height={19}>
@@ -50,7 +50,7 @@ function PlaceCard({ card }: PropsCards): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${rating * 20}%` }} />
+            <span style={{ width: `${rating * ONE_STAR_RATIO}%` }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
