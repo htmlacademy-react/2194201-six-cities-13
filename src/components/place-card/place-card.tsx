@@ -5,16 +5,21 @@ type Add = {
 };
 
 function PlaceCard({ card }: Add): JSX.Element {
+  const { title, type, price, isFavorite, isPremium, rating, previewImage } =
+    card;
+
   return (
     <article className="cities__card place-card">
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
+      {isPremium && (
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+      )}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img
             className="place-card__image"
-            src={card.previewImage}
+            src={previewImage}
             width={260}
             height={200}
             alt="Place image"
@@ -24,14 +29,23 @@ function PlaceCard({ card }: Add): JSX.Element {
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">€{card.price}</b>
+            <b className="place-card__price-value">€{price} </b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
+          <button
+            className={
+              isFavorite
+                ? 'place-card__bookmark-button place-card__bookmark-button--active button'
+                : 'place-card__bookmark-button button'
+            }
+            type="button"
+          >
             <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark" />
             </svg>
-            <span className="visually-hidden">To bookmarks</span>
+            <span className="visually-hidden">
+              {isFavorite ? 'In bookmarks' : 'To bookmarks'}
+            </span>
           </button>
         </div>
         <div className="place-card__rating rating">
@@ -41,9 +55,9 @@ function PlaceCard({ card }: Add): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{card.title}</a>
+          <a href="#">{title}</a>
         </h2>
-        <p className="place-card__type">{card.type}</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );
