@@ -2,6 +2,7 @@ import Header from '../../components/header/header';
 import Tabs from '../../components/tabs/tabs';
 import SortForm from '../../components/sort-form/sort-form';
 import PlaceCard from '../../components/place-card/place-card';
+import Map from '../../components/map/map';
 import { CardList } from '../../components/consts';
 
 function MainScreen(): JSX.Element {
@@ -24,7 +25,7 @@ function MainScreen(): JSX.Element {
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <Map />
             </div>
           </div>
         </div>
