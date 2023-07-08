@@ -23,7 +23,7 @@ function MainScreen({ numberOffers }: NumberOffersProps): JSX.Element {
               <SortForm />
               <div className="cities__places-list places__list tabs__content">
                 {CardList.map((card) => (
-                  <PlaceCard card={card} key={Math.random()} />
+                  <PlaceCard card={card} key={card.id} />
                 ))}
               </div>
             </section>
