@@ -1,7 +1,7 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 
-function FavoritesScreen(): JSX.Element {
+function Favorites(): JSX.Element {
   return (
     <div className="page">
       <Header />
@@ -182,4 +182,4 @@ function FavoritesScreen(): JSX.Element {
   );
 }
 
-export default FavoritesScreen;
+export default Favorites;

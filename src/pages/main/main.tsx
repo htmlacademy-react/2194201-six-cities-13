@@ -1,12 +1,15 @@
-import { NumberOffersProps } from '../../types/offers';
 import Header from '../../components/header/header';
 import Tabs from '../../components/tabs/tabs';
 import SortForm from '../../components/sort-form/sort-form';
 import PlaceCard from '../../components/place-card/place-card';
 import Map from '../../components/map/map';
-import { CardList } from '../../components/consts';
+import { CardList } from '../../constants';
 
-function MainScreen({ numberOffers }: NumberOffersProps): JSX.Element {
+type MainProps = {
+  numberOffers: number;
+};
+
+function Main({ numberOffers }: MainProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -37,4 +40,4 @@ function MainScreen({ numberOffers }: NumberOffersProps): JSX.Element {
   );
 }
 
-export default MainScreen;
+export default Main;

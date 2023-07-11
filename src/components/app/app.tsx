@@ -1,7 +1,10 @@
-import { NumberOffersProps } from '../../types/offers';
-import MainScreen from '../../pages/main-screen/main-screen';
+import MainScreen from '../../pages/main/main';
 
-function App({ numberOffers }: NumberOffersProps): JSX.Element {
+type AppProps = {
+  numberOffers: number;
+};
+
+function App({ numberOffers }: AppProps): JSX.Element {
   return <MainScreen numberOffers={numberOffers} />;
 }
 

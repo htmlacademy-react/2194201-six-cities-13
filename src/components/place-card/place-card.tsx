@@ -1,11 +1,11 @@
-import { Cards } from '../../types/card-data';
+import { Card } from '../../types';
+import { ONE_STAR_RATIO } from '../../constants';
 
-type PropsCards = {
-  card: Cards;
+type PlaceCardProps = {
+  card: Card;
 };
 
-function PlaceCard({ card }: PropsCards): JSX.Element {
-  const ONE_STAR_RATIO = 20;
+function PlaceCard({ card }: PlaceCardProps): JSX.Element {
   const { title, type, price, isFavorite, isPremium, rating, previewImage } =
     card;
   const favoriteActiveClass = isFavorite

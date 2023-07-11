@@ -1,6 +1,6 @@
 import Header from '../../components/header/header';
 
-function OfferScreen(): JSX.Element {
+function Offer(): JSX.Element {
   return (
     <div className="page">
       <Header />
@@ -441,4 +441,4 @@ function OfferScreen(): JSX.Element {
   );
 }
 
-export default OfferScreen;
+export default Offer;

@@ -1,10 +1,9 @@
-import { Cards } from '../types/card-data';
+import { Card } from './types';
 
-const Settings = {
-  numberOffers: 312,
-} as const;
+const NUMBER_OFFERS = 312;
+const ONE_STAR_RATIO = 20;
 
-const CardList: Cards[] = [
+const CardList: Card[] = [
   {
     id: 1,
     title: 'Beautiful & luxurious apartment at great location',
@@ -57,4 +56,4 @@ const CardList: Cards[] = [
   },
 ];
 
-export { Settings, CardList };
+export { NUMBER_OFFERS, ONE_STAR_RATIO, CardList };
