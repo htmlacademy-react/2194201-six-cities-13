@@ -1,3 +1,4 @@
+import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from '../../pages/layout/layout';
 import Main from '../../pages/main/main';
@@ -15,24 +16,26 @@ type AppProps = {
 
 function App({ numberOffers }: AppProps): JSX.Element {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={AppRoute.Root} element={<Layout />}>
-          <Route index element={<Main numberOffers={numberOffers} />} />
-          <Route path={AppRoute.Login} element={<Login />} />
-          <Route
-            path={AppRoute.Favorites}
-            element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <Favorites />
-              </PrivateRoute>
-            }
-          />
-          <Route path={AppRoute.Offer} element={<Offer />} />
-        </Route>
-        <Route path={AppRoute.NotFound} element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path={AppRoute.Root} element={<Layout />}>
+            <Route index element={<Main numberOffers={numberOffers} />} />
+            <Route path={AppRoute.Login} element={<Login />} />
+            <Route
+              path={AppRoute.Favorites}
+              element={
+                <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+                  <Favorites />
+                </PrivateRoute>
+              }
+            />
+            <Route path={AppRoute.Offer} element={<Offer />} />
+          </Route>
+          <Route path={AppRoute.NotFound} element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }
 
