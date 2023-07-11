@@ -7,7 +7,7 @@ type MainProps = {
   numberOffers: number;
 };
 
-function Cities({ numberOffers }: MainProps): JSX.Element {
+function Main({ numberOffers }: MainProps): JSX.Element {
   return (
     <div className="cities">
       <div className="cities__places-container container">
@@ -31,4 +31,4 @@ function Cities({ numberOffers }: MainProps): JSX.Element {
   );
 }
 
-export default Cities;
+export default Main;

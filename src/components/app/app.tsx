@@ -1,6 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from '../../pages/layout/layout';
-import Cities from '../../pages/cities/cities';
+import Main from '../../pages/main/main';
+import Login from '../../pages/login/login';
+import Favorites from '../../pages/favorites/favorites';
+import Offer from '../../pages/offer/offer';
+import NotFound from '../../pages/not-found/not-found';
+import { AppRoute } from '../../constants';
 
 type AppProps = {
   numberOffers: number;
@@ -10,9 +15,13 @@ function App({ numberOffers }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Cities numberOffers={numberOffers} />} />
+        <Route path={AppRoute.Root} element={<Layout />}>
+          <Route index element={<Main numberOffers={numberOffers} />} />
+          <Route path={AppRoute.Login} element={<Login />} />
+          <Route path={AppRoute.Favorites} element={<Favorites />} />
+          <Route path={AppRoute.Offer} element={<Offer />} />
         </Route>
+        <Route path={AppRoute.NotFound} element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
