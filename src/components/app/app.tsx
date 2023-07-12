@@ -1,6 +1,7 @@
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from '../../pages/layout/layout';
+import LayoutOffer from '../../pages/layout-offer/layout-offer';
 import Main from '../../pages/main/main';
 import Login from '../../pages/login/login';
 import Favorites from '../../pages/favorites/favorites';
@@ -30,7 +31,9 @@ function App({ numberOffers }: AppProps): JSX.Element {
                 </PrivateRoute>
               }
             />
-            <Route path={AppRoute.Offer} element={<Offer />} />
+            <Route path={AppRoute.Offer} element={<LayoutOffer />}>
+              <Route path=":id" element={<Offer />} />
+            </Route>
           </Route>
           <Route path={AppRoute.NotFound} element={<NotFound />} />
         </Routes>
