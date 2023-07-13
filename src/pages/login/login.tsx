@@ -7,7 +7,7 @@ function Login(): JSX.Element {
       <Helmet>
         <title>Войдите, используя логин и пароль</title>
       </Helmet>
-      <Header userNav={false} />
+      <Header />
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">

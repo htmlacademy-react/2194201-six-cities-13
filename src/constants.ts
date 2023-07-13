@@ -7,9 +7,7 @@ const AppRoute = {
   Root: '/',
   Login: '/login',
   Favorites: '/favorites',
-  Offer: '/offer',
-  OfferId: ':id',
-  NotFound: '*',
+  Offer: '/offer/:id',
 } as const;
 
 const AuthorizationStatus = {

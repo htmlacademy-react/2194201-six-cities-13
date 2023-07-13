@@ -7,7 +7,7 @@ function Offer(): JSX.Element {
       <Helmet>
         <title>Страница гостиницы</title>
       </Helmet>
-      <Header userNav />
+      <Header isUserNav />
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">

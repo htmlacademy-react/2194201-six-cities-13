@@ -2,10 +2,10 @@ import Logo from '../logo/logo';
 import UserNav from '../user-nav/user-nav';
 
 type HeaderProps = {
-  userNav: boolean;
+  isUserNav?: boolean;
 };
 
-function Header({ userNav }: HeaderProps): JSX.Element {
+function Header({ isUserNav = false }: HeaderProps): JSX.Element {
   return (
     <header className="header">
       <div className="container">
@@ -13,7 +13,7 @@ function Header({ userNav }: HeaderProps): JSX.Element {
           <div className="header__left">
             <Logo />
           </div>
-          {userNav && <UserNav />}
+          {isUserNav && <UserNav />}
         </div>
       </div>
     </header>

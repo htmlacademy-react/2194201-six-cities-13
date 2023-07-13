@@ -1,12 +1,12 @@
+import { PropsWithChildren } from 'react';
 import { Navigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../constants';
 
-type PrivateRouteProps = {
-  authorizationStatus: string;
-  children: JSX.Element;
-};
+type PrivateRouteProps = PropsWithChildren<{
+  authorizationStatus: (typeof AuthorizationStatus)[keyof typeof AuthorizationStatus];
+}>;
 
-function PrivateRoute(props: PrivateRouteProps): JSX.Element {
+function PrivateRoute(props: PrivateRouteProps) {
   const { authorizationStatus, children } = props;
 
   return authorizationStatus === AuthorizationStatus.Auth ? (
