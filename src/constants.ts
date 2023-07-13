@@ -1,10 +1,22 @@
-import { Cards } from '../types/card-data';
+import { Card } from './types';
 
-const Settings = {
-  numberOffers: 312,
+const NUMBER_OFFERS = 312;
+const ONE_STAR_RATIO = 20;
+
+const AppRoute = {
+  Root: '/',
+  Login: '/login',
+  Favorites: '/favorites',
+  Offer: '/offer/:id',
 } as const;
 
-const CardList: Cards[] = [
+const AuthorizationStatus = {
+  Auth: 'AUTH',
+  NoAuth: 'NO_AUTH',
+  Unknown: 'UNKNOWN',
+} as const;
+
+const CardList: Card[] = [
   {
     id: 1,
     title: 'Beautiful & luxurious apartment at great location',
@@ -57,4 +69,10 @@ const CardList: Cards[] = [
   },
 ];
 
-export { Settings, CardList };
+export {
+  NUMBER_OFFERS,
+  ONE_STAR_RATIO,
+  AppRoute,
+  AuthorizationStatus,
+  CardList,
+};

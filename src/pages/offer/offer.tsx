@@ -1,9 +1,13 @@
+import { Helmet } from 'react-helmet-async';
 import Header from '../../components/header/header';
 
-function OfferScreen(): JSX.Element {
+function Offer(): JSX.Element {
   return (
     <div className="page">
-      <Header />
+      <Helmet>
+        <title>Страница гостиницы</title>
+      </Helmet>
+      <Header isUserNav />
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">
@@ -441,4 +445,4 @@ function OfferScreen(): JSX.Element {
   );
 }
 
-export default OfferScreen;
+export default Offer;

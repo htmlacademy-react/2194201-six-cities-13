@@ -1,8 +1,12 @@
+import { Helmet } from 'react-helmet-async';
 import Header from '../../components/header/header';
 
-function LoginScreen(): JSX.Element {
+function Login(): JSX.Element {
   return (
     <div className="page page--gray page--login">
+      <Helmet>
+        <title>Войдите, используя логин и пароль</title>
+      </Helmet>
       <Header />
       <main className="page__main page__main--login">
         <div className="page__login-container container">
@@ -50,4 +54,4 @@ function LoginScreen(): JSX.Element {
   );
 }
 
-export default LoginScreen;
+export default Login;
