@@ -59,7 +59,9 @@ function PlaceCard({ card }: PlaceCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${rating * ONE_STAR_RATIO}%` }} />
+            <span
+              style={{ width: `${Math.round(rating) * ONE_STAR_RATIO}%` }}
+            />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

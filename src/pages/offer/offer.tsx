@@ -6,7 +6,7 @@ import { ONE_STAR_RATIO } from '../../constants';
 import { Card, OfferCard } from '../../types';
 import NotFound from '../not-found/not-found';
 import PlaceCard from '../../components/place-card/place-card';
-import { MAX_OFFERS_NEARBY } from '../../constants';
+import { MAX_OFFER_IMAGES, MAX_OFFERS_NEARBY } from '../../constants';
 
 type OfferProps = {
   cardList: Card[];
@@ -59,15 +59,22 @@ function Offer({ cardList, offerList }: OfferProps): JSX.Element {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {images.map((image) => (
-                <div className="offer__image-wrapper" key={crypto.randomUUID()}>
-                  <img
-                    className="offer__image"
-                    src={image}
-                    alt="Photo studio"
-                  />
-                </div>
-              ))}
+              {images.map((image: string, index) => {
+                if (MAX_OFFER_IMAGES > index) {
+                  return (
+                    <div
+                      className="offer__image-wrapper"
+                      key={crypto.randomUUID()}
+                    >
+                      <img
+                        className="offer__image"
+                        src={image}
+                        alt="Photo studio"
+                      />
+                    </div>
+                  );
+                }
+              })}
             </div>
           </div>
           <div className="offer__container container">
@@ -93,7 +100,9 @@ function Offer({ cardList, offerList }: OfferProps): JSX.Element {
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{ width: `${rating * ONE_STAR_RATIO}%` }} />
+                  <span
+                    style={{ width: `${Math.round(rating) * ONE_STAR_RATIO}%` }}
+                  />
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="offer__rating-value rating__value">
@@ -160,7 +169,7 @@ function Offer({ cardList, offerList }: OfferProps): JSX.Element {
               Other places in the neighbourhood
             </h2>
             <div className="near-places__list places__list">
-              {offersNearby.map((offer) => (
+              {offersNearby.map((offer: Card) => (
                 <PlaceCard key={offer.id} card={offer} />
               ))}
             </div>

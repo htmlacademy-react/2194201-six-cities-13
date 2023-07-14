@@ -648,6 +648,7 @@ const OfferList: OfferCard[] = [
       'https://13.design.pages.academy/static/hotel/5.jpg',
       'https://13.design.pages.academy/static/hotel/6.jpg',
       'https://13.design.pages.academy/static/hotel/15.jpg',
+      'https://13.design.pages.academy/static/hotel/15.jpg',
     ],
     city: {
       name: 'Paris',
