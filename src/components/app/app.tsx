@@ -36,7 +36,7 @@ function App({ numberOffers, cardList, offerList }: AppProps): JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={<Offer offerList={offerList} />}
+            element={<Offer cardList={cardList} offerList={offerList} />}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>

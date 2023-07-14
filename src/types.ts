@@ -4,8 +4,21 @@ type User = {
   isPro: boolean;
 };
 
+type Location = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+};
+
 type City = {
   name: string;
+  location: Location;
+};
+
+type Host = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
 };
 
 export type Card = {
@@ -14,6 +27,7 @@ export type Card = {
   type: string;
   price: number;
   city: City;
+  location: Location;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
@@ -24,6 +38,8 @@ export type OfferCard = {
   description: string;
   bedrooms: number;
   goods: string[];
+  host: Host;
+  images: string[];
   maxAdults: number;
 } & Card;
 
