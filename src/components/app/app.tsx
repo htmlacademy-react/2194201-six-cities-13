@@ -8,17 +8,22 @@ import NotFound from '../../pages/not-found/not-found';
 import { AppRoute } from '../../constants';
 import PrivateRoute from '../private-route/private-route';
 import { AuthorizationStatus } from '../../constants';
+import { Card } from '../../types';
 
 type AppProps = {
   numberOffers: number;
+  cardList: Card[];
 };
 
-function App({ numberOffers }: AppProps): JSX.Element {
+function App({ numberOffers, cardList }: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route index element={<Main numberOffers={numberOffers} />} />
+          <Route
+            index
+            element={<Main numberOffers={numberOffers} cardList={cardList} />}
+          />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route
             path={AppRoute.Favorites}

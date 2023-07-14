@@ -1,14 +1,15 @@
 import PlaceCard from '../../components/place-card/place-card';
 import Map from '../../components/map/map';
-import { CardList } from '../../constants';
 import Header from '../../components/header/header';
 import Tabs from '../../components/tabs/tabs';
+import { Card } from '../../types';
 
 type MainProps = {
   numberOffers: number;
+  cardList: Card[];
 };
 
-function Main({ numberOffers }: MainProps): JSX.Element {
+function Main({ numberOffers, cardList }: MainProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header isUserNav />
@@ -49,7 +50,7 @@ function Main({ numberOffers }: MainProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {CardList.map((card) => (
+                {cardList.map((card) => (
                   <PlaceCard card={card} key={card.id} />
                 ))}
               </div>

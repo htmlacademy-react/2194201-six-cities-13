@@ -1,5 +1,5 @@
 export type Card = {
-  id: number;
+  id: string;
   title: string;
   type: string;
   price: number;
@@ -7,4 +7,18 @@ export type Card = {
   isPremium: boolean;
   rating: number;
   previewImage: string;
+};
+
+export type Review = {
+  id: string;
+  date: string;
+  user: User;
+  comment: string;
+  rating: number;
+};
+
+type User = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
 };
