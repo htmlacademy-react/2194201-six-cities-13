@@ -16,6 +16,7 @@ const OfferList: OfferCard[] = [
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     bedrooms: 2,
     goods: ['Heating'],
+    maxAdults: 5,
   },
   {
     id: '93ba75af-4f56-4f68-b3bb-214491ce469c',
@@ -32,6 +33,7 @@ const OfferList: OfferCard[] = [
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     bedrooms: 3,
     goods: ['Dishwasher', 'Heating', 'Baby seat'],
+    maxAdults: 3,
   },
   {
     id: '8e2350c5-32a5-4426-9f24-1a70a8056077',
@@ -48,6 +50,7 @@ const OfferList: OfferCard[] = [
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     bedrooms: 1,
     goods: ['Coffee machine', 'Fridge'],
+    maxAdults: 2,
   },
   {
     id: '937b0b0f-2bec-4792-ba06-5319dae924bf',
@@ -64,6 +67,7 @@ const OfferList: OfferCard[] = [
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     bedrooms: 5,
     goods: ['Heating', 'Cabel TV', 'Towels', 'Wi-Fi', 'Washing machine'],
+    maxAdults: 7,
   },
   {
     id: '64f54be0-57ef-4c19-8feb-2880c24af73c',
@@ -80,6 +84,7 @@ const OfferList: OfferCard[] = [
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     bedrooms: 4,
     goods: ['Heating', 'Wi-Fi', 'Kitchen', 'Coffee machine'],
+    maxAdults: 1,
   },
 ];
 

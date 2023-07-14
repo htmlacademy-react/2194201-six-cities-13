@@ -4,6 +4,7 @@ import Header from '../../components/header/header';
 import { Reviews } from '../../components/reviews/reviews';
 import { ONE_STAR_RATIO } from '../../constants';
 import { OfferCard } from '../../types';
+import NotFound from '../not-found/not-found';
 
 type OfferProps = {
   offerList: OfferCard[];
@@ -12,8 +13,27 @@ type OfferProps = {
 function Offer({ offerList }: OfferProps): JSX.Element {
   const { id } = useParams();
   const card = offerList.find((item: OfferCard) => item.id === id);
-  const { isFavorite, isPremium, price, rating, title, type } = card;
-  console.log(card);
+
+  if (!card) {
+    return <NotFound />;
+  }
+
+  const {
+    isFavorite,
+    isPremium,
+    price,
+    rating,
+    title,
+    type,
+    bedrooms,
+    maxAdults,
+    description,
+    goods,
+  } = card;
+
+  const favoriteActiveClass = isFavorite
+    ? 'place-card__bookmark-button--active'
+    : '';
 
   return (
     <div className="page">
@@ -78,11 +98,16 @@ function Offer({ offerList }: OfferProps): JSX.Element {
               )}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">{title}</h1>
-                <button className="offer__bookmark-button button" type="button">
+                <button
+                  className={`offer__bookmark-button ${favoriteActiveClass} button`}
+                  type="button"
+                >
                   <svg className="offer__bookmark-icon" width={31} height={33}>
                     <use xlinkHref="#icon-bookmark" />
                   </svg>
-                  <span className="visually-hidden">To bookmarks</span>
+                  <span className="visually-hidden">
+                    {isFavorite ? 'In bookmarks' : 'To bookmarks'}
+                  </span>
                 </button>
               </div>
               <div className="offer__rating rating">
@@ -99,10 +124,10 @@ function Offer({ offerList }: OfferProps): JSX.Element {
                   {type}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  {3} Bedrooms
+                  {bedrooms} Bedrooms
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max 4 adults
+                  Max {maxAdults} adults
                 </li>
               </ul>
               <div className="offer__price">
@@ -112,16 +137,14 @@ function Offer({ offerList }: OfferProps): JSX.Element {
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
                 <ul className="offer__inside-list">
-                  <li className="offer__inside-item">Wi-Fi</li>
-                  <li className="offer__inside-item">Washing machine</li>
-                  <li className="offer__inside-item">Towels</li>
-                  <li className="offer__inside-item">Heating</li>
-                  <li className="offer__inside-item">Coffee machine</li>
-                  <li className="offer__inside-item">Baby seat</li>
-                  <li className="offer__inside-item">Kitchen</li>
-                  <li className="offer__inside-item">Dishwasher</li>
-                  <li className="offer__inside-item">Cabel TV</li>
-                  <li className="offer__inside-item">Fridge</li>
+                  {goods.map((good: string) => (
+                    <li
+                      className="offer__inside-item"
+                      key={crypto.randomUUID()}
+                    >
+                      {good}
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div className="offer__host">
@@ -140,16 +163,7 @@ function Offer({ offerList }: OfferProps): JSX.Element {
                   <span className="offer__user-status">Pro</span>
                 </div>
                 <div className="offer__description">
-                  <p className="offer__text">
-                    A quiet cozy and picturesque that hides behind a a river by
-                    the unique lightness of Amsterdam. The building is green and
-                    from 18th century.
-                  </p>
-                  <p className="offer__text">
-                    An independent House, strategically located between Rembrand
-                    Square and National Opera, but where the bustle of the city
-                    comes to rest in this alley flowery and colorful.
-                  </p>
+                  <p className="offer__text">{description}</p>
                 </div>
               </div>
               <Reviews />

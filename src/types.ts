@@ -24,7 +24,7 @@ export type OfferCard = {
   description: string;
   bedrooms: number;
   goods: string[];
-  title: string;
+  maxAdults: number;
 } & Card;
 
 export type Review = {
