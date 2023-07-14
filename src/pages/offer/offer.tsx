@@ -1,12 +1,24 @@
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import { Reviews } from '../../components/reviews/reviews';
+import { ONE_STAR_RATIO } from '../../constants';
+import { OfferCard } from '../../types';
 
-function Offer(): JSX.Element {
+type OfferProps = {
+  offerList: OfferCard[];
+};
+
+function Offer({ offerList }: OfferProps): JSX.Element {
+  const { id } = useParams();
+  const card = offerList.find((item: OfferCard) => item.id === id);
+  const { isFavorite, isPremium, price, rating, title, type } = card;
+  console.log(card);
+
   return (
     <div className="page">
       <Helmet>
-        <title>Страница гостиницы</title>
+        <title>Гостиница &quot;{title}&quot;</title>
       </Helmet>
       <Header isUserNav />
       <main className="page__main page__main--offer">
@@ -59,13 +71,13 @@ function Offer(): JSX.Element {
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              <div className="offer__mark">
-                <span>Premium</span>
-              </div>
+              {isPremium && (
+                <div className="offer__mark">
+                  <span>Premium</span>
+                </div>
+              )}
               <div className="offer__name-wrapper">
-                <h1 className="offer__name">
-                  Beautiful &amp; luxurious studio at great location
-                </h1>
+                <h1 className="offer__name">{title}</h1>
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width={31} height={33}>
                     <use xlinkHref="#icon-bookmark" />
@@ -75,24 +87,26 @@ function Offer(): JSX.Element {
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{ width: '80%' }} />
+                  <span style={{ width: `${rating * ONE_STAR_RATIO}%` }} />
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="offer__rating-value rating__value">4.8</span>
+                <span className="offer__rating-value rating__value">
+                  {rating}
+                </span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  Apartment
+                  {type}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  3 Bedrooms
+                  {3} Bedrooms
                 </li>
                 <li className="offer__feature offer__feature--adults">
                   Max 4 adults
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">€120</b>
+                <b className="offer__price-value">€{price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">

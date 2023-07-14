@@ -1,6 +1,6 @@
-import { Card } from '../types';
+import { OfferCard } from '../types';
 
-const CardList: Card[] = [
+const OfferList: OfferCard[] = [
   {
     id: '6af6f711-c28d-4121-82cd-e0b462a27f00',
     title: 'Beautiful & luxurious apartment at great location',
@@ -12,7 +12,10 @@ const CardList: Card[] = [
     isFavorite: false,
     isPremium: true,
     rating: 4,
-    previewImage: 'img/apartment-01.jpg',
+    description:
+      'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    bedrooms: 2,
+    goods: ['Heating'],
   },
   {
     id: '93ba75af-4f56-4f68-b3bb-214491ce469c',
@@ -25,7 +28,10 @@ const CardList: Card[] = [
     isFavorite: true,
     isPremium: false,
     rating: 4,
-    previewImage: 'img/room.jpg',
+    description:
+      'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    bedrooms: 3,
+    goods: ['Dishwasher', 'Heating', 'Baby seat'],
   },
   {
     id: '8e2350c5-32a5-4426-9f24-1a70a8056077',
@@ -38,7 +44,10 @@ const CardList: Card[] = [
     isFavorite: false,
     isPremium: false,
     rating: 4,
-    previewImage: 'img/apartment-02.jpg',
+    description:
+      'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    bedrooms: 1,
+    goods: ['Coffee machine', 'Fridge'],
   },
   {
     id: '937b0b0f-2bec-4792-ba06-5319dae924bf',
@@ -51,7 +60,10 @@ const CardList: Card[] = [
     isFavorite: false,
     isPremium: true,
     rating: 5,
-    previewImage: 'img/apartment-03.jpg',
+    description:
+      'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    bedrooms: 5,
+    goods: ['Heating', 'Cabel TV', 'Towels', 'Wi-Fi', 'Washing machine'],
   },
   {
     id: '64f54be0-57ef-4c19-8feb-2880c24af73c',
@@ -64,8 +76,11 @@ const CardList: Card[] = [
     isFavorite: true,
     isPremium: false,
     rating: 2,
-    previewImage: 'img/room.jpg',
+    description:
+      'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    bedrooms: 4,
+    goods: ['Heating', 'Wi-Fi', 'Kitchen', 'Coffee machine'],
   },
 ];
 
-export { CardList };
+export { OfferList };

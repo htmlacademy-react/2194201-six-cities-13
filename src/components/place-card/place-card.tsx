@@ -1,13 +1,22 @@
+import { Link, generatePath } from 'react-router-dom';
 import { Card } from '../../types';
-import { ONE_STAR_RATIO } from '../../constants';
+import { ONE_STAR_RATIO, AppRoute } from '../../constants';
 
 type PlaceCardProps = {
   card: Card;
 };
 
 function PlaceCard({ card }: PlaceCardProps): JSX.Element {
-  const { title, type, price, isFavorite, isPremium, rating, previewImage } =
-    card;
+  const {
+    id,
+    title,
+    type,
+    price,
+    isFavorite,
+    isPremium,
+    rating,
+    previewImage,
+  } = card;
   const favoriteActiveClass = isFavorite
     ? 'place-card__bookmark-button--active'
     : '';
@@ -20,7 +29,7 @@ function PlaceCard({ card }: PlaceCardProps): JSX.Element {
         </div>
       )}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={generatePath(AppRoute.Offer, { id: `${id}` })}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -28,7 +37,7 @@ function PlaceCard({ card }: PlaceCardProps): JSX.Element {
             height={200}
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -55,7 +64,9 @@ function PlaceCard({ card }: PlaceCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={generatePath(AppRoute.Offer, { id: `${id}` })}>
+            {title}
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
