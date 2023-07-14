@@ -12,12 +12,12 @@ type MainProps = {
 
 function Main({ numberOffers, cardList }: MainProps): JSX.Element {
   const isCardListNotEmpty = Boolean(cardList.length);
-  const EmptyMainClass = isCardListNotEmpty ? '' : 'page__main--index-empty';
+  const MainEmptyClass = isCardListNotEmpty ? '' : 'page__main--index-empty';
 
   return (
     <div className="page page--gray page--main">
       <Header isUserNav />
-      <main className={`page__main page__main--index ${EmptyMainClass}`}>
+      <main className={`page__main page__main--index ${MainEmptyClass}`}>
         <h1 className="visually-hidden">Cities</h1>
         <Tabs />
         <div className="cities">
