@@ -14,10 +14,11 @@ module.exports = {
   plugins: ['react-refresh'],
   rules: {
     'react-refresh/only-export-components': 'warn',
+    'object-curly-newline': 'off',
   },
   overrides: [
     {
-      files: [ '*test*' ],
+      files: ['*test*'],
       rules: { '@typescript-eslint/unbound-method': 'off' }
     },
   ],
