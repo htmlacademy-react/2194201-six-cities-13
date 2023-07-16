@@ -815,7 +815,7 @@ const OfferList: OfferCard[] = [
     },
     goods: ['Air conditioning', 'Washer', 'Cable TV', 'Baby seat', 'Heating'],
     host: {
-      isPro: true,
+      isPro: false,
       name: 'Angelina',
       avatarUrl:
         'https://13.design.pages.academy/static/host/avatar-angelina.jpg',

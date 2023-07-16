@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import { Helmet } from 'react-helmet-async';
 import PlaceCard from '../../components/place-card/place-card';
 import Map from '../../components/map/map';
@@ -13,7 +14,6 @@ type MainProps = {
 
 function Main({ numberOffers, cardList }: MainProps): JSX.Element {
   const isCardListNotEmpty = Boolean(cardList.length);
-  const MainEmptyClass = isCardListNotEmpty ? '' : 'page__main--index-empty';
 
   return (
     <div className="page page--gray page--main">
@@ -21,7 +21,11 @@ function Main({ numberOffers, cardList }: MainProps): JSX.Element {
         <title>Онлайн-бронирование гостиниц</title>
       </Helmet>
       <Header isUserNav />
-      <main className={`page__main page__main--index ${MainEmptyClass}`}>
+      <main
+        className={cn('page__main page__main--index', {
+          'page__main--index-empty': isCardListNotEmpty,
+        })}
+      >
         <h1 className="visually-hidden">Cities</h1>
         <Tabs />
         <div className="cities">

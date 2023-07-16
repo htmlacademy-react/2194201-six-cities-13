@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
@@ -44,11 +45,6 @@ function Offer({ cardList, offerList }: OfferProps): JSX.Element {
     .sort(() => Math.random() - 0.5)
     .slice(0, MAX_OFFERS_NEARBY);
 
-  const favoriteActiveClass = isFavorite
-    ? 'place-card__bookmark-button--active'
-    : '';
-  const proActiveClass = isPro ? 'offer__avatar-wrapper--pro' : '';
-
   return (
     <div className="page">
       <Helmet>
@@ -87,7 +83,9 @@ function Offer({ cardList, offerList }: OfferProps): JSX.Element {
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">{title}</h1>
                 <button
-                  className={`offer__bookmark-button ${favoriteActiveClass} button`}
+                  className={cn('offer__bookmark-button', 'button', {
+                    'place-card__bookmark-button--active': isFavorite,
+                  })}
                   type="button"
                 >
                   <svg className="offer__bookmark-icon" width={31} height={33}>
@@ -128,10 +126,7 @@ function Offer({ cardList, offerList }: OfferProps): JSX.Element {
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
                 <ul className="offer__inside-list">
                   {goods.map((good: string) => (
-                    <li
-                      className="offer__inside-item"
-                      key={crypto.randomUUID()}
-                    >
+                    <li className="offer__inside-item" key={good}>
                       {good}
                     </li>
                   ))}
@@ -141,7 +136,11 @@ function Offer({ cardList, offerList }: OfferProps): JSX.Element {
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
                   <div
-                    className={`offer__avatar-wrapper ${proActiveClass} user__avatar-wrapper`}
+                    className={cn(
+                      'offer__avatar-wrapper',
+                      'user__avatar-wrapper',
+                      { 'offer__avatar-wrapper--pro': isPro }
+                    )}
                   >
                     <img
                       className="offer__avatar user__avatar"
