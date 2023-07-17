@@ -39,7 +39,7 @@ function Reviews({ reviewsList }: ReviewsProps): JSX.Element {
                   <div className="reviews__stars rating__stars">
                     <span
                       style={{
-                        width: `${Math.round(rating) * ONE_STAR_RATIO}%`,
+                        width: `${rating * ONE_STAR_RATIO}%`,
                       }}
                     />
                     <span className="visually-hidden">Rating</span>
