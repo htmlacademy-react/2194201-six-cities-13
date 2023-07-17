@@ -13,12 +13,9 @@ function Reviews({ reviewsList }: ReviewsProps): JSX.Element {
       </h2>
       <ul className="reviews__list">
         {reviewsList.map(({ id, date, user, comment, rating }) => {
-          const reviewDate = date.split('T').slice(0, 1).join();
-          const reviewYear = reviewDate.split('-').slice(0, 1).join();
-          const reviewMonth = MONTHS.find(
-            (month, index) =>
-              index + 1 === +reviewDate.split('-').slice(1, 2).join()
-          );
+          const reviewDate = date.split('T')[0];
+          const year = reviewDate.split('-')[0];
+          const month = MONTHS[+reviewDate.split('-')[1] - 1];
 
           return (
             <li className="reviews__item" key={id}>
@@ -47,7 +44,7 @@ function Reviews({ reviewsList }: ReviewsProps): JSX.Element {
                 </div>
                 <p className="reviews__text">{comment}</p>
                 <time className="reviews__time" dateTime={reviewDate}>
-                  {reviewMonth} {reviewYear}
+                  {month} {year}
                 </time>
               </div>
             </li>
