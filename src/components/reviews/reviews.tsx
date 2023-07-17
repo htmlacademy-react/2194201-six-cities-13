@@ -1,40 +1,58 @@
-function Reviews(): JSX.Element {
+import { ONE_STAR_RATIO, MONTHS } from '../../constants';
+import { Review } from '../../types';
+
+type ReviewsProps = {
+  reviewsList: Review[];
+};
+
+function Reviews({ reviewsList }: ReviewsProps): JSX.Element {
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">
-        Reviews · <span className="reviews__amount">1</span>
+        Reviews · <span className="reviews__amount">{reviewsList.length}</span>
       </h2>
       <ul className="reviews__list">
-        <li className="reviews__item">
-          <div className="reviews__user user">
-            <div className="reviews__avatar-wrapper user__avatar-wrapper">
-              <img
-                className="reviews__avatar user__avatar"
-                src="img/avatar-max.jpg"
-                width={54}
-                height={54}
-                alt="Reviews avatar"
-              />
-            </div>
-            <span className="reviews__user-name">Max</span>
-          </div>
-          <div className="reviews__info">
-            <div className="reviews__rating rating">
-              <div className="reviews__stars rating__stars">
-                <span style={{ width: '80%' }} />
-                <span className="visually-hidden">Rating</span>
+        {reviewsList.map(({ id, date, user, comment, rating }) => {
+          const reviewDate = date.split('T').slice(0, 1).join();
+          const reviewYear = reviewDate.split('-').slice(0, 1).join();
+          const reviewMonth = MONTHS.find(
+            (month, index) =>
+              index + 1 === +reviewDate.split('-').slice(1, 2).join()
+          );
+
+          return (
+            <li className="reviews__item" key={id}>
+              <div className="reviews__user user">
+                <div className="reviews__avatar-wrapper user__avatar-wrapper">
+                  <img
+                    className="reviews__avatar user__avatar"
+                    src={user.avatarUrl}
+                    width={54}
+                    height={54}
+                    alt="Reviews avatar"
+                  />
+                </div>
+                <span className="reviews__user-name">{user.name}</span>
               </div>
-            </div>
-            <p className="reviews__text">
-              A quiet cozy and picturesque that hides behind a a river by the
-              unique lightness of Amsterdam. The building is green and from 18th
-              century.
-            </p>
-            <time className="reviews__time" dateTime="2019-04-24">
-              April 2019
-            </time>
-          </div>
-        </li>
+              <div className="reviews__info">
+                <div className="reviews__rating rating">
+                  <div className="reviews__stars rating__stars">
+                    <span
+                      style={{
+                        width: `${Math.round(rating) * ONE_STAR_RATIO}%`,
+                      }}
+                    />
+                    <span className="visually-hidden">Rating</span>
+                  </div>
+                </div>
+                <p className="reviews__text">{comment}</p>
+                <time className="reviews__time" dateTime={reviewDate}>
+                  {reviewMonth} {reviewYear}
+                </time>
+              </div>
+            </li>
+          );
+        })}
       </ul>
       <form className="reviews__form form" action="#" method="post">
         <label className="reviews__label form__label" htmlFor="review">

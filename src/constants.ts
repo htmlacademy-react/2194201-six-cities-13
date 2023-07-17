@@ -11,6 +11,21 @@ const CITIES = [
   'Dusseldorf',
 ] as const;
 
+const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+] as const;
+
 const AppRoute = {
   Root: '/',
   Login: '/login',
@@ -29,6 +44,7 @@ export {
   MAX_OFFERS_NEARBY,
   MAX_OFFER_IMAGES,
   CITIES,
+  MONTHS,
   AppRoute,
   AuthorizationStatus,
 };

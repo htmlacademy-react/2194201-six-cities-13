@@ -9,14 +9,15 @@ import NotFound from '../../pages/not-found/not-found';
 import { AppRoute } from '../../constants';
 import PrivateRoute from '../private-route/private-route';
 import { AuthorizationStatus } from '../../constants';
-import { Card, OfferCard } from '../../types';
+import { Card, OfferCard, Review } from '../../types';
 
 type AppProps = {
   cardList: Card[];
   offerList: OfferCard[];
+  reviewsList: Review[];
 };
 
-function App({ cardList, offerList }: AppProps): JSX.Element {
+function App({ cardList, offerList, reviewsList }: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -34,7 +35,13 @@ function App({ cardList, offerList }: AppProps): JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={<Offer cardList={cardList} offerList={offerList} />}
+            element={
+              <Offer
+                cardList={cardList}
+                offerList={offerList}
+                reviewsList={reviewsList}
+              />
+            }
           />
           <Route path="*" element={<NotFound />} />
         </Routes>

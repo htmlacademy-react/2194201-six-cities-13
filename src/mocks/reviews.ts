@@ -6,7 +6,7 @@ const ReviewsList: Review[] = [
     date: '2019-05-08T14:13:56.569Z',
     user: {
       name: 'Oliver Conner',
-      avatarUrl: '../../public/avatar-angelina.jpg',
+      avatarUrl: '../../public/img/avatar-angelina.jpg',
       isPro: false,
     },
     comment:
@@ -15,11 +15,11 @@ const ReviewsList: Review[] = [
   },
   {
     id: '4dd41d31-cc23-4c38-b4be-d098673c41cc',
-    date: '2019-07-11T10:10:06.569Z',
+    date: '2020-07-11T10:10:06.569Z',
     user: {
       name: 'Till Lindermann',
-      avatarUrl: '../../public/avatar-max.jpg',
-      isPro: false,
+      avatarUrl: '../../public/img/avatar-max.jpg',
+      isPro: true,
     },
     comment:
       'Id exercitation irure anim ad magna. Dolor sint irure consequat tempor quis elit sit. Sunt qui deserunt veniam anim aliqua in sunt mollit consequat dolor. Laboris esse dolor magna eiusmod commodo. Ad amet mollit reprehenderit nisi cillum fugiat esse. Velit deserunt est ipsum aute cillum adipisicing.',

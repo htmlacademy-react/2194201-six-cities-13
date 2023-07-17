@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import { Reviews } from '../../components/reviews/reviews';
 import { ONE_STAR_RATIO } from '../../constants';
-import { Card, OfferCard } from '../../types';
+import { Card, OfferCard, Review } from '../../types';
 import NotFound from '../not-found/not-found';
 import PlaceCard from '../../components/place-card/place-card';
 import { MAX_OFFER_IMAGES, MAX_OFFERS_NEARBY } from '../../constants';
@@ -12,9 +12,10 @@ import { MAX_OFFER_IMAGES, MAX_OFFERS_NEARBY } from '../../constants';
 type OfferProps = {
   cardList: Card[];
   offerList: OfferCard[];
+  reviewsList: Review[];
 };
 
-function Offer({ cardList, offerList }: OfferProps): JSX.Element {
+function Offer({ cardList, offerList, reviewsList }: OfferProps): JSX.Element {
   const { id } = useParams();
   const card = offerList.find((item: OfferCard) => item.id === id);
 
@@ -157,7 +158,7 @@ function Offer({ cardList, offerList }: OfferProps): JSX.Element {
                   <p className="offer__text">{description}</p>
                 </div>
               </div>
-              <Reviews />
+              <Reviews reviewsList={reviewsList} />
             </div>
           </div>
           <section className="offer__map map" />
