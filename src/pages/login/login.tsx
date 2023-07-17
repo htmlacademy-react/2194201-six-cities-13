@@ -1,5 +1,7 @@
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import Header from '../../components/header/header';
+import { AppRoute, CITIES } from '../../constants';
 
 function Login(): JSX.Element {
   return (
@@ -43,9 +45,9 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <Link className="locations__item-link" to={AppRoute.Root}>
+                <span>{CITIES[3]}</span>
+              </Link>
             </div>
           </section>
         </div>

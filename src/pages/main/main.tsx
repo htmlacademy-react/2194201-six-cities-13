@@ -1,20 +1,22 @@
 import cn from 'classnames';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import PlaceCard from '../../components/place-card/place-card';
-import Map from '../../components/map/map';
 import Header from '../../components/header/header';
 import Tabs from '../../components/tabs/tabs';
-import { CITIES } from '../../constants';
+import PlaceCard from '../../components/place-card/place-card';
+import Map from '../../components/map/map';
 import { MainEmpty } from '../../components/main-empty/main-empty';
-import { Card } from '../../types';
+import { CITIES } from '../../constants';
+import { Card, CityNames } from '../../types';
 
 type MainProps = {
-  numberOffers: number;
   cardList: Card[];
 };
 
-function Main({ numberOffers, cardList }: MainProps): JSX.Element {
-  const isCardListNotEmpty = Boolean(cardList.length);
+function Main({ cardList }: MainProps): JSX.Element {
+  const [activeCity, setActiveCity] = useState<CityNames>(CITIES[0]);
+
+  const currentOffers = cardList.filter(({ city }) => activeCity === city.name);
 
   return (
     <div className="page page--gray page--main">
@@ -23,19 +25,19 @@ function Main({ numberOffers, cardList }: MainProps): JSX.Element {
       </Helmet>
       <Header isUserNav />
       <main
-        className={cn('page__main page__main--index', {
-          'page__main--index-empty': isCardListNotEmpty,
+        className={cn('page__main', 'page__main--index', {
+          'page__main--index-empty': !currentOffers.length,
         })}
       >
         <h1 className="visually-hidden">Cities</h1>
-        <Tabs cities={CITIES} />
+        <Tabs activeCity={activeCity} setActiveCity={setActiveCity} />
         <div className="cities">
-          {isCardListNotEmpty ? (
+          {currentOffers.length ? (
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">
-                  {numberOffers} places to stay in Amsterdam
+                  {currentOffers.length} places to stay in {activeCity}
                 </b>
                 <form className="places__sorting" action="#" method="get">
                   <span className="places__sorting-caption">Sort by</span>
@@ -64,8 +66,8 @@ function Main({ numberOffers, cardList }: MainProps): JSX.Element {
                   </ul>
                 </form>
                 <div className="cities__places-list places__list tabs__content">
-                  {cardList.map((card) => (
-                    <PlaceCard card={card} key={card.id} />
+                  {currentOffers.map((offer) => (
+                    <PlaceCard card={offer} key={offer.id} />
                   ))}
                 </div>
               </section>
@@ -74,7 +76,7 @@ function Main({ numberOffers, cardList }: MainProps): JSX.Element {
               </div>
             </div>
           ) : (
-            <MainEmpty />
+            <MainEmpty activeCity={activeCity} />
           )}
         </div>
       </main>

@@ -31,7 +31,7 @@ const CardList: Card[] = [
     price: 382,
     previewImage: 'https://13.design.pages.academy/static/hotel/3.jpg',
     city: {
-      name: 'Paris',
+      name: 'Cologne',
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -100,7 +100,7 @@ const CardList: Card[] = [
     price: 110,
     previewImage: 'https://13.design.pages.academy/static/hotel/13.jpg',
     city: {
-      name: 'Paris',
+      name: 'Cologne',
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -123,7 +123,7 @@ const CardList: Card[] = [
     price: 272,
     previewImage: 'https://13.design.pages.academy/static/hotel/14.jpg',
     city: {
-      name: 'Paris',
+      name: 'Brussels',
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -146,7 +146,7 @@ const CardList: Card[] = [
     price: 100,
     previewImage: 'https://13.design.pages.academy/static/hotel/11.jpg',
     city: {
-      name: 'Paris',
+      name: 'Brussels',
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -169,7 +169,7 @@ const CardList: Card[] = [
     price: 238,
     previewImage: 'https://13.design.pages.academy/static/hotel/3.jpg',
     city: {
-      name: 'Paris',
+      name: 'Brussels',
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -192,7 +192,7 @@ const CardList: Card[] = [
     price: 274,
     previewImage: 'https://13.design.pages.academy/static/hotel/5.jpg',
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -215,7 +215,7 @@ const CardList: Card[] = [
     price: 442,
     previewImage: 'https://13.design.pages.academy/static/hotel/16.jpg',
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -238,7 +238,7 @@ const CardList: Card[] = [
     price: 172,
     previewImage: 'https://13.design.pages.academy/static/hotel/16.jpg',
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -261,7 +261,7 @@ const CardList: Card[] = [
     price: 348,
     previewImage: 'https://13.design.pages.academy/static/hotel/12.jpg',
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -284,7 +284,7 @@ const CardList: Card[] = [
     price: 119,
     previewImage: 'https://13.design.pages.academy/static/hotel/17.jpg',
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -307,7 +307,7 @@ const CardList: Card[] = [
     price: 488,
     previewImage: 'https://13.design.pages.academy/static/hotel/13.jpg',
     city: {
-      name: 'Paris',
+      name: 'Hamburg',
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -330,7 +330,7 @@ const CardList: Card[] = [
     price: 388,
     previewImage: 'https://13.design.pages.academy/static/hotel/3.jpg',
     city: {
-      name: 'Paris',
+      name: 'Hamburg',
       location: {
         latitude: 48.85661,
         longitude: 2.351499,

@@ -12,21 +12,17 @@ import { AuthorizationStatus } from '../../constants';
 import { Card, OfferCard } from '../../types';
 
 type AppProps = {
-  numberOffers: number;
   cardList: Card[];
   offerList: OfferCard[];
 };
 
-function App({ numberOffers, cardList, offerList }: AppProps): JSX.Element {
+function App({ cardList, offerList }: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route
-            index
-            element={<Main numberOffers={numberOffers} cardList={cardList} />}
-          />
+          <Route index element={<Main cardList={cardList} />} />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route
             path={AppRoute.Favorites}

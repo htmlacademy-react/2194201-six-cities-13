@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import { NavLink, Link } from 'react-router-dom';
 import { AppRoute } from '../../constants';
 
@@ -14,9 +15,9 @@ function Header({ isUserNav = false }: HeaderProps): JSX.Element {
             <NavLink
               to={AppRoute.Root}
               className={({ isActive }) =>
-                isActive
-                  ? 'header__logo-link header__logo-link--active'
-                  : 'header__logo-link'
+                cn('header__logo-link', {
+                  'header__logo-link--active': isActive,
+                })
               }
             >
               <img
@@ -34,7 +35,7 @@ function Header({ isUserNav = false }: HeaderProps): JSX.Element {
                 <li className="header__nav-item user">
                   <Link
                     className="header__nav-link header__nav-link--profile"
-                    to="#"
+                    to={AppRoute.Favorites}
                   >
                     <div className="header__avatar-wrapper user__avatar-wrapper" />
                     <span className="header__user-name user__name">
@@ -44,7 +45,7 @@ function Header({ isUserNav = false }: HeaderProps): JSX.Element {
                   </Link>
                 </li>
                 <li className="header__nav-item">
-                  <Link className="header__nav-link" to="#">
+                  <Link className="header__nav-link" to={AppRoute.Root}>
                     <span className="header__signout">Sign out</span>
                   </Link>
                 </li>

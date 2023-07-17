@@ -1,3 +1,7 @@
+import { CITIES } from './constants';
+
+export type CityNames = (typeof CITIES)[number];
+
 type User = {
   name: string;
   avatarUrl: string;
