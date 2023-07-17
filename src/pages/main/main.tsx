@@ -4,6 +4,7 @@ import PlaceCard from '../../components/place-card/place-card';
 import Map from '../../components/map/map';
 import Header from '../../components/header/header';
 import Tabs from '../../components/tabs/tabs';
+import { CITIES } from '../../constants';
 import { MainEmpty } from '../../components/main-empty/main-empty';
 import { Card } from '../../types';
 
@@ -27,7 +28,7 @@ function Main({ numberOffers, cardList }: MainProps): JSX.Element {
         })}
       >
         <h1 className="visually-hidden">Cities</h1>
-        <Tabs />
+        <Tabs cities={CITIES} />
         <div className="cities">
           {isCardListNotEmpty ? (
             <div className="cities__places-container container">
