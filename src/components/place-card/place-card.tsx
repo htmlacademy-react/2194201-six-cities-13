@@ -20,10 +20,10 @@ function PlaceCard({ card }: PlaceCardProps): JSX.Element {
     previewImage,
   } = card;
 
-  const [offerId, setOfferId] = useState('');
+  const [cardId, setCardId] = useState('');
 
   const handlePlaceCardMouseOver = (evt: MouseEvent<HTMLElement>) => {
-    setOfferId(evt.currentTarget.id);
+    setCardId(evt.currentTarget.id);
   };
 
   return (
