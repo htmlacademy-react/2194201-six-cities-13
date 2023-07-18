@@ -30,7 +30,11 @@ function Favorites({ cardList }: FavoritesProps): JSX.Element {
                 </div>
                 <div className="favorites__places">
                   {cardList.map((card) => (
-                    <PlaceCard card={card} key={card.id} />
+                    <PlaceCard
+                      card={card}
+                      className="favorites"
+                      key={card.id}
+                    />
                   ))}
                 </div>
               </li>

@@ -6,9 +6,10 @@ import { ONE_STAR_RATIO, AppRoute } from '../../constants';
 
 type PlaceCardProps = {
   card: Card;
+  className: 'cities' | 'favorites' | 'near-places';
 };
 
-function PlaceCard({ card }: PlaceCardProps): JSX.Element {
+function PlaceCard({ card, className }: PlaceCardProps): JSX.Element {
   const {
     id,
     title,
@@ -28,7 +29,7 @@ function PlaceCard({ card }: PlaceCardProps): JSX.Element {
 
   return (
     <article
-      className="cities__card place-card"
+      className={`${className}__card place-card`}
       onMouseOver={handlePlaceCardMouseOver}
       id={id}
     >
@@ -37,7 +38,7 @@ function PlaceCard({ card }: PlaceCardProps): JSX.Element {
           <span>Premium</span>
         </div>
       )}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <Link to={generatePath(AppRoute.Offer, { id: `${id}` })}>
           <img
             className="place-card__image"
@@ -48,7 +49,11 @@ function PlaceCard({ card }: PlaceCardProps): JSX.Element {
           />
         </Link>
       </div>
-      <div className="place-card__info">
+      <div
+        className={cn('place-card__info', {
+          'favorites__card-info': className === 'favorites',
+        })}
+      >
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€{price} </b>

@@ -170,7 +170,11 @@ function Offer({ cardList, offerList, reviewsList }: OfferProps): JSX.Element {
             </h2>
             <div className="near-places__list places__list">
               {offersNearby.map((offer: Card) => (
-                <PlaceCard key={offer.id} card={offer} />
+                <PlaceCard
+                  key={offer.id}
+                  className="near-places"
+                  card={offer}
+                />
               ))}
             </div>
           </section>
