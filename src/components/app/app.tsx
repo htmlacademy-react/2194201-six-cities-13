@@ -15,9 +15,15 @@ type AppProps = {
   cardList: Card[];
   offerList: OfferCard[];
   reviewsList: Review[];
+  favoritesList: Card[];
 };
 
-function App({ cardList, offerList, reviewsList }: AppProps): JSX.Element {
+function App({
+  cardList,
+  offerList,
+  reviewsList,
+  favoritesList,
+}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -29,7 +35,7 @@ function App({ cardList, offerList, reviewsList }: AppProps): JSX.Element {
             path={AppRoute.Favorites}
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <Favorites cardList={cardList} />
+                <Favorites favoritesList={favoritesList} />
               </PrivateRoute>
             }
           />
