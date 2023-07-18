@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import { useState, MouseEvent } from 'react';
 import { Link, generatePath } from 'react-router-dom';
 import { Card } from '../../types';
 import { ONE_STAR_RATIO, AppRoute } from '../../constants';
@@ -19,8 +20,18 @@ function PlaceCard({ card }: PlaceCardProps): JSX.Element {
     previewImage,
   } = card;
 
+  const [offerId, setOfferId] = useState('');
+
+  const handlePlaceCardMouseOver = (evt: MouseEvent<HTMLElement>) => {
+    setOfferId(evt.currentTarget.id);
+  };
+
   return (
-    <article className="cities__card place-card">
+    <article
+      className="cities__card place-card"
+      onMouseOver={handlePlaceCardMouseOver}
+      id={id}
+    >
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
