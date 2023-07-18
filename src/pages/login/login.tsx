@@ -1,9 +1,17 @@
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import Header from '../../components/header/header';
-import { AppRoute, CITIES } from '../../constants';
+import { AppRoute, CITIES, AuthorizationStatus } from '../../constants';
 
-function Login(): JSX.Element {
+type LoginProps = {
+  authorizationStatus: (typeof AuthorizationStatus)[keyof typeof AuthorizationStatus];
+};
+
+function Login({ authorizationStatus }: LoginProps): JSX.Element {
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    return <Navigate to={AppRoute.Root} />;
+  }
+
   return (
     <div className="page page--gray page--login">
       <Helmet>

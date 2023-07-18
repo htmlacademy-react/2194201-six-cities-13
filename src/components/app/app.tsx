@@ -30,7 +30,10 @@ function App({
         <ScrollToTop />
         <Routes>
           <Route index element={<Main cardList={cardList} />} />
-          <Route path={AppRoute.Login} element={<Login />} />
+          <Route
+            path={AppRoute.Login}
+            element={<Login authorizationStatus={AuthorizationStatus.NoAuth} />}
+          />
           <Route
             path={AppRoute.Favorites}
             element={
