@@ -7,7 +7,11 @@ import { ONE_STAR_RATIO } from '../../constants';
 import { Card, OfferCard, Review } from '../../types';
 import NotFound from '../not-found/not-found';
 import PlaceCard from '../../components/place-card/place-card';
-import { MAX_OFFER_IMAGES, MAX_OFFERS_NEARBY } from '../../constants';
+import {
+  MAX_OFFER_IMAGES,
+  MAX_OFFERS_NEARBY,
+  AuthorizationStatus,
+} from '../../constants';
 
 type OfferProps = {
   cardList: Card[];
@@ -158,7 +162,10 @@ function Offer({ cardList, offerList, reviewsList }: OfferProps): JSX.Element {
                   <p className="offer__text">{description}</p>
                 </div>
               </div>
-              <Reviews reviewsList={reviewsList} />
+              <Reviews
+                reviewsList={reviewsList}
+                authorizationStatus={AuthorizationStatus.Auth}
+              />
             </div>
           </div>
           <section className="offer__map map" />

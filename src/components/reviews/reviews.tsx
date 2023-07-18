@@ -1,12 +1,15 @@
 import ReviewForm from '../review-form/review-form';
-import { ONE_STAR_RATIO, MONTHS } from '../../constants';
 import { Review } from '../../types';
+import { ONE_STAR_RATIO, MONTHS, AuthorizationStatus } from '../../constants';
 
 type ReviewsProps = {
   reviewsList: Review[];
+  authorizationStatus: (typeof AuthorizationStatus)[keyof typeof AuthorizationStatus];
 };
 
-function Reviews({ reviewsList }: ReviewsProps): JSX.Element {
+function Reviews(props: ReviewsProps): JSX.Element {
+  const { reviewsList, authorizationStatus } = props;
+
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">
@@ -52,7 +55,7 @@ function Reviews({ reviewsList }: ReviewsProps): JSX.Element {
           );
         })}
       </ul>
-      <ReviewForm />
+      {authorizationStatus === AuthorizationStatus.Auth && <ReviewForm />}
     </section>
   );
 }
