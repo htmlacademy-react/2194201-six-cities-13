@@ -6,7 +6,7 @@ const ReviewsList: Review[] = [
     date: '2019-05-08T14:13:56.569Z',
     user: {
       name: 'Oliver Conner',
-      avatarUrl: '../../public/img/avatar-angelina.jpg',
+      avatarUrl: '../../img/avatar-angelina.jpg',
       isPro: false,
     },
     comment:
@@ -18,7 +18,7 @@ const ReviewsList: Review[] = [
     date: '2020-07-11T10:10:06.569Z',
     user: {
       name: 'Till Lindermann',
-      avatarUrl: '../../public/img/avatar-max.jpg',
+      avatarUrl: '../../img/avatar-max.jpg',
       isPro: true,
     },
     comment:
