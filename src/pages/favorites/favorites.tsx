@@ -13,26 +13,26 @@ type FavoritesProps = {
 };
 
 function Favorites({ favoritesList }: FavoritesProps): JSX.Element {
-  const isFavoritesEmpty = !!favoritesList.length;
+  const isEmpty = !!favoritesList.length;
 
   return (
-    <div className={cn('page', { 'page--favorites-empty': !isFavoritesEmpty })}>
+    <div className={cn('page', { 'page--favorites-empty': !isEmpty })}>
       <Helmet>
         <title>Избранные гостиницы</title>
       </Helmet>
       <Header isUserNav />
       <main
         className={cn('page__main', 'page__main--favorites', {
-          'page__main--favorites-empty': !isFavoritesEmpty,
+          'page__main--favorites-empty': !isEmpty,
         })}
       >
         <div className="page__favorites-container container">
           <section
             className={cn('favorites', {
-              'favorites--empty': !isFavoritesEmpty,
+              'favorites--empty': !isEmpty,
             })}
           >
-            {isFavoritesEmpty ? (
+            {isEmpty ? (
               <>
                 <h1 className="favorites__title">Saved listing</h1>
                 <ul className="favorites__list">
@@ -41,7 +41,7 @@ function Favorites({ favoritesList }: FavoritesProps): JSX.Element {
                       (card) => city === card.city.name
                     );
 
-                    if (favoritesSortCity.length) {
+                    if (isEmpty) {
                       return (
                         <li className="favorites__locations-items" key={city}>
                           <div className="favorites__locations locations locations--current">
