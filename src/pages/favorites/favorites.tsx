@@ -1,6 +1,10 @@
+import cn from 'classnames';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import { Card } from '../../types';
+import { AppRoute, CITIES } from '../../constants';
 import Header from '../../components/header/header';
+import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import PlaceCard from '../../components/place-card/place-card';
 import Footer from '../../components/footer/footer';
 
@@ -9,72 +13,65 @@ type FavoritesProps = {
 };
 
 function Favorites({ favoritesList }: FavoritesProps): JSX.Element {
-  const favoritesListTemp = [...favoritesList];
+  const isFavoritesEmpty = !!favoritesList.length;
 
   return (
-    <div className="page">
+    <div className={cn('page', { 'page--favorites-empty': !isFavoritesEmpty })}>
       <Helmet>
         <title>Избранные гостиницы</title>
       </Helmet>
       <Header isUserNav />
-      <main className="page__main page__main--favorites">
+      <main
+        className={cn('page__main', 'page__main--favorites', {
+          'page__main--favorites-empty': !isFavoritesEmpty,
+        })}
+      >
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              {favoritesList.map((card1) => {
-                const favoritesSortCity = favoritesListTemp.filter(
-                  (card2) => card1.city.name === card2.city.name
-                );
+          <section
+            className={cn('favorites', {
+              'favorites--empty': !isFavoritesEmpty,
+            })}
+          >
+            {isFavoritesEmpty ? (
+              <>
+                <h1 className="favorites__title">Saved listing</h1>
+                <ul className="favorites__list">
+                  {CITIES.map((city) => {
+                    const favoritesSortCity = favoritesList.filter(
+                      (card) => city === card.city.name
+                    );
 
-                console.log(
-                  favoritesListTemp.findIndex(
-                    (card4) => card1.city.name === card4.city.name
-                  )
-                );
-
-                // favoritesListTemp.splice(
-                //   favoritesListTemp.findIndex(
-                //     (card4) => card1.city.name === card4.city.name
-                //   ),
-                //   1
-                // );
-
-                console.log(favoritesListTemp);
-
-                return (
-                  <li className="favorites__locations-items" key={card1.id}>
-                    <div className="favorites__locations locations locations--current">
-                      <div className="locations__item">
-                        <a className="locations__item-link" href="#">
-                          <span>{card1.city.name}</span>
-                        </a>
-                      </div>
-                    </div>
-                    <div className="favorites__places">
-                      {favoritesSortCity.map((card3) => (
-                        <PlaceCard
-                          card={card3}
-                          className="favorites"
-                          key={card3.id}
-                        />
-                      ))}
-                    </div>
-                  </li>
-                );
-              })}
-
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <a className="locations__item-link" href="#">
-                      <span>Cologne</span>
-                    </a>
-                  </div>
-                </div>
-                <div className="favorites__places"></div>
-              </li>
-            </ul>
+                    if (favoritesSortCity.length) {
+                      return (
+                        <li className="favorites__locations-items" key={city}>
+                          <div className="favorites__locations locations locations--current">
+                            <div className="locations__item">
+                              <Link
+                                className="locations__item-link"
+                                to={AppRoute.Root}
+                              >
+                                <span>{city}</span>
+                              </Link>
+                            </div>
+                          </div>
+                          <div className="favorites__places">
+                            {favoritesSortCity.map((card) => (
+                              <PlaceCard
+                                card={card}
+                                className="favorites"
+                                key={card.id}
+                              />
+                            ))}
+                          </div>
+                        </li>
+                      );
+                    }
+                  })}
+                </ul>
+              </>
+            ) : (
+              <FavoritesEmpty />
+            )}
           </section>
         </div>
       </main>
