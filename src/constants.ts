@@ -1,7 +1,43 @@
-import { Card } from './types';
-
-const NUMBER_OFFERS = 312;
 const ONE_STAR_RATIO = 20;
+const MAX_OFFER_IMAGES = 6;
+const MAX_OFFERS_NEARBY = 3;
+
+const CITIES = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf',
+] as const;
+
+const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+] as const;
+
+const RATINGS = [
+  { star: 5, title: 'perfect' },
+  { star: 4, title: 'good' },
+  { star: 3, title: 'not bad' },
+  { star: 2, title: 'badly' },
+  { star: 1, title: 'terribly' },
+] as const;
+
+const TextLength = {
+  min: 50,
+  max: 300,
+} as const;
 
 const AppRoute = {
   Root: '/',
@@ -16,63 +52,14 @@ const AuthorizationStatus = {
   Unknown: 'UNKNOWN',
 } as const;
 
-const CardList: Card[] = [
-  {
-    id: 1,
-    title: 'Beautiful & luxurious apartment at great location',
-    type: 'Apartment',
-    price: 120,
-    isFavorite: false,
-    isPremium: true,
-    rating: 4,
-    previewImage: 'img/apartment-01.jpg',
-  },
-  {
-    id: 2,
-    title: 'Wood and stone place',
-    type: 'Private room',
-    price: 80,
-    isFavorite: true,
-    isPremium: false,
-    rating: 4,
-    previewImage: 'img/room.jpg',
-  },
-  {
-    id: 3,
-    title: 'Canal View Prinsengracht',
-    type: 'Apartment',
-    price: 132,
-    isFavorite: false,
-    isPremium: false,
-    rating: 4,
-    previewImage: 'img/apartment-02.jpg',
-  },
-  {
-    id: 4,
-    title: 'Nice, cozy, warm big bed apartment',
-    type: 'Apartment',
-    price: 180,
-    isFavorite: false,
-    isPremium: true,
-    rating: 5,
-    previewImage: 'img/apartment-03.jpg',
-  },
-  {
-    id: 5,
-    title: 'Wood and stone place',
-    type: 'Private room',
-    price: 80,
-    isFavorite: true,
-    isPremium: false,
-    rating: 2,
-    previewImage: 'img/room.jpg',
-  },
-];
-
 export {
-  NUMBER_OFFERS,
   ONE_STAR_RATIO,
+  MAX_OFFERS_NEARBY,
+  MAX_OFFER_IMAGES,
+  CITIES,
+  MONTHS,
+  RATINGS,
+  TextLength,
   AppRoute,
   AuthorizationStatus,
-  CardList,
 };

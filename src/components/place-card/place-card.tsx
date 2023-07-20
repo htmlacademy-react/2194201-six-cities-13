@@ -1,26 +1,46 @@
+import cn from 'classnames';
+import { useState } from 'react';
+import { Link, generatePath } from 'react-router-dom';
 import { Card } from '../../types';
-import { ONE_STAR_RATIO } from '../../constants';
+import { ONE_STAR_RATIO, AppRoute } from '../../constants';
 
 type PlaceCardProps = {
   card: Card;
+  className: 'cities' | 'favorites' | 'near-places';
 };
 
-function PlaceCard({ card }: PlaceCardProps): JSX.Element {
-  const { title, type, price, isFavorite, isPremium, rating, previewImage } =
-    card;
-  const favoriteActiveClass = isFavorite
-    ? 'place-card__bookmark-button--active'
-    : '';
+function PlaceCard({ card, className }: PlaceCardProps): JSX.Element {
+  const {
+    id,
+    title,
+    type,
+    price,
+    isFavorite,
+    isPremium,
+    rating,
+    previewImage,
+  } = card;
+
+  // TODO: Первым значением в кортеже снизу будет переменная CardId. Применять ее будем в следующих разделах.
+  // Временно удалена во избежании ошибок линта.
+  const [, setCardId] = useState('');
+
+  const handlePlaceCardMouseOver = () => {
+    setCardId(id);
+  };
 
   return (
-    <article className="cities__card place-card">
+    <article
+      className={`${className}__card place-card`}
+      onMouseOver={handlePlaceCardMouseOver}
+    >
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       )}
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+      <div className={`${className}__image-wrapper place-card__image-wrapper`}>
+        <Link to={generatePath(AppRoute.Offer, { id: id })}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -28,16 +48,22 @@ function PlaceCard({ card }: PlaceCardProps): JSX.Element {
             height={200}
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
-      <div className="place-card__info">
+      <div
+        className={cn('place-card__info', {
+          'favorites__card-info': className === 'favorites',
+        })}
+      >
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€{price} </b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
-            className={`place-card__bookmark-button ${favoriteActiveClass} button`}
+            className={cn('place-card__bookmark-button', 'button', {
+              'place-card__bookmark-button--active': isFavorite,
+            })}
             type="button"
           >
             <svg className="place-card__bookmark-icon" width={18} height={19}>
@@ -50,12 +76,14 @@ function PlaceCard({ card }: PlaceCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${rating * ONE_STAR_RATIO}%` }} />
+            <span
+              style={{ width: `${Math.round(rating) * ONE_STAR_RATIO}%` }}
+            />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={generatePath(AppRoute.Offer, { id: id })}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

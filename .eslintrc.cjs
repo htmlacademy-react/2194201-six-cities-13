@@ -7,6 +7,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
     "htmlacademy/react-typescript",
+    "prettier"
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module', project: 'tsconfig.json' },
@@ -14,10 +15,11 @@ module.exports = {
   plugins: ['react-refresh'],
   rules: {
     'react-refresh/only-export-components': 'warn',
+    'object-curly-newline': 'off',
   },
   overrides: [
     {
-      files: [ '*test*' ],
+      files: ['*test*'],
       rules: { '@typescript-eslint/unbound-method': 'off' }
     },
   ],

@@ -6,7 +6,7 @@ type PrivateRouteProps = PropsWithChildren<{
   authorizationStatus: (typeof AuthorizationStatus)[keyof typeof AuthorizationStatus];
 }>;
 
-function PrivateRoute(props: PrivateRouteProps) {
+function PrivateRoute(props: PrivateRouteProps): React.ReactNode {
   const { authorizationStatus, children } = props;
 
   return authorizationStatus === AuthorizationStatus.Auth ? (
