@@ -4,16 +4,16 @@ import { RATINGS, TextLength } from '../../constants';
 function ReviewForm(): JSX.Element {
   const { min, max } = TextLength;
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{ rating: number; review: string }>({
     rating: 0,
     review: '',
   });
 
-  const handleRatingChange = (
+  const handleInputChange = (
     evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = evt.target;
-    setFormData({ ...formData, [name]: +value || value });
+    setFormData({ ...formData, [name]: name === 'rating' ? +value : value });
   };
 
   return (
@@ -25,10 +25,10 @@ function ReviewForm(): JSX.Element {
         {RATINGS.map(({ star, title }) => (
           <Fragment key={star}>
             <input
-              onChange={handleRatingChange}
+              onChange={handleInputChange}
               className="form__rating-input visually-hidden"
               name="rating"
-              defaultValue={star}
+              value={formData.rating}
               id={`${star}-star`}
               type="radio"
             />
@@ -45,12 +45,12 @@ function ReviewForm(): JSX.Element {
         ))}
       </div>
       <textarea
-        onChange={handleRatingChange}
+        onChange={handleInputChange}
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        defaultValue={''}
+        value={formData.review}
         minLength={min}
         maxLength={max}
       />

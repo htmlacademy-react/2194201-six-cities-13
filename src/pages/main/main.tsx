@@ -16,7 +16,7 @@ type MainProps = {
 function Main({ cardList }: MainProps): JSX.Element {
   const [activeCity, setActiveCity] = useState<CityNames>(CITIES[0]);
   const currentOffers = cardList.filter(({ city }) => activeCity === city.name);
-  const isEmpty = !!currentOffers.length;
+  const isNotEmpty = !!currentOffers.length;
 
   return (
     <div className="page page--gray page--main">
@@ -26,13 +26,13 @@ function Main({ cardList }: MainProps): JSX.Element {
       <Header isUserNav />
       <main
         className={cn('page__main', 'page__main--index', {
-          'page__main--index-empty': !isEmpty,
+          'page__main--index-empty': !isNotEmpty,
         })}
       >
         <h1 className="visually-hidden">Cities</h1>
         <Tabs activeCity={activeCity} setActiveCity={setActiveCity} />
         <div className="cities">
-          {isEmpty ? (
+          {isNotEmpty ? (
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>

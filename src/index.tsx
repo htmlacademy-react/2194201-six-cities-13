@@ -15,8 +15,8 @@ root.render(
     <App
       cardList={CardList}
       offerList={OfferList}
-      reviewsList={ReviewsList}
-      favoritesList={FavoritesList}
+      reviewList={ReviewsList}
+      favoriteList={FavoritesList}
     />
   </React.StrictMode>
 );

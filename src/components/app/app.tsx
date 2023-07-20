@@ -14,15 +14,15 @@ import { Card, OfferCard, Review } from '../../types';
 type AppProps = {
   cardList: Card[];
   offerList: OfferCard[];
-  reviewsList: Review[];
-  favoritesList: Card[];
+  reviewList: Review[];
+  favoriteList: Card[];
 };
 
 function App({
   cardList,
   offerList,
-  reviewsList,
-  favoritesList,
+  reviewList,
+  favoriteList,
 }: AppProps): JSX.Element {
   return (
     <HelmetProvider>
@@ -38,7 +38,7 @@ function App({
             path={AppRoute.Favorites}
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <Favorites favoritesList={favoritesList} />
+                <Favorites favoriteList={favoriteList} />
               </PrivateRoute>
             }
           />
@@ -48,7 +48,7 @@ function App({
               <Offer
                 cardList={cardList}
                 offerList={offerList}
-                reviewsList={reviewsList}
+                reviewList={reviewList}
               />
             }
           />

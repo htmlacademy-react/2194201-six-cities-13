@@ -9,39 +9,39 @@ import PlaceCard from '../../components/place-card/place-card';
 import Footer from '../../components/footer/footer';
 
 type FavoritesProps = {
-  favoritesList: Card[];
+  favoriteList: Card[];
 };
 
-function Favorites({ favoritesList }: FavoritesProps): JSX.Element {
-  const isEmpty = !!favoritesList.length;
+function Favorites({ favoriteList }: FavoritesProps): JSX.Element {
+  const isNotEmpty = !!favoriteList.length;
 
   return (
-    <div className={cn('page', { 'page--favorites-empty': !isEmpty })}>
+    <div className={cn('page', { 'page--favorites-empty': !isNotEmpty })}>
       <Helmet>
         <title>Избранные гостиницы</title>
       </Helmet>
       <Header isUserNav />
       <main
         className={cn('page__main', 'page__main--favorites', {
-          'page__main--favorites-empty': !isEmpty,
+          'page__main--favorites-empty': !isNotEmpty,
         })}
       >
         <div className="page__favorites-container container">
           <section
             className={cn('favorites', {
-              'favorites--empty': !isEmpty,
+              'favorites--empty': !isNotEmpty,
             })}
           >
-            {isEmpty ? (
+            {isNotEmpty ? (
               <>
                 <h1 className="favorites__title">Saved listing</h1>
                 <ul className="favorites__list">
                   {CITIES.map((city) => {
-                    const favoritesSortCity = favoritesList.filter(
+                    const favoritesSortCity = favoriteList.filter(
                       (card) => city === card.city.name
                     );
 
-                    if (isEmpty) {
+                    if (favoritesSortCity.length) {
                       return (
                         <li className="favorites__locations-items" key={city}>
                           <div className="favorites__locations locations locations--current">

@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { useState, MouseEvent } from 'react';
+import { useState } from 'react';
 import { Link, generatePath } from 'react-router-dom';
 import { Card } from '../../types';
 import { ONE_STAR_RATIO, AppRoute } from '../../constants';
@@ -21,17 +21,18 @@ function PlaceCard({ card, className }: PlaceCardProps): JSX.Element {
     previewImage,
   } = card;
 
-  const [cardId, setCardId] = useState('');
+  // TODO: Первым значением в кортеже снизу будет переменная CardId. Применять ее будем в следующих разделах.
+  // Временно удалена во избежании ошибок линта.
+  const [, setCardId] = useState('');
 
-  const handlePlaceCardMouseOver = (evt: MouseEvent<HTMLElement>) => {
-    setCardId(evt.currentTarget.id);
+  const handlePlaceCardMouseOver = () => {
+    setCardId(id);
   };
 
   return (
     <article
       className={`${className}__card place-card`}
       onMouseOver={handlePlaceCardMouseOver}
-      id={id}
     >
       {isPremium && (
         <div className="place-card__mark">
@@ -39,7 +40,7 @@ function PlaceCard({ card, className }: PlaceCardProps): JSX.Element {
         </div>
       )}
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
-        <Link to={generatePath(AppRoute.Offer, { id: `${id}` })}>
+        <Link to={generatePath(AppRoute.Offer, { id: id })}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -82,9 +83,7 @@ function PlaceCard({ card, className }: PlaceCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={generatePath(AppRoute.Offer, { id: `${id}` })}>
-            {title}
-          </Link>
+          <Link to={generatePath(AppRoute.Offer, { id: id })}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

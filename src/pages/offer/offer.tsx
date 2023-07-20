@@ -16,10 +16,10 @@ import {
 type OfferProps = {
   cardList: Card[];
   offerList: OfferCard[];
-  reviewsList: Review[];
+  reviewList: Review[];
 };
 
-function Offer({ cardList, offerList, reviewsList }: OfferProps): JSX.Element {
+function Offer({ cardList, offerList, reviewList }: OfferProps): JSX.Element {
   const { id } = useParams();
   const card = offerList.find((item: OfferCard) => item.id === id);
 
@@ -63,10 +63,7 @@ function Offer({ cardList, offerList, reviewsList }: OfferProps): JSX.Element {
               {images.map((image: string, index) => {
                 if (MAX_OFFER_IMAGES > index) {
                   return (
-                    <div
-                      className="offer__image-wrapper"
-                      key={crypto.randomUUID()}
-                    >
+                    <div className="offer__image-wrapper" key={image}>
                       <img
                         className="offer__image"
                         src={image}
@@ -163,7 +160,7 @@ function Offer({ cardList, offerList, reviewsList }: OfferProps): JSX.Element {
                 </div>
               </div>
               <Reviews
-                reviewsList={reviewsList}
+                reviewList={reviewList}
                 authorizationStatus={AuthorizationStatus.Auth}
               />
             </div>

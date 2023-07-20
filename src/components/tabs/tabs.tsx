@@ -19,7 +19,6 @@ function Tabs({ activeCity, setActiveCity }: TabsProps): JSX.Element {
                 className={cn('locations__item-link', 'tabs__item', {
                   'tabs__item--active': activeCity === city,
                 })}
-                data-city={city}
                 onClick={() => setActiveCity(city)}
                 to="#"
               >

@@ -3,20 +3,20 @@ import { Review } from '../../types';
 import { ONE_STAR_RATIO, MONTHS, AuthorizationStatus } from '../../constants';
 
 type ReviewsProps = {
-  reviewsList: Review[];
+  reviewList: Review[];
   authorizationStatus: (typeof AuthorizationStatus)[keyof typeof AuthorizationStatus];
 };
 
 function Reviews(props: ReviewsProps): JSX.Element {
-  const { reviewsList, authorizationStatus } = props;
+  const { reviewList, authorizationStatus } = props;
 
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">
-        Reviews · <span className="reviews__amount">{reviewsList.length}</span>
+        Reviews · <span className="reviews__amount">{reviewList.length}</span>
       </h2>
       <ul className="reviews__list">
-        {reviewsList.map(({ id, date, user, comment, rating }) => {
+        {reviewList.map(({ id, date, user, comment, rating }) => {
           const reviewDate = date.split('T')[0];
           const year = reviewDate.split('-')[0];
           const month = MONTHS[+reviewDate.split('-')[1] - 1];
