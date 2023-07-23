@@ -1,6 +1,7 @@
 const ONE_STAR_RATIO = 20;
 const MAX_OFFER_IMAGES = 6;
 const MAX_OFFERS_NEARBY = 3;
+const MAX_COMMENTS = 10;
 
 const CITIES = [
   'Paris',
@@ -9,21 +10,6 @@ const CITIES = [
   'Amsterdam',
   'Hamburg',
   'Dusseldorf',
-] as const;
-
-const MONTHS = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
 ] as const;
 
 const RATINGS = [
@@ -56,8 +42,8 @@ export {
   ONE_STAR_RATIO,
   MAX_OFFERS_NEARBY,
   MAX_OFFER_IMAGES,
+  MAX_COMMENTS,
   CITIES,
-  MONTHS,
   RATINGS,
   TextLength,
   AppRoute,

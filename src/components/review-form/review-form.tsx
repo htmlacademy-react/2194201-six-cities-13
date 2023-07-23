@@ -9,7 +9,7 @@ function ReviewForm(): JSX.Element {
     review: '',
   });
 
-  const handleInputChange = (
+  const handleFieldsChange = (
     evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = evt.target;
@@ -25,7 +25,7 @@ function ReviewForm(): JSX.Element {
         {RATINGS.map(({ star, title }) => (
           <Fragment key={star}>
             <input
-              onChange={handleInputChange}
+              onChange={handleFieldsChange}
               className="form__rating-input visually-hidden"
               name="rating"
               value={formData.rating}
@@ -45,7 +45,7 @@ function ReviewForm(): JSX.Element {
         ))}
       </div>
       <textarea
-        onChange={handleInputChange}
+        onChange={handleFieldsChange}
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
