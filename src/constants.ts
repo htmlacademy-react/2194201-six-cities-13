@@ -1,7 +1,7 @@
 const ONE_STAR_RATIO = 20;
 const MAX_OFFER_IMAGES = 6;
 const MAX_OFFERS_NEARBY = 3;
-const MAX_COMMENTS = 10;
+const MAX_REVIEWS = 10;
 
 const CITIES = [
   'Paris',
@@ -42,7 +42,7 @@ export {
   ONE_STAR_RATIO,
   MAX_OFFERS_NEARBY,
   MAX_OFFER_IMAGES,
-  MAX_COMMENTS,
+  MAX_REVIEWS,
   CITIES,
   RATINGS,
   TextLength,

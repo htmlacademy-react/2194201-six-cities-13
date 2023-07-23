@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import { Review } from '../../types';
 import {
   ONE_STAR_RATIO,
-  MAX_COMMENTS,
+  MAX_REVIEWS,
   AuthorizationStatus,
 } from '../../constants';
 
@@ -28,7 +28,7 @@ function Reviews(props: ReviewsProps): JSX.Element {
           const year = dayjs(date).year();
           const month = dayjs(date).format('MMMM');
 
-          if (index < MAX_COMMENTS) {
+          if (index < MAX_REVIEWS) {
             return (
               <li className="reviews__item" key={id}>
                 <div className="reviews__user user">
