@@ -72,7 +72,7 @@ function Main({ cardList }: MainProps): JSX.Element {
                 </div>
               </section>
               <div className="cities__right-section">
-                <Map />
+                <Map className="cities" />
               </div>
             </div>
           ) : (

@@ -7,6 +7,7 @@ import { ONE_STAR_RATIO } from '../../constants';
 import { Card, OfferCard, Review } from '../../types';
 import NotFound from '../not-found/not-found';
 import PlaceCard from '../../components/place-card/place-card';
+import Map from '../../components/map/map';
 import {
   MAX_OFFER_IMAGES,
   MAX_OFFERS_NEARBY,
@@ -165,7 +166,7 @@ function Offer({ cardList, offerList, reviewList }: OfferProps): JSX.Element {
               />
             </div>
           </div>
-          <section className="offer__map map" />
+          <Map className="offer" />
         </section>
         <div className="container">
           <section className="near-places places">
