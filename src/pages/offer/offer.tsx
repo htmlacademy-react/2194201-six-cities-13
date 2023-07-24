@@ -166,7 +166,13 @@ function Offer({ cardList, offerList, reviewList }: OfferProps): JSX.Element {
               />
             </div>
           </div>
-          <Map className="offer" />
+          <Map
+            className="offer"
+            height="579px"
+            cityInfo={card.city}
+            pins={[card]}
+            cardId={id}
+          />
         </section>
         <div className="container">
           <section className="near-places places">

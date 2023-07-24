@@ -3,6 +3,9 @@ const MAX_OFFER_IMAGES = 6;
 const MAX_OFFERS_NEARBY = 3;
 const MAX_REVIEWS = 10;
 
+const URL_PIN_DEFAULT = 'img/pin.svg';
+const URL_PIN_CURRENT = 'img/pin-active.svg';
+
 const CITIES = [
   'Paris',
   'Cologne',
@@ -43,6 +46,8 @@ export {
   MAX_OFFERS_NEARBY,
   MAX_OFFER_IMAGES,
   MAX_REVIEWS,
+  URL_PIN_DEFAULT,
+  URL_PIN_CURRENT,
   CITIES,
   RATINGS,
   TextLength,

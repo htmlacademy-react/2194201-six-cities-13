@@ -33,14 +33,14 @@ const CardList: Card[] = [
     city: {
       name: 'Cologne',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 50.938361,
+        longitude: 6.959974,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.858610000000006,
-      longitude: 2.330499,
+      latitude: 50.950361,
+      longitude: 6.961974,
       zoom: 16,
     },
     isFavorite: false,
@@ -102,14 +102,14 @@ const CardList: Card[] = [
     city: {
       name: 'Cologne',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 50.938361,
+        longitude: 6.959974,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.87561,
-      longitude: 2.375499,
+      latitude: 50.932361,
+      longitude: 6.937974,
       zoom: 16,
     },
     isFavorite: false,
@@ -125,14 +125,14 @@ const CardList: Card[] = [
     city: {
       name: 'Brussels',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 50.846557,
+        longitude: 4.351697,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.87961000000001,
-      longitude: 2.353499,
+      latitude: 50.854557,
+      longitude: 4.364697,
       zoom: 16,
     },
     isFavorite: false,
@@ -148,14 +148,14 @@ const CardList: Card[] = [
     city: {
       name: 'Brussels',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 50.846557,
+        longitude: 4.351697,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.834610000000005,
-      longitude: 2.364499,
+      latitude: 50.867557,
+      longitude: 4.371696999999999,
       zoom: 16,
     },
     isFavorite: false,
@@ -171,14 +171,14 @@ const CardList: Card[] = [
     city: {
       name: 'Brussels',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 50.846557,
+        longitude: 4.351697,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.837610000000005,
-      longitude: 2.3454990000000002,
+      latitude: 50.827557,
+      longitude: 4.336697,
       zoom: 16,
     },
     isFavorite: false,
@@ -194,15 +194,15 @@ const CardList: Card[] = [
     city: {
       name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 52.37454,
+        longitude: 4.897976,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.84761,
-      longitude: 2.356499,
-      zoom: 16,
+      latitude: 52.37454,
+      longitude: 4.897976,
+      zoom: 13,
     },
     isFavorite: false,
     isPremium: false,
@@ -217,14 +217,14 @@ const CardList: Card[] = [
     city: {
       name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 52.37454,
+        longitude: 4.897976,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.862610000000004,
-      longitude: 2.369499,
+      latitude: 52.397540000000006,
+      longitude: 4.9099759999999995,
       zoom: 16,
     },
     isFavorite: false,
@@ -240,14 +240,14 @@ const CardList: Card[] = [
     city: {
       name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 52.37454,
+        longitude: 4.897976,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.83861,
-      longitude: 2.350499,
+      latitude: 52.37454,
+      longitude: 4.881976,
       zoom: 16,
     },
     isFavorite: false,
@@ -263,15 +263,15 @@ const CardList: Card[] = [
     city: {
       name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 52.37454,
+        longitude: 4.897976,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.861610000000006,
-      longitude: 2.340499,
-      zoom: 16,
+      latitude: 52.37454,
+      longitude: 4.897976,
+      zoom: 13,
     },
     isFavorite: false,
     isPremium: false,
@@ -286,14 +286,14 @@ const CardList: Card[] = [
     city: {
       name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 52.37454,
+        longitude: 4.897976,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.87861,
-      longitude: 2.357499,
+      latitude: 52.35754,
+      longitude: 4.9179759999999995,
       zoom: 16,
     },
     isFavorite: false,
@@ -309,14 +309,14 @@ const CardList: Card[] = [
     city: {
       name: 'Hamburg',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 53.550341,
+        longitude: 10.000654,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.877610000000004,
-      longitude: 2.333499,
+      latitude: 53.528341000000005,
+      longitude: 10.018654000000002,
       zoom: 16,
     },
     isFavorite: false,
@@ -332,14 +332,14 @@ const CardList: Card[] = [
     city: {
       name: 'Hamburg',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 53.550341,
+        longitude: 10.000654,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.83961,
-      longitude: 2.342499,
+      latitude: 53.538341,
+      longitude: 9.976654000000002,
       zoom: 16,
     },
     isFavorite: false,
@@ -424,14 +424,14 @@ const CardList: Card[] = [
     city: {
       name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 52.37454,
+        longitude: 4.897976,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.843610000000005,
-      longitude: 2.338499,
+      latitude: 52.37854,
+      longitude: 4.894976,
       zoom: 16,
     },
     isFavorite: false,

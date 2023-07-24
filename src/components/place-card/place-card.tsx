@@ -1,5 +1,4 @@
 import cn from 'classnames';
-import { useState } from 'react';
 import { Link, generatePath } from 'react-router-dom';
 import { Card } from '../../types';
 import { ONE_STAR_RATIO, AppRoute } from '../../constants';
@@ -7,9 +6,16 @@ import { ONE_STAR_RATIO, AppRoute } from '../../constants';
 type PlaceCardProps = {
   card: Card;
   className: 'cities' | 'favorites' | 'near-places';
+  handlePlaceCardMouseOver?: (id: string) => void;
+  handlePlaceCardMouseLeave?: () => void;
 };
 
-function PlaceCard({ card, className }: PlaceCardProps): JSX.Element {
+function PlaceCard({
+  card,
+  className,
+  handlePlaceCardMouseOver,
+  handlePlaceCardMouseLeave,
+}: PlaceCardProps): JSX.Element {
   const {
     id,
     title,
@@ -21,18 +27,11 @@ function PlaceCard({ card, className }: PlaceCardProps): JSX.Element {
     previewImage,
   } = card;
 
-  // TODO: Первым значением в кортеже снизу будет переменная CardId. Применять ее будем в следующих разделах.
-  // Временно удалена во избежании ошибок линта.
-  const [, setCardId] = useState('');
-
-  const handlePlaceCardMouseOver = () => {
-    setCardId(id);
-  };
-
   return (
     <article
       className={`${className}__card place-card`}
-      onMouseOver={handlePlaceCardMouseOver}
+      onMouseOver={() => handlePlaceCardMouseOver?.(id)}
+      onMouseLeave={() => handlePlaceCardMouseLeave?.()}
     >
       {isPremium && (
         <div className="place-card__mark">
