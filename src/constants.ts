@@ -1,6 +1,10 @@
 const ONE_STAR_RATIO = 20;
 const MAX_OFFER_IMAGES = 6;
 const MAX_OFFERS_NEARBY = 3;
+const MAX_REVIEWS = 10;
+
+const URL_PIN_DEFAULT = 'img/pin.svg';
+const URL_PIN_CURRENT = 'img/pin-active.svg';
 
 const CITIES = [
   'Paris',
@@ -9,21 +13,6 @@ const CITIES = [
   'Amsterdam',
   'Hamburg',
   'Dusseldorf',
-] as const;
-
-const MONTHS = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
 ] as const;
 
 const RATINGS = [
@@ -56,8 +45,10 @@ export {
   ONE_STAR_RATIO,
   MAX_OFFERS_NEARBY,
   MAX_OFFER_IMAGES,
+  MAX_REVIEWS,
+  URL_PIN_DEFAULT,
+  URL_PIN_CURRENT,
   CITIES,
-  MONTHS,
   RATINGS,
   TextLength,
   AppRoute,

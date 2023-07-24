@@ -15,8 +15,13 @@ type MainProps = {
 
 function Main({ cardList }: MainProps): JSX.Element {
   const [activeCity, setActiveCity] = useState<CityNames>(CITIES[0]);
+  const [cardId, setCardId] = useState<string>('');
+
   const currentOffers = cardList.filter(({ city }) => activeCity === city.name);
   const isNotEmpty = !!currentOffers.length;
+
+  const handlePlaceCardMouseOver = (id: string) => setCardId(id);
+  const handlePlaceCardMouseLeave = () => setCardId('');
 
   return (
     <div className="page page--gray page--main">
@@ -67,12 +72,24 @@ function Main({ cardList }: MainProps): JSX.Element {
                 </form>
                 <div className="cities__places-list places__list tabs__content">
                   {currentOffers.map((offer) => (
-                    <PlaceCard card={offer} className="cities" key={offer.id} />
+                    <PlaceCard
+                      card={offer}
+                      className="cities"
+                      key={offer.id}
+                      handlePlaceCardMouseOver={handlePlaceCardMouseOver}
+                      handlePlaceCardMouseLeave={handlePlaceCardMouseLeave}
+                    />
                   ))}
                 </div>
               </section>
               <div className="cities__right-section">
-                <Map />
+                <Map
+                  className="cities"
+                  height="100%"
+                  cityInfo={currentOffers[0].city}
+                  pins={currentOffers}
+                  cardId={cardId}
+                />
               </div>
             </div>
           ) : (
