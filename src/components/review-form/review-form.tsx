@@ -1,11 +1,11 @@
 import { Fragment, useState, ChangeEvent, FormEvent } from 'react';
 import { RATINGS, TextLength } from '../../constants';
-import { TReview } from '../../types';
+import { ReviewValues } from '../../types';
 
 function ReviewForm(): JSX.Element {
   const { min, max } = TextLength;
 
-  const [formData, setFormData] = useState<TReview>({
+  const [formData, setFormData] = useState<ReviewValues>({
     rating: 0,
     review: '',
   });

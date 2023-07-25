@@ -54,7 +54,7 @@ export type Review = {
   comment: string;
   rating: number;
 };
-export type TReview = {
+export type ReviewValues = {
   rating: number;
   review: string;
 };
