@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, MutableRefObject } from 'react';
-import { Map, TileLayer } from 'leaflet';
+import { Map, TileLayer, Browser } from 'leaflet';
 import { City } from '../types';
 
 function useMap(
@@ -18,6 +18,10 @@ function useMap(
           lng: longitude,
         },
         zoom: zoom,
+        dragging: !Browser.mobile,
+        tap: !Browser.mobile,
+        touchZoom: !Browser.mobile,
+        scrollWheelZoom: false,
       });
 
       const layer = new TileLayer(
