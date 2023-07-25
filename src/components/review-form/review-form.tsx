@@ -1,23 +1,40 @@
-import { Fragment, useState, ChangeEvent } from 'react';
+import { Fragment, useState, ChangeEvent, FormEvent } from 'react';
 import { RATINGS, TextLength } from '../../constants';
+import { TReview } from '../../types';
 
 function ReviewForm(): JSX.Element {
   const { min, max } = TextLength;
 
-  const [formData, setFormData] = useState<{ rating: number; review: string }>({
+  const [formData, setFormData] = useState<TReview>({
     rating: 0,
     review: '',
+    isValid: false,
   });
+  console.log(formData.rating);
+  console.log(formData.review);
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+  };
 
   const handleFieldsChange = (
     evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = evt.target;
     setFormData({ ...formData, [name]: name === 'rating' ? +value : value });
+    if (formData.rating && formData.review.length > min) {
+      formData.isValid = true;
+    } else {
+      formData.isValid = false;
+    }
   };
 
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit={handleFormSubmit}
+    >
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
@@ -64,7 +81,7 @@ function ReviewForm(): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled
+          disabled={formData.isValid}
         >
           Submit
         </button>

@@ -54,3 +54,8 @@ export type Review = {
   comment: string;
   rating: number;
 };
+export type TReview = {
+  rating: number;
+  review: string;
+  isValid: boolean;
+};
