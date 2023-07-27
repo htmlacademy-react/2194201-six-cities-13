@@ -170,7 +170,7 @@ function Offer({ cardList, offerList, reviewList }: OfferProps): JSX.Element {
             className="offer"
             height="579px"
             cityInfo={card.city}
-            pins={[card]}
+            pins={[card, ...offersNearby]}
             cardId={id}
           />
         </section>

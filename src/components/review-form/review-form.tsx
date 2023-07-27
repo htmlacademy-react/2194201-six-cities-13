@@ -1,23 +1,53 @@
-import { Fragment, useState, ChangeEvent } from 'react';
+import { Fragment, useState, ChangeEvent, FormEvent } from 'react';
 import { RATINGS, TextLength } from '../../constants';
+import { ReviewValues } from '../../types';
 
 function ReviewForm(): JSX.Element {
   const { min, max } = TextLength;
 
-  const [formData, setFormData] = useState<{ rating: number; review: string }>({
+  const [formData, setFormData] = useState<ReviewValues>({
     rating: 0,
     review: '',
   });
 
-  const handleFieldsChange = (
-    evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const { rating, review } = formData;
+  const isValid = !!rating && review.length > min && review.length <= max;
+
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    const form = evt.target as HTMLFormElement;
+    form.reset();
+
+    setFormData({ ...formData, rating: 0, review: '' });
+    // TODO: Здесь будет код отправки формы на сервер и проверка.
+  };
+
+  const handleInputsChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = evt.target;
-    setFormData({ ...formData, [name]: name === 'rating' ? +value : value });
+
+    setFormData({
+      ...formData,
+      [name]: name === 'rating' ? +value : value,
+    });
+  };
+
+  const handleTextAreaChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = evt.target;
+
+    setFormData({
+      ...formData,
+      [name]: name === 'rating' ? +value : value,
+    });
   };
 
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit={handleFormSubmit}
+    >
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
@@ -25,10 +55,10 @@ function ReviewForm(): JSX.Element {
         {RATINGS.map(({ star, title }) => (
           <Fragment key={star}>
             <input
-              onChange={handleFieldsChange}
+              onChange={handleInputsChange}
               className="form__rating-input visually-hidden"
               name="rating"
-              value={formData.rating}
+              value={star}
               id={`${star}-star`}
               type="radio"
             />
@@ -45,12 +75,12 @@ function ReviewForm(): JSX.Element {
         ))}
       </div>
       <textarea
-        onChange={handleFieldsChange}
+        onChange={handleTextAreaChange}
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value={formData.review}
+        defaultValue=""
         minLength={min}
         maxLength={max}
       />
@@ -64,7 +94,7 @@ function ReviewForm(): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled
+          disabled={!isValid}
         >
           Submit
         </button>

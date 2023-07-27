@@ -10,7 +10,7 @@ type MapProps = {
   cityInfo: City;
   pins: Card[];
   height: string;
-  cardId?: string;
+  cardId: string;
 };
 
 const defaultCustomPin = new Icon({
