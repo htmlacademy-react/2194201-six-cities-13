@@ -2,13 +2,16 @@ import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { CITIES } from '../../constants';
 import { CityNames } from '../../types';
+import { useAppDispatch } from '../../hooks';
+import { changeActiveCity } from '../../store/action';
 
 type TabsProps = {
   activeCity: CityNames;
-  setActiveCity: (city: CityNames) => void;
 };
 
-function Tabs({ activeCity, setActiveCity }: TabsProps): JSX.Element {
+function Tabs({ activeCity }: TabsProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
   return (
     <div className="tabs">
       <section className="locations container">
@@ -19,7 +22,7 @@ function Tabs({ activeCity, setActiveCity }: TabsProps): JSX.Element {
                 className={cn('locations__item-link', 'tabs__item', {
                   'tabs__item--active': activeCity === city,
                 })}
-                onClick={() => setActiveCity(city)}
+                onClick={() => dispatch(changeActiveCity({ activeCity: city }))}
                 to="#"
               >
                 <span>{city}</span>
