@@ -5,6 +5,8 @@ import {
   ONE_STAR_RATIO,
   MAX_REVIEWS,
   AuthorizationStatus,
+  DATE,
+  MONTH_TEXT,
 } from '../../constants';
 
 type ReviewsProps = {
@@ -24,9 +26,9 @@ function Reviews(props: ReviewsProps): JSX.Element {
       </h2>
       <ul className="reviews__list">
         {reviewList.map(({ id, date, user, comment, rating }, index) => {
-          const reviewDate = dayjs(date).format('YYYY-MM-DD');
+          const reviewDate = dayjs(date).format(DATE);
           const year = dayjs(date).year();
-          const month = dayjs(date).format('MMMM');
+          const month = dayjs(date).format(MONTH_TEXT);
 
           if (index < MAX_REVIEWS) {
             return (

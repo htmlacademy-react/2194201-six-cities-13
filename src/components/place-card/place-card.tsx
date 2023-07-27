@@ -31,7 +31,7 @@ function PlaceCard({
     <article
       className={`${className}__card place-card`}
       onMouseOver={() => handlePlaceCardMouseOver?.(id)}
-      onMouseLeave={() => handlePlaceCardMouseLeave?.()}
+      onMouseLeave={handlePlaceCardMouseLeave}
     >
       {isPremium && (
         <div className="place-card__mark">

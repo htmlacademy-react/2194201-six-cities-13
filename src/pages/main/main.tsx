@@ -88,7 +88,7 @@ function Main({ cardList }: MainProps): JSX.Element {
                   className="cities"
                   height="100%"
                   cityInfo={currentOffers[0].city}
-                  pins={currentOffers}
+                  offers={currentOffers}
                   cardId={cardId}
                 />
               </div>

@@ -3,32 +3,32 @@ import leaflet, { Icon, Marker } from 'leaflet';
 import useMap from '../../hooks/useMap';
 import { Card, City } from '../../types';
 import 'leaflet/dist/leaflet.css';
-import { URL_PIN_CURRENT, URL_PIN_DEFAULT } from '../../constants';
+import { URL_PIN_CURRENT, URL_PIN_DEFAULT, ICON_SIZE } from '../../constants';
 
 type MapProps = {
-  className: 'cities' | 'offer';
+  className: string;
   cityInfo: City;
-  pins: Card[];
+  offers: Card[];
   height: string;
-  cardId: string;
+  cardId?: string;
 };
 
-const defaultCustomPin = new Icon({
+const defaultCustomPin: Icon = new Icon({
   iconUrl: URL_PIN_DEFAULT,
-  iconSize: [27, 39],
-  iconAnchor: [13, 39],
+  iconSize: ICON_SIZE,
+  iconAnchor: ICON_SIZE,
 });
 
-const currentCustomPin = new Icon({
+const currentCustomPin: Icon = new Icon({
   iconUrl: URL_PIN_CURRENT,
-  iconSize: [27, 39],
-  iconAnchor: [13, 39],
+  iconSize: ICON_SIZE,
+  iconAnchor: ICON_SIZE,
 });
 
 function Map({
   className,
   cityInfo,
-  pins,
+  offers,
   height,
   cardId,
 }: MapProps): JSX.Element {
@@ -39,8 +39,8 @@ function Map({
     const markers = leaflet.layerGroup();
 
     if (map) {
-      pins.forEach((pin) => {
-        const { latitude, longitude } = pin.location;
+      offers.forEach((offer) => {
+        const { latitude, longitude } = offer.location;
 
         const marker = new Marker({
           lat: latitude,
@@ -48,7 +48,7 @@ function Map({
         });
 
         marker.setIcon(
-          cardId && cardId === pin.id ? currentCustomPin : defaultCustomPin
+          cardId && cardId === offer.id ? currentCustomPin : defaultCustomPin
         );
         marker.addTo(markers);
       });
@@ -58,7 +58,7 @@ function Map({
     return () => {
       markers.clearLayers();
     };
-  }, [cardId, map, pins]);
+  }, [cardId, map, offers]);
 
   return (
     <section
