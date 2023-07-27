@@ -11,7 +11,7 @@ const ICON_SIZE = [27, 39] as PointExpression;
 const DATE = 'YYYY-MM-DD';
 const MONTH_TEXT = 'MMMM';
 
-const TITLE =
+const TILE_LAYER =
   'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
 const COPYRIGHT =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
@@ -61,7 +61,7 @@ export {
   ICON_SIZE,
   DATE,
   MONTH_TEXT,
-  TITLE,
+  TILE_LAYER,
   COPYRIGHT,
   CITIES,
   RATINGS,
