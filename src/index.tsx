@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { store } from './store';
 import App from './components/app/app';
 import { CardList } from './mocks/offers';
 import { OfferList } from './mocks/offer';
@@ -12,11 +14,13 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App
-      cardList={CardList}
-      offerList={OfferList}
-      reviewList={ReviewsList}
-      favoriteList={FavoritesList}
-    />
+    <Provider store={store}>
+      <App
+        cardList={CardList}
+        offerList={OfferList}
+        reviewList={ReviewsList}
+        favoriteList={FavoritesList}
+      />
+    </Provider>
   </React.StrictMode>
 );

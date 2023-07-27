@@ -6,15 +6,16 @@ import Tabs from '../../components/tabs/tabs';
 import PlaceCard from '../../components/place-card/place-card';
 import Map from '../../components/map/map';
 import { MainEmpty } from '../../components/main-empty/main-empty';
-import { CITIES } from '../../constants';
 import { Card, CityNames } from '../../types';
+import { useAppSelector } from '../../hooks';
+import { getActiveCity } from '../../store/action';
 
 type MainProps = {
   cardList: Card[];
 };
 
 function Main({ cardList }: MainProps): JSX.Element {
-  const [activeCity, setActiveCity] = useState<CityNames>(CITIES[0]);
+  const activeCity = useAppSelector<CityNames>(getActiveCity);
   const [cardId, setCardId] = useState<string>('');
 
   const currentOffers = cardList.filter(({ city }) => activeCity === city.name);
@@ -35,7 +36,7 @@ function Main({ cardList }: MainProps): JSX.Element {
         })}
       >
         <h1 className="visually-hidden">Cities</h1>
-        <Tabs activeCity={activeCity} setActiveCity={setActiveCity} />
+        <Tabs activeCity={activeCity} />
         <div className="cities">
           {isNotEmpty ? (
             <div className="cities__places-container container">
