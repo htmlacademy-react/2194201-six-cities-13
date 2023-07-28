@@ -1,13 +1,31 @@
 import cn from 'classnames';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { SORT_ITEMS } from '../../constants';
 
 function SortOffers(): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  const handleDocumentClick = (evt: Event) => {
+    const isSortList = !(evt.target as HTMLElement).closest('.places__options');
+
+    if (isSortList) {
+      setIsOpen(false);
+    }
+  };
+
   const handleSortClick = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('click', handleDocumentClick, true);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleDocumentClick, true);
+    };
+  });
 
   return (
     <form className="places__sorting" action="#" method="get">
