@@ -1,7 +1,8 @@
-import { CITIES } from './constants';
+import { CITIES, SORT_ITEMS } from './constants';
 import { store } from './store/index';
 
 export type CityNames = (typeof CITIES)[number];
+export type SortNames = (typeof SORT_ITEMS)[number];
 
 type User = {
   name: string;
@@ -66,8 +67,9 @@ export type ReviewValues = {
 };
 
 export type AppProcess = {
-  activeCity: (typeof CITIES)[number];
+  activeCity: CityNames;
   currentOffers: Card[];
+  activeSort: SortNames;
 };
 
 export type State = ReturnType<typeof store.getState>;

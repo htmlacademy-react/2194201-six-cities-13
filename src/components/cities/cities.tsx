@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import PlaceCard from '../../components/place-card/place-card';
 import Map from '../../components/map/map';
-import { Card, CityNames } from '../../types';
+import { Card, CityNames, SortNames } from '../../types';
 import { getOffersLocation } from '../../helpers/get-offers-location';
 import SortOffers from '../sort-offers/sort-offers';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { changeActiveSort, getActiveSort } from '../../store/action';
 
 type CitiesProps = {
   activeCity: CityNames;
@@ -11,12 +13,17 @@ type CitiesProps = {
 };
 
 function Cities({ activeCity, offers }: CitiesProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const [cardId, setCardId] = useState<string>('');
+  const activeSort = useAppSelector(getActiveSort);
 
   const offersLocation = getOffersLocation(offers);
 
   const handlePlaceCardMouseOver = (id: string) => setCardId(id);
   const handlePlaceCardMouseLeave = () => setCardId('');
+  const handleSortItemClick = (item: SortNames) => {
+    dispatch(changeActiveSort({ activeSort: item }));
+  };
 
   return (
     <div className="cities__places-container container">
@@ -25,7 +32,10 @@ function Cities({ activeCity, offers }: CitiesProps): JSX.Element {
         <b className="places__found">
           {offers.length} places to stay in {activeCity}
         </b>
-        <SortOffers />
+        <SortOffers
+          activeSort={activeSort}
+          handleSortItemClick={handleSortItemClick}
+        />
         <div className="cities__places-list places__list tabs__content">
           {offers.map((offer) => (
             <PlaceCard
