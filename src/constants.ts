@@ -25,6 +25,13 @@ const CITIES = [
   'Dusseldorf',
 ] as const;
 
+const SORT_ITEMS = [
+  'Popular',
+  'Price: low to high',
+  'Price: high to low',
+  'Top rated first',
+] as const;
+
 const RATINGS = [
   { star: 5, title: 'perfect' },
   { star: 4, title: 'good' },
@@ -64,6 +71,7 @@ export {
   TILE_LAYER,
   COPYRIGHT,
   CITIES,
+  SORT_ITEMS,
   RATINGS,
   TextLength,
   AppRoute,
