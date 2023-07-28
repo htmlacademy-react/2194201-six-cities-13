@@ -15,6 +15,11 @@ type Location = {
   zoom: number;
 };
 
+export type LocationMap = {
+  id: string;
+  location: Location;
+};
+
 export type City = {
   name: string;
   location: Location;

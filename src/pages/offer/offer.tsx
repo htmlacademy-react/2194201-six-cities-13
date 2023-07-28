@@ -51,7 +51,10 @@ function Offer({ cardList, offerList, reviewList }: OfferProps): JSX.Element {
     .sort(() => Math.random() - 0.5)
     .slice(0, MAX_OFFERS_NEARBY);
 
-  const currentNearbyOffers = [currentOffer, ...offersNearby];
+  const currentNearbyOffers = [currentOffer, ...offersNearby].map((offer) => ({
+    id: offer.id,
+    location: offer.location,
+  }));
 
   return (
     <div className="page">
