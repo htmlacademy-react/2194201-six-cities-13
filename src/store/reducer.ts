@@ -6,19 +6,17 @@ import { CardList } from '../mocks/offers';
 
 const initialState: AppProcess = {
   activeCity: CITIES[0],
-  currentOffers: CardList,
+  offers: CardList,
   activeSort: SORT_ITEMS[0],
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeActiveCity, (state, action) => {
-      const { activeCity } = action.payload;
-      state.activeCity = activeCity;
+      state.activeCity = action.payload;
     })
     .addCase(changeActiveSort, (state, action) => {
-      const { activeSort } = action.payload;
-      state.activeSort = activeSort;
+      state.activeSort = action.payload;
     });
 });
 

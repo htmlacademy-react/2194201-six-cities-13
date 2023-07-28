@@ -6,6 +6,7 @@ import { getOffersLocation } from '../../helpers/get-offers-location';
 import SortOffers from '../sort-offers/sort-offers';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeActiveSort, getActiveSort } from '../../store/action';
+import { useSortOffers } from '../../hooks/use-sort-offers/use-sort-offers';
 
 type CitiesProps = {
   activeCity: CityNames;
@@ -17,12 +18,13 @@ function Cities({ activeCity, offers }: CitiesProps): JSX.Element {
   const [cardId, setCardId] = useState<string>('');
   const activeSort = useAppSelector(getActiveSort);
 
+  const sortOffers = useSortOffers(activeSort, [...offers]);
   const offersLocation = getOffersLocation(offers);
 
   const handlePlaceCardMouseOver = (id: string) => setCardId(id);
   const handlePlaceCardMouseLeave = () => setCardId('');
   const handleSortItemClick = (item: SortNames) => {
-    dispatch(changeActiveSort({ activeSort: item }));
+    dispatch(changeActiveSort(item));
   };
 
   return (
@@ -37,7 +39,7 @@ function Cities({ activeCity, offers }: CitiesProps): JSX.Element {
           handleSortItemClick={handleSortItemClick}
         />
         <div className="cities__places-list places__list tabs__content">
-          {offers.map((offer) => (
+          {sortOffers.map((offer) => (
             <PlaceCard
               card={offer}
               className="cities"

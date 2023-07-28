@@ -68,7 +68,7 @@ export type ReviewValues = {
 
 export type AppProcess = {
   activeCity: CityNames;
-  currentOffers: Card[];
+  offers: Card[];
   activeSort: SortNames;
 };
 
