@@ -1,25 +1,19 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { CITIES } from '../constants';
-import { changeActiveCity, setCurrentOffers } from './action';
+import { changeActiveCity } from './action';
 import { AppProcess } from '../types';
+import { CardList } from '../mocks/offers';
 
 const initialState: AppProcess = {
   activeCity: CITIES[0],
-  currentOffers: [],
+  currentOffers: CardList,
 };
 
 const reducer = createReducer(initialState, (builder) => {
-  builder
-    .addCase(changeActiveCity, (state, action) => {
-      const { activeCity } = action.payload;
-      state.activeCity = activeCity;
-    })
-    .addCase(setCurrentOffers, (state, action) => {
-      const { cardList, activeCity } = action.payload;
-      state.currentOffers = cardList.filter(
-        ({ city }) => activeCity === city.name
-      );
-    });
+  builder.addCase(changeActiveCity, (state, action) => {
+    const { activeCity } = action.payload;
+    state.activeCity = activeCity;
+  });
 });
 
 export { reducer };

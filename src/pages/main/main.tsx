@@ -1,40 +1,21 @@
 import cn from 'classnames';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Header from '../../components/header/header';
 import Tabs from '../../components/tabs/tabs';
 import PlaceCard from '../../components/place-card/place-card';
 import Map from '../../components/map/map';
 import { MainEmpty } from '../../components/main-empty/main-empty';
-import { Card, CityNames } from '../../types';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getActiveCity, setCurrentOffers, getOffers } from '../../store/action';
+import { CityNames } from '../../types';
+import { useAppSelector } from '../../hooks';
+import { getActiveCity, getOffers } from '../../store/action';
 
-type MainProps = {
-  cardList: Card[];
-};
-
-function Main({ cardList }: MainProps): JSX.Element {
-  const dispatch = useAppDispatch();
+function Main(): JSX.Element {
   const activeCity = useAppSelector<CityNames>(getActiveCity);
-  const currentOffers = useAppSelector(getOffers);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    if (isMounted) {
-      dispatch(
-        setCurrentOffers({ cardList: cardList, activeCity: activeCity })
-      );
-    }
-
-    return () => {
-      isMounted = false;
-    };
-  }, [activeCity, cardList, dispatch]);
-
+  const offers = useAppSelector(getOffers);
   const [cardId, setCardId] = useState<string>('');
 
+  const currentOffers = offers.filter(({ city }) => activeCity === city.name);
   const isNotEmpty = !!currentOffers.length;
 
   const handlePlaceCardMouseOver = (id: string) => setCardId(id);
