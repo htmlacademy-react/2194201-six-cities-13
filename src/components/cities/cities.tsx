@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PlaceCard from '../../components/place-card/place-card';
 import Map from '../../components/map/map';
 import { Card, CityNames } from '../../types';
+import { getOffersLocation } from '../../helpers/get-offers-location';
 
 type CitiesProps = {
   activeCity: CityNames;
@@ -11,10 +12,7 @@ type CitiesProps = {
 function Cities({ activeCity, offers }: CitiesProps): JSX.Element {
   const [cardId, setCardId] = useState<string>('');
 
-  const offersLocation = offers.map((offer) => ({
-    id: offer.id,
-    location: offer.location,
-  }));
+  const offersLocation = getOffersLocation(offers);
 
   const handlePlaceCardMouseOver = (id: string) => setCardId(id);
   const handlePlaceCardMouseLeave = () => setCardId('');
