@@ -62,6 +62,7 @@ export type ReviewValues = {
 
 export type AppProcess = {
   activeCity: (typeof CITIES)[number];
+  currentOffers: Card[];
 };
 
 export type State = ReturnType<typeof store.getState>;

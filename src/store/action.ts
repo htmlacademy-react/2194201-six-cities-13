@@ -1,9 +1,15 @@
 import { createAction } from '@reduxjs/toolkit';
-import { CityNames, State } from '../types';
+import { Card, CityNames, State } from '../types';
 
 const changeActiveCity = createAction<{ activeCity: CityNames }>(
-  'changeActiveCity'
+  'offers/changeActiveCity'
 );
 const getActiveCity = (state: State): CityNames => state.activeCity;
 
-export { changeActiveCity, getActiveCity };
+const setCurrentOffers = createAction<{
+  cardList: Card[];
+  activeCity: CityNames;
+}>('offers/setCurrentOffers');
+const getOffers = (state: State) => state.currentOffers;
+
+export { changeActiveCity, getActiveCity, setCurrentOffers, getOffers };
