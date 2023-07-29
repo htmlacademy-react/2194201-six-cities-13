@@ -23,8 +23,12 @@ function Cities({ activeCity, offers }: CitiesProps): JSX.Element {
 
   const handlePlaceCardMouseOver = (id: string) => setCardId(id);
   const handlePlaceCardMouseLeave = () => setCardId('');
-  const handleSortItemClick = (item: SortNames) => {
+  const handleSortItemClick = (
+    item: SortNames,
+    setIsOpen: (isOpen: boolean) => void
+  ) => {
     dispatch(changeActiveSort(item));
+    setIsOpen(false);
   };
 
   return (

@@ -5,7 +5,10 @@ import { SortNames } from '../../types';
 
 type SortOffersProps = {
   activeSort: SortNames;
-  handleSortItemClick?: (item: SortNames) => void;
+  handleSortItemClick?: (
+    item: SortNames,
+    setIsOpen: (isOpen: boolean) => void
+  ) => void;
 };
 
 function SortOffers({
@@ -13,20 +16,6 @@ function SortOffers({
   handleSortItemClick,
 }: SortOffersProps): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [, setActiveSort] = useState<{ activeSort: SortNames }>({
-    activeSort,
-  });
-
-  useEffect(() => {
-    setActiveSort((prevSort) => {
-      setIsOpen(false);
-
-      return {
-        ...prevSort,
-        activeSort,
-      };
-    });
-  }, [activeSort]);
 
   useEffect(() => {
     const handleDocumentClick = (evt: Event) => {
@@ -85,7 +74,7 @@ function SortOffers({
             })}
             tabIndex={0}
             key={item}
-            onClick={() => handleSortItemClick?.(item)}
+            onClick={() => handleSortItemClick?.(item, setIsOpen)}
           >
             {item}
           </li>
