@@ -22,7 +22,7 @@ function Tabs({ activeCity }: TabsProps): JSX.Element {
                 className={cn('locations__item-link', 'tabs__item', {
                   'tabs__item--active': activeCity === city,
                 })}
-                onClick={() => dispatch(changeActiveCity({ activeCity: city }))}
+                onClick={() => dispatch(changeActiveCity(city))}
                 to="#"
               >
                 <span>{city}</span>

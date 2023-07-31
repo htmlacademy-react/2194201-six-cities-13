@@ -1,14 +1,14 @@
 import { useRef, useEffect } from 'react';
 import leaflet, { Icon, Marker } from 'leaflet';
 import useMap from '../../hooks/use-map/use-map';
-import { Card, City } from '../../types';
+import { City, LocationMap } from '../../types';
 import 'leaflet/dist/leaflet.css';
 import { URL_PIN_CURRENT, URL_PIN_DEFAULT, ICON_SIZE } from '../../constants';
 
 type MapProps = {
   className: string;
   cityInfo: City;
-  offers: Card[];
+  offers: LocationMap[];
   height: string;
   cardId?: string;
 };

@@ -13,6 +13,7 @@ import {
   MAX_OFFERS_NEARBY,
   AuthorizationStatus,
 } from '../../constants';
+import { getOffersLocation } from '../../helpers/get-offers-location';
 
 type OfferProps = {
   cardList: Card[];
@@ -51,7 +52,10 @@ function Offer({ cardList, offerList, reviewList }: OfferProps): JSX.Element {
     .sort(() => Math.random() - 0.5)
     .slice(0, MAX_OFFERS_NEARBY);
 
-  const currentNearbyOffers = [currentOffer, ...offersNearby];
+  const currentNearbyOffers = getOffersLocation([
+    currentOffer,
+    ...offersNearby,
+  ]);
 
   return (
     <div className="page">
