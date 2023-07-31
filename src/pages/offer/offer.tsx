@@ -22,9 +22,9 @@ type OfferProps = {
 
 function Offer({ cardList, offerList, reviewList }: OfferProps): JSX.Element {
   const { id } = useParams();
-  const card = offerList.find((item: OfferCard) => item.id === id);
+  const currentOffer = offerList.find((item: OfferCard) => item.id === id);
 
-  if (!card) {
+  if (!currentOffer) {
     return <NotFound />;
   }
 
@@ -42,7 +42,7 @@ function Offer({ cardList, offerList, reviewList }: OfferProps): JSX.Element {
     goods,
     host,
     images,
-  } = card;
+  } = currentOffer;
 
   const { name, avatarUrl, isPro } = host;
 
@@ -50,6 +50,8 @@ function Offer({ cardList, offerList, reviewList }: OfferProps): JSX.Element {
     .filter((offer) => offer.city.name === city.name && offer.id !== id)
     .sort(() => Math.random() - 0.5)
     .slice(0, MAX_OFFERS_NEARBY);
+
+  const currentNearbyOffers = [currentOffer, ...offersNearby];
 
   return (
     <div className="page">
@@ -169,8 +171,8 @@ function Offer({ cardList, offerList, reviewList }: OfferProps): JSX.Element {
           <Map
             className="offer"
             height="579px"
-            cityInfo={card.city}
-            pins={[card, ...offersNearby]}
+            cityInfo={currentOffer.city}
+            offers={currentNearbyOffers}
             cardId={id}
           />
         </section>

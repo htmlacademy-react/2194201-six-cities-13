@@ -1,4 +1,5 @@
 import { CITIES } from './constants';
+import { store } from './store/index';
 
 export type CityNames = (typeof CITIES)[number];
 
@@ -58,3 +59,12 @@ export type ReviewValues = {
   rating: number;
   review: string;
 };
+
+export type AppProcess = {
+  activeCity: (typeof CITIES)[number];
+  currentOffers: Card[];
+};
+
+export type State = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;

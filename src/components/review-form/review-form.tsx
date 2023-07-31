@@ -11,7 +11,7 @@ function ReviewForm(): JSX.Element {
   });
 
   const { rating, review } = formData;
-  const isValid = !!rating && review.length > min && review.length <= max;
+  const isValid = !!rating && review.length >= min && review.length <= max;
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();

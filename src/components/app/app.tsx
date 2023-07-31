@@ -29,7 +29,7 @@ function App({
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route index element={<Main cardList={cardList} />} />
+          <Route index element={<Main />} />
           <Route
             path={AppRoute.Login}
             element={<Login authorizationStatus={AuthorizationStatus.NoAuth} />}
