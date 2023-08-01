@@ -1,15 +1,13 @@
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { CITIES } from '../../constants';
-import { CityNames } from '../../types';
 import { useAppDispatch } from '../../hooks';
 import { changeActiveCity } from '../../store/action';
+import { useAppSelector } from '../../hooks';
+import { selectActiveCity } from '../../store/action';
 
-type TabsProps = {
-  activeCity: CityNames;
-};
-
-function Tabs({ activeCity }: TabsProps): JSX.Element {
+function Tabs(): JSX.Element {
+  const activeCity = useAppSelector(selectActiveCity);
   const dispatch = useAppDispatch();
 
   return (

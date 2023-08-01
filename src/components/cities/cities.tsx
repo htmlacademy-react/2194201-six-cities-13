@@ -1,47 +1,36 @@
 import { useState } from 'react';
 import PlaceCard from '../../components/place-card/place-card';
 import Map from '../../components/map/map';
-import { Card, CityNames, SortNames } from '../../types';
+import { Card } from '../../types';
 import { getOffersLocation } from '../../helpers/get-offers-location';
 import SortOffers from '../sort-offers/sort-offers';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeActiveSort, getActiveSort } from '../../store/action';
+import { useAppSelector } from '../../hooks';
+import { selectActiveSort, selectActiveCity } from '../../store/action';
 import { useSortOffers } from '../../hooks/use-sort-offers/use-sort-offers';
 
 type CitiesProps = {
-  activeCity: CityNames;
   offers: Card[];
 };
 
-function Cities({ activeCity, offers }: CitiesProps): JSX.Element {
-  const dispatch = useAppDispatch();
+function Cities({ offers }: CitiesProps): JSX.Element {
   const [cardId, setCardId] = useState<string>('');
-  const activeSort = useAppSelector(getActiveSort);
+  const activeCity = useAppSelector(selectActiveCity);
+  const activeSort = useAppSelector(selectActiveSort);
 
-  const sortOffers = useSortOffers(activeSort, [...offers]);
+  const sortOffers = useSortOffers(activeSort, offers);
   const offersLocation = getOffersLocation(offers);
 
   const handlePlaceCardMouseOver = (id: string) => setCardId(id);
   const handlePlaceCardMouseLeave = () => setCardId('');
-  const handleSortItemClick = (
-    item: SortNames,
-    setIsOpen: (isOpen: boolean) => void
-  ) => {
-    dispatch(changeActiveSort(item));
-    setIsOpen(false);
-  };
 
   return (
     <div className="cities__places-container container">
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">
-          {offers.length} places to stay in {activeCity}
+          {sortOffers.length} places to stay in {activeCity}
         </b>
-        <SortOffers
-          activeSort={activeSort}
-          handleSortItemClick={handleSortItemClick}
-        />
+        <SortOffers />
         <div className="cities__places-list places__list tabs__content">
           {sortOffers.map((offer) => (
             <PlaceCard

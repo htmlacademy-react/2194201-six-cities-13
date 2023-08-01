@@ -3,14 +3,14 @@ import { CityNames, SortNames, State } from '../types';
 
 const changeActiveCity = createAction<CityNames>('offers/changeActiveCity');
 const changeActiveSort = createAction<SortNames>('offers/changeActiveSort');
-const getActiveCity = (state: State): CityNames => state.activeCity;
+const selectActiveCity = (state: State): CityNames => state.activeCity;
 const getOffers = (state: State) => state.offers;
-const getActiveSort = (state: State) => state.activeSort;
+const selectActiveSort = (state: State) => state.activeSort;
 
 export {
   changeActiveCity,
   changeActiveSort,
-  getActiveCity,
+  selectActiveCity,
   getOffers,
-  getActiveSort,
+  selectActiveSort,
 };
