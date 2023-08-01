@@ -1,5 +1,6 @@
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Loading from '../../pages/loading/loading';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import Main from '../../pages/main/main';
 import Login from '../../pages/login/login';
@@ -10,6 +11,7 @@ import { AppRoute } from '../../constants';
 import PrivateRoute from '../private-route/private-route';
 import { AuthorizationStatus } from '../../constants';
 import { Card, OfferCard, Review } from '../../types';
+import { useAppSelector } from '../../hooks';
 
 type AppProps = {
   cardList: Card[];
@@ -24,6 +26,20 @@ function App({
   reviewList,
   favoriteList,
 }: AppProps): JSX.Element {
+  const authorizationStatus = useAppSelector(
+    (state) => state.authorizationStatus
+  );
+  const isQuestionsDataLoading = useAppSelector(
+    (state) => state.isQuestionsDataLoading
+  );
+
+  if (
+    authorizationStatus === AuthorizationStatus.Unknown ||
+    isQuestionsDataLoading
+  ) {
+    return <Loading />;
+  }
+
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -32,12 +48,12 @@ function App({
           <Route index element={<Main />} />
           <Route
             path={AppRoute.Login}
-            element={<Login authorizationStatus={AuthorizationStatus.NoAuth} />}
+            element={<Login authorizationStatus={authorizationStatus} />}
           />
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <PrivateRoute authorizationStatus={authorizationStatus}>
                 <Favorites favoriteList={favoriteList} />
               </PrivateRoute>
             }

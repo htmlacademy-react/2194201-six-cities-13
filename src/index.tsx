@@ -7,6 +7,11 @@ import { CardList } from './mocks/offers';
 import { OfferList } from './mocks/offer';
 import { ReviewsList } from './mocks/reviews';
 import { FavoritesList } from './mocks/favorites';
+import ErrorMessage from './components/error-message/error-message';
+import { fetchOffersAction, checkAuthAction } from './store/api-actions';
+
+store.dispatch(fetchOffersAction());
+store.dispatch(checkAuthAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,6 +20,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <ErrorMessage />
       <App
         cardList={CardList}
         offerList={OfferList}
