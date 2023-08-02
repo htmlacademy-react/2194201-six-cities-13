@@ -81,6 +81,18 @@ export type AuthData = {
   password: string;
 };
 
+type UserAuthData = {
+  value: string;
+  isValid: boolean;
+  errorText: string;
+  regex: RegExp;
+};
+
+export type UserAuth = {
+  email: UserAuthData;
+  password: UserAuthData;
+};
+
 export type UserData = {
   id: number;
   email: string;
