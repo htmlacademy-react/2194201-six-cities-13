@@ -10,11 +10,13 @@ import {
   setError,
   setOffersLoadingStatus,
   setUserEmail,
+  redirectToRoute,
 } from './action';
 import {
   TIMEOUT_SHOW_ERROR,
   APIRoute,
   AuthorizationStatus,
+  AppRoute,
 } from '../constants';
 
 const clearErrorAction = createAsyncThunk('app/clearError', () => {
@@ -70,6 +72,7 @@ const loginAction = createAsyncThunk<
     saveToken(token);
     dispatch(setUserEmail(email));
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(redirectToRoute(AppRoute.Root));
   }
 );
 

@@ -5,6 +5,7 @@ import {
   SortNames,
   State,
   AuthorizationStatuses,
+  AppRoutes,
 } from '../types';
 
 const loadOffers = createAction<Card[]>('offers/fetch');
@@ -18,6 +19,7 @@ const setOffersLoadingStatus = createAction<boolean>(
 );
 const setUserEmail = createAction<string | null>('user/setUserEmail');
 const setError = createAction<string | null>('app/setError');
+const redirectToRoute = createAction<AppRoutes>('app/redirectToRoute');
 const getAuthStatus = (state: State) => state.authorizationStatus;
 const getUserEmail = (state: State) => state.user;
 const selectActiveCity = (state: State): CityNames => state.activeCity;
@@ -32,6 +34,7 @@ export {
   setOffersLoadingStatus,
   setUserEmail,
   setError,
+  redirectToRoute,
   getAuthStatus,
   getUserEmail,
   selectActiveCity,

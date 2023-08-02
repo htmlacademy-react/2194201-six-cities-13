@@ -1,4 +1,4 @@
-import { AuthorizationStatus, CITIES, SORT_ITEMS } from './constants';
+import { AuthorizationStatus, CITIES, SORT_ITEMS, AppRoute } from './constants';
 import { store } from './store/index';
 
 export type CityNames = (typeof CITIES)[number];
@@ -104,6 +104,8 @@ export type DetailMessageType = {
   type: string;
   message: string;
 };
+
+export type AppRoutes = (typeof AppRoute)[keyof typeof AppRoute];
 
 export type AuthorizationStatuses =
   (typeof AuthorizationStatus)[keyof typeof AuthorizationStatus];
