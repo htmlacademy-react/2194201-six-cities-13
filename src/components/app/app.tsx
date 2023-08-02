@@ -29,14 +29,9 @@ function App({
   const authorizationStatus = useAppSelector(
     (state) => state.authorizationStatus
   );
-  const isQuestionsDataLoading = useAppSelector(
-    (state) => state.isQuestionsDataLoading
-  );
+  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
 
-  if (
-    authorizationStatus === AuthorizationStatus.Unknown ||
-    isQuestionsDataLoading
-  ) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersLoading) {
     return <Loading />;
   }
 
