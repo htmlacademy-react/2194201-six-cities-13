@@ -71,6 +71,7 @@ export type AppProcess = {
   offers: Card[];
   isOffersLoading: boolean;
   authorizationStatus: AuthorizationStatuses;
+  user: string | null;
   activeCity: CityNames;
   activeSort: SortNames;
   error: string | null;

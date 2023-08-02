@@ -9,6 +9,7 @@ import {
   requireAuthorization,
   setError,
   setOffersLoadingStatus,
+  setUserEmail,
 } from './action';
 import {
   TIMEOUT_SHOW_ERROR,
@@ -67,6 +68,7 @@ const loginAction = createAsyncThunk<
       data: { token },
     } = await api.post<UserData>(APIRoute.Login, { email, password });
     saveToken(token);
+    dispatch(setUserEmail(email));
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
   }
 );
@@ -82,6 +84,7 @@ const logoutAction = createAsyncThunk<
 >('user/logout', async (_arg, { dispatch, extra: api }) => {
   await api.delete(APIRoute.Logout);
   dropToken();
+  dispatch(setUserEmail(null));
   dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
 });
 
