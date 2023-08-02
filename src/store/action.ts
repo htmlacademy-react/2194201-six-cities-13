@@ -6,12 +6,14 @@ import {
   State,
   AuthorizationStatuses,
   AppRoutes,
+  OfferCard,
 } from '../types';
 
 const loadOffers = createAction<Card[]>('offers/fetch');
 const requireAuthorization = createAction<AuthorizationStatuses>(
   'user/requireAuthorization'
 );
+export const setActiveOffer = createAction<OfferCard>('setUser');
 const changeActiveCity = createAction<CityNames>('offers/changeActiveCity');
 const changeActiveSort = createAction<SortNames>('offers/changeActiveSort');
 const setOffersLoadingStatus = createAction<boolean>(
@@ -25,6 +27,7 @@ const getUserEmail = (state: State) => state.user;
 const selectActiveCity = (state: State): CityNames => state.activeCity;
 const getOffers = (state: State) => state.offers;
 const selectActiveSort = (state: State) => state.activeSort;
+const getActiveOffer = (state: State) => state.activeOffer;
 
 export {
   loadOffers,
@@ -40,4 +43,5 @@ export {
   selectActiveCity,
   getOffers,
   selectActiveSort,
+  getActiveOffer,
 };

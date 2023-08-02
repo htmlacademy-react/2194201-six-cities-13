@@ -5,11 +5,13 @@ export type CityNames = (typeof CITIES)[number];
 export type SortNames = (typeof SORT_ITEMS)[number];
 export type Token = string;
 
-type User = {
-  name: string;
-  avatarUrl: string;
-  isPro: boolean;
-};
+export type User =
+  | {
+      name: string;
+      avatarUrl: string;
+      isPro: boolean;
+    }
+  | UserData;
 
 type Location = {
   latitude: number;
@@ -69,6 +71,7 @@ export type ReviewValues = {
 
 export type AppProcess = {
   offers: Card[];
+  activeOffer: OfferCard | null;
   isOffersLoading: boolean;
   authorizationStatus: AuthorizationStatuses;
   user: string | null;

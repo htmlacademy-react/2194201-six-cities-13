@@ -9,10 +9,12 @@ import {
   setError,
   setOffersLoadingStatus,
   setUserEmail,
+  setActiveOffer,
 } from './action';
 
 const initialState: AppProcess = {
   offers: [],
+  activeOffer: null,
   isOffersLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   user: null,
@@ -28,6 +30,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOffersLoadingStatus, (state, action) => {
       state.isOffersLoading = action.payload;
+    })
+    .addCase(setActiveOffer, (state, action) => {
+      state.activeOffer = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;

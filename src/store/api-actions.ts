@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { State, AppDispatch, Card } from '../types';
 import { saveToken, dropToken } from '../services/token';
-import { AuthData, UserData } from '../types';
+import { AuthData, UserData, OfferCard } from '../types';
 import { store } from './';
 import {
   loadOffers,
@@ -11,6 +11,7 @@ import {
   setOffersLoadingStatus,
   setUserEmail,
   redirectToRoute,
+  setActiveOffer,
 } from './action';
 import {
   TIMEOUT_SHOW_ERROR,
@@ -36,6 +37,19 @@ const fetchOffersAction = createAsyncThunk<
   const { data } = await api.get<Card[]>(APIRoute.Offers);
   dispatch(setOffersLoadingStatus(false));
   dispatch(loadOffers(data));
+});
+
+const fetchActiveOfferAction = createAsyncThunk<
+  void,
+  string,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('data/fetchActiveOffer', async (id, { dispatch, extra: api }) => {
+  const { data } = await api.get<OfferCard>(`${APIRoute.Offers}/${id}`);
+  dispatch(setActiveOffer(data));
 });
 
 const checkAuthAction = createAsyncThunk<
@@ -94,6 +108,7 @@ const logoutAction = createAsyncThunk<
 export {
   clearErrorAction,
   fetchOffersAction,
+  fetchActiveOfferAction,
   checkAuthAction,
   loginAction,
   logoutAction,

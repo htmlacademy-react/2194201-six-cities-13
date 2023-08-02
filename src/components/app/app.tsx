@@ -12,22 +12,16 @@ import NotFound from '../../pages/not-found/not-found';
 import { AppRoute } from '../../constants';
 import PrivateRoute from '../private-route/private-route';
 import { AuthorizationStatus } from '../../constants';
-import { Card, OfferCard, Review } from '../../types';
+import { Card, Review } from '../../types';
 import { useAppSelector } from '../../hooks';
 
 type AppProps = {
   cardList: Card[];
-  offerList: OfferCard[];
   reviewList: Review[];
   favoriteList: Card[];
 };
 
-function App({
-  cardList,
-  offerList,
-  reviewList,
-  favoriteList,
-}: AppProps): JSX.Element {
+function App({ cardList, reviewList, favoriteList }: AppProps): JSX.Element {
   const authorizationStatus = useAppSelector(
     (state) => state.authorizationStatus
   );
@@ -57,13 +51,7 @@ function App({
           />
           <Route
             path={AppRoute.Offer}
-            element={
-              <Offer
-                cardList={cardList}
-                offerList={offerList}
-                reviewList={reviewList}
-              />
-            }
+            element={<Offer cardList={cardList} reviewList={reviewList} />}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>
