@@ -19,6 +19,7 @@ type ReviewsProps = {
 function Reviews({ offerId }: ReviewsProps): JSX.Element {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthStatus);
+  const reviewList = useAppSelector(getOfferReviews);
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
 
   useEffect(() => {
@@ -26,8 +27,6 @@ function Reviews({ offerId }: ReviewsProps): JSX.Element {
       dispatch(fetchOfferReviewsAction(offerId));
     }
   }, [offerId, dispatch]);
-
-  const reviewList = useAppSelector(getOfferReviews);
 
   const sortedReviews = [...reviewList]
     .sort((a, b) => dayjs(b.date).diff(a.date))
