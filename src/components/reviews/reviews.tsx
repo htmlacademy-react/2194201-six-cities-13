@@ -13,7 +13,7 @@ import {
 import { fetchOfferReviewsAction } from '../../store/api-actions';
 
 type ReviewsProps = {
-  offerId: string | undefined;
+  offerId: string;
 };
 
 function Reviews({ offerId }: ReviewsProps): JSX.Element {
@@ -77,7 +77,7 @@ function Reviews({ offerId }: ReviewsProps): JSX.Element {
           );
         })}
       </ul>
-      {isAuth && <ReviewForm />}
+      {isAuth && <ReviewForm offerId={offerId} />}
     </section>
   );
 }

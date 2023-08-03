@@ -63,8 +63,9 @@ export type Review = {
   rating: number;
 };
 export type ReviewValues = {
+  id: string;
   rating: number;
-  review: string;
+  comment: string;
 };
 
 export type AppProcess = {

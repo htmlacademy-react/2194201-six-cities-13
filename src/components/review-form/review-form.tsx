@@ -1,26 +1,36 @@
 import { Fragment, useState, ChangeEvent, FormEvent } from 'react';
 import { RATINGS, TextLength } from '../../constants';
 import { ReviewValues } from '../../types';
+import { useAppDispatch } from '../../hooks';
+import { postReviewAction } from '../../store/api-actions';
 
-function ReviewForm(): JSX.Element {
+type ReviewFormProps = {
+  offerId: string;
+};
+
+function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const { min, max } = TextLength;
 
   const [formData, setFormData] = useState<ReviewValues>({
+    id: offerId,
     rating: 0,
-    review: '',
+    comment: '',
   });
 
-  const { rating, review } = formData;
-  const isValid = !!rating && review.length >= min && review.length <= max;
-
+  const { rating, comment } = formData;
+  const isValid = !!rating && comment.length >= min && comment.length <= max;
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    const form = evt.target as HTMLFormElement;
-    form.reset();
+    setFormData({ ...formData, rating: 0, comment: '' });
 
-    setFormData({ ...formData, rating: 0, review: '' });
-    // TODO: Здесь будет код отправки формы на сервер и проверка.
+    if (isValid) {
+      const form = evt.target as HTMLFormElement;
+      form.reset();
+
+      dispatch(postReviewAction(formData));
+    }
   };
 
   const handleInputsChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -78,7 +88,7 @@ function ReviewForm(): JSX.Element {
         onChange={handleTextAreaChange}
         className="reviews__textarea form__textarea"
         id="review"
-        name="review"
+        name="comment"
         placeholder="Tell how was your stay, what you like and what can be improved"
         defaultValue=""
         minLength={min}
