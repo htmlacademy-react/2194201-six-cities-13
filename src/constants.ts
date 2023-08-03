@@ -63,6 +63,7 @@ const APIRoute = {
   Offers: '/offers',
   Login: '/login',
   Logout: '/logout',
+  Nearby: '/nearby',
 } as const;
 
 const AuthorizationStatus = {

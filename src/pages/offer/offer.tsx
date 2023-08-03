@@ -12,30 +12,42 @@ import Map from '../../components/map/map';
 import { MAX_OFFER_IMAGES, MAX_OFFERS_NEARBY } from '../../constants';
 import { getOffersLocation } from '../../helpers/get-offers-location';
 import { useAppDispatch } from '../../hooks';
-import { fetchActiveOfferAction } from '../../store/api-actions';
+import {
+  fetchActiveOfferAction,
+  fetchOffersNearbyAction,
+} from '../../store/api-actions';
 import { useAppSelector } from '../../hooks';
-import { getActiveOffer } from '../../store/action';
+import { getActiveOffer, getOffersNearby } from '../../store/action';
 
 type OfferProps = {
-  cardList: Card[];
   reviewList: Review[];
 };
 
-function Offer({ cardList, reviewList }: OfferProps): JSX.Element {
+function Offer({ reviewList }: OfferProps): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (id) {
       dispatch(fetchActiveOfferAction(id));
+      dispatch(fetchOffersNearbyAction(id));
     }
   }, [id, dispatch]);
 
   const currentOffer = useAppSelector(getActiveOffer);
+  const offersNearby = useAppSelector(getOffersNearby).slice(
+    0,
+    MAX_OFFERS_NEARBY
+  );
 
   if (!currentOffer) {
     return <NotFound />;
   }
+
+  const currentNearbyOffers = getOffersLocation([
+    currentOffer,
+    ...offersNearby,
+  ]);
 
   const {
     isFavorite,
@@ -44,7 +56,6 @@ function Offer({ cardList, reviewList }: OfferProps): JSX.Element {
     rating,
     title,
     type,
-    city,
     bedrooms,
     maxAdults,
     description,
@@ -54,16 +65,6 @@ function Offer({ cardList, reviewList }: OfferProps): JSX.Element {
   } = currentOffer;
 
   const { name, avatarUrl, isPro } = host;
-
-  const offersNearby = cardList
-    .filter((offer) => offer.city.name === city.name && offer.id !== id)
-    .sort(() => Math.random() - 0.5)
-    .slice(0, MAX_OFFERS_NEARBY);
-
-  const currentNearbyOffers = getOffersLocation([
-    currentOffer,
-    ...offersNearby,
-  ]);
 
   return (
     <div className="page">

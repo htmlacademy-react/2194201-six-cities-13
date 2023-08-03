@@ -13,7 +13,8 @@ const loadOffers = createAction<Card[]>('offers/fetch');
 const requireAuthorization = createAction<AuthorizationStatuses>(
   'user/requireAuthorization'
 );
-export const setActiveOffer = createAction<OfferCard>('setUser');
+const setActiveOffer = createAction<OfferCard>('setUser');
+const loadOffersNearby = createAction<OfferCard[]>('offers/loadOffersNearby');
 const changeActiveCity = createAction<CityNames>('offers/changeActiveCity');
 const changeActiveSort = createAction<SortNames>('offers/changeActiveSort');
 const setOffersLoadingStatus = createAction<boolean>(
@@ -28,11 +29,14 @@ const selectActiveCity = (state: State): CityNames => state.activeCity;
 const getOffers = (state: State) => state.offers;
 const selectActiveSort = (state: State) => state.activeSort;
 const getActiveOffer = (state: State) => state.activeOffer;
+const getOffersNearby = (state: State) => state.offersNearby;
 const isOffersLoading = (state: State) => state.isOffersLoading;
 
 export {
   loadOffers,
   requireAuthorization,
+  setActiveOffer,
+  loadOffersNearby,
   changeActiveCity,
   changeActiveSort,
   setOffersLoadingStatus,
@@ -45,5 +49,6 @@ export {
   getOffers,
   selectActiveSort,
   getActiveOffer,
+  getOffersNearby,
   isOffersLoading,
 };

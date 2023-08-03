@@ -12,6 +12,7 @@ import {
   setUserEmail,
   redirectToRoute,
   setActiveOffer,
+  loadOffersNearby,
 } from './action';
 import {
   TIMEOUT_SHOW_ERROR,
@@ -50,6 +51,22 @@ const fetchActiveOfferAction = createAsyncThunk<
 >('data/fetchActiveOffer', async (id, { dispatch, extra: api }) => {
   const { data } = await api.get<OfferCard>(`${APIRoute.Offers}/${id}`);
   dispatch(setActiveOffer(data));
+});
+
+const fetchOffersNearbyAction = createAsyncThunk<
+  void,
+  string,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('data/fetchOfferNearby', async (offerID, { dispatch, extra: api }) => {
+  const { data } = await api.get<OfferCard[]>(
+    `${APIRoute.Offers}/${offerID}${APIRoute.Nearby}`
+  );
+
+  dispatch(loadOffersNearby(data));
 });
 
 const checkAuthAction = createAsyncThunk<
@@ -112,6 +129,7 @@ export {
   clearErrorAction,
   fetchOffersAction,
   fetchActiveOfferAction,
+  fetchOffersNearbyAction,
   checkAuthAction,
   loginAction,
   logoutAction,

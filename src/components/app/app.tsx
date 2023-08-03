@@ -17,12 +17,11 @@ import { useAppSelector } from '../../hooks';
 import { getAuthStatus, isOffersLoading } from '../../store/action';
 
 type AppProps = {
-  cardList: Card[];
   reviewList: Review[];
   favoriteList: Card[];
 };
 
-function App({ cardList, reviewList, favoriteList }: AppProps): JSX.Element {
+function App({ reviewList, favoriteList }: AppProps): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthStatus);
   const isOffersLoad = useAppSelector(isOffersLoading);
 
@@ -47,7 +46,7 @@ function App({ cardList, reviewList, favoriteList }: AppProps): JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={<Offer cardList={cardList} reviewList={reviewList} />}
+            element={<Offer reviewList={reviewList} />}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>

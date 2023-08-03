@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import App from './components/app/app';
-import { CardList } from './mocks/offers';
 import { ReviewsList } from './mocks/reviews';
 import { FavoritesList } from './mocks/favorites';
 import ErrorMessage from './components/error-message/error-message';
@@ -20,11 +19,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ErrorMessage />
-      <App
-        cardList={CardList}
-        reviewList={ReviewsList}
-        favoriteList={FavoritesList}
-      />
+      <App reviewList={ReviewsList} favoriteList={FavoritesList} />
     </Provider>
   </React.StrictMode>
 );

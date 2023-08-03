@@ -70,6 +70,7 @@ export type ReviewValues = {
 export type AppProcess = {
   offers: Card[];
   activeOffer: OfferCard | null;
+  offersNearby: OfferCard[];
   isOffersLoading: boolean;
   authorizationStatus: AuthorizationStatuses;
   user: string | null;
