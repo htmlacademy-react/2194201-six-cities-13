@@ -71,6 +71,7 @@ export type AppProcess = {
   offers: Card[];
   activeOffer: OfferCard | null;
   offersNearby: OfferCard[];
+  offerReviews: Review[];
   isOffersLoading: boolean;
   authorizationStatus: AuthorizationStatuses;
   user: string | null;

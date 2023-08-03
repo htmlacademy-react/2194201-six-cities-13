@@ -11,12 +11,14 @@ import {
   setUserEmail,
   setActiveOffer,
   loadOffersNearby,
+  loadOfferReviews,
 } from './action';
 
 const initialState: AppProcess = {
   offers: [],
   activeOffer: null,
   offersNearby: [],
+  offerReviews: [],
   isOffersLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   user: null,
@@ -38,6 +40,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadOffersNearby, (state, action) => {
       state.offersNearby = action.payload;
+    })
+    .addCase(loadOfferReviews, (state, action) => {
+      state.offerReviews = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;

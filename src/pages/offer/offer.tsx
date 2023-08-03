@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import { Reviews } from '../../components/reviews/reviews';
 import { ONE_STAR_RATIO } from '../../constants';
-import { Card, Review } from '../../types';
+import { Card } from '../../types';
 import NotFound from '../not-found/not-found';
 import { useEffect } from 'react';
 import PlaceCard from '../../components/place-card/place-card';
@@ -19,20 +19,16 @@ import {
 import { useAppSelector } from '../../hooks';
 import { getActiveOffer, getOffersNearby } from '../../store/action';
 
-type OfferProps = {
-  reviewList: Review[];
-};
-
-function Offer({ reviewList }: OfferProps): JSX.Element {
-  const { id } = useParams();
+function Offer(): JSX.Element {
+  const { id: offerId } = useParams();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (id) {
-      dispatch(fetchActiveOfferAction(id));
-      dispatch(fetchOffersNearbyAction(id));
+    if (offerId) {
+      dispatch(fetchActiveOfferAction(offerId));
+      dispatch(fetchOffersNearbyAction(offerId));
     }
-  }, [id, dispatch]);
+  }, [offerId, dispatch]);
 
   const currentOffer = useAppSelector(getActiveOffer);
   const offersNearby = useAppSelector(getOffersNearby).slice(
@@ -175,7 +171,7 @@ function Offer({ reviewList }: OfferProps): JSX.Element {
                   <p className="offer__text">{description}</p>
                 </div>
               </div>
-              <Reviews reviewList={reviewList} />
+              <Reviews offerId={offerId} />
             </div>
           </div>
           <Map
@@ -183,7 +179,7 @@ function Offer({ reviewList }: OfferProps): JSX.Element {
             height="579px"
             cityInfo={currentOffer.city}
             offers={currentNearbyOffers}
-            cardId={id}
+            offerId={offerId}
           />
         </section>
         <div className="container">

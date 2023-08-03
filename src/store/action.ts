@@ -7,6 +7,7 @@ import {
   AuthorizationStatuses,
   AppRoutes,
   OfferCard,
+  Review,
 } from '../types';
 
 const loadOffers = createAction<Card[]>('offers/fetch');
@@ -15,6 +16,7 @@ const requireAuthorization = createAction<AuthorizationStatuses>(
 );
 const setActiveOffer = createAction<OfferCard>('setUser');
 const loadOffersNearby = createAction<OfferCard[]>('offers/loadOffersNearby');
+const loadOfferReviews = createAction<Review[]>('reviews/loadOfferReviews');
 const changeActiveCity = createAction<CityNames>('offers/changeActiveCity');
 const changeActiveSort = createAction<SortNames>('offers/changeActiveSort');
 const setOffersLoadingStatus = createAction<boolean>(
@@ -30,6 +32,7 @@ const getOffers = (state: State) => state.offers;
 const selectActiveSort = (state: State) => state.activeSort;
 const getActiveOffer = (state: State) => state.activeOffer;
 const getOffersNearby = (state: State) => state.offersNearby;
+const getOfferReviews = (state: State) => state.offerReviews;
 const isOffersLoading = (state: State) => state.isOffersLoading;
 
 export {
@@ -37,6 +40,7 @@ export {
   requireAuthorization,
   setActiveOffer,
   loadOffersNearby,
+  loadOfferReviews,
   changeActiveCity,
   changeActiveSort,
   setOffersLoadingStatus,
@@ -50,5 +54,6 @@ export {
   selectActiveSort,
   getActiveOffer,
   getOffersNearby,
+  getOfferReviews,
   isOffersLoading,
 };

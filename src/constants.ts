@@ -64,6 +64,7 @@ const APIRoute = {
   Login: '/login',
   Logout: '/logout',
   Nearby: '/nearby',
+  Comments: '/comments',
 } as const;
 
 const AuthorizationStatus = {

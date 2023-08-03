@@ -1,8 +1,8 @@
+import { useEffect } from 'react';
 import ReviewForm from '../review-form/review-form';
 import dayjs from 'dayjs';
-import { Review } from '../../types';
-import { useAppSelector } from '../../hooks';
-import { getAuthStatus } from '../../store/action';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getAuthStatus, getOfferReviews } from '../../store/action';
 import {
   ONE_STAR_RATIO,
   MAX_REVIEWS,
@@ -10,14 +10,24 @@ import {
   DATE,
   MONTH_TEXT,
 } from '../../constants';
+import { fetchOfferReviewsAction } from '../../store/api-actions';
 
 type ReviewsProps = {
-  reviewList: Review[];
+  offerId: string | undefined;
 };
 
-function Reviews({ reviewList }: ReviewsProps): JSX.Element {
+function Reviews({ offerId }: ReviewsProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthStatus);
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
+
+  useEffect(() => {
+    if (offerId) {
+      dispatch(fetchOfferReviewsAction(offerId));
+    }
+  }, [offerId, dispatch]);
+
+  const reviewList = [...useAppSelector(getOfferReviews)];
 
   reviewList.sort((a, b) => dayjs(b.date).diff(a.date));
 

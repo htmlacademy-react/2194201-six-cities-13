@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { State, AppDispatch, Card } from '../types';
+import { State, AppDispatch, Card, Review } from '../types';
 import { saveToken, dropToken } from '../services/token';
 import { AuthData, UserData, OfferCard } from '../types';
 import { store } from './';
@@ -13,6 +13,7 @@ import {
   redirectToRoute,
   setActiveOffer,
   loadOffersNearby,
+  loadOfferReviews,
 } from './action';
 import {
   TIMEOUT_SHOW_ERROR,
@@ -48,8 +49,8 @@ const fetchActiveOfferAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('data/fetchActiveOffer', async (id, { dispatch, extra: api }) => {
-  const { data } = await api.get<OfferCard>(`${APIRoute.Offers}/${id}`);
+>('data/fetchActiveOffer', async (offerId, { dispatch, extra: api }) => {
+  const { data } = await api.get<OfferCard>(`${APIRoute.Offers}/${offerId}`);
   dispatch(setActiveOffer(data));
 });
 
@@ -61,12 +62,26 @@ const fetchOffersNearbyAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('data/fetchOfferNearby', async (offerID, { dispatch, extra: api }) => {
+>('data/fetchOfferNearby', async (offerId, { dispatch, extra: api }) => {
   const { data } = await api.get<OfferCard[]>(
-    `${APIRoute.Offers}/${offerID}${APIRoute.Nearby}`
+    `${APIRoute.Offers}/${offerId}${APIRoute.Nearby}`
   );
 
   dispatch(loadOffersNearby(data));
+});
+
+const fetchOfferReviewsAction = createAsyncThunk<
+  void,
+  string,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('data/fetchOfferReviews', async (offerId, { dispatch, extra: api }) => {
+  const { data } = await api.get<Review[]>(`${APIRoute.Comments}/${offerId}`);
+
+  dispatch(loadOfferReviews(data));
 });
 
 const checkAuthAction = createAsyncThunk<
@@ -130,6 +145,7 @@ export {
   fetchOffersAction,
   fetchActiveOfferAction,
   fetchOffersNearbyAction,
+  fetchOfferReviewsAction,
   checkAuthAction,
   loginAction,
   logoutAction,
