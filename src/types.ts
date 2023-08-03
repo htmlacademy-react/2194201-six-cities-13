@@ -5,13 +5,11 @@ export type CityNames = (typeof CITIES)[number];
 export type SortNames = (typeof SORT_ITEMS)[number];
 export type Token = string;
 
-export type User =
-  | {
-      name: string;
-      avatarUrl: string;
-      isPro: boolean;
-    }
-  | UserData;
+export type User = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+};
 
 type Location = {
   latitude: number;

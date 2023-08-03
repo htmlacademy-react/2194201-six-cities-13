@@ -62,7 +62,10 @@ const checkAuthAction = createAsyncThunk<
   }
 >('user/checkAuth', async (_arg, { dispatch, extra: api }) => {
   try {
-    await api.get(APIRoute.Login);
+    const {
+      data: { email },
+    } = await api.get<Omit<UserData, 'id' & 'token'>>(APIRoute.Login);
+    dispatch(setUserEmail(email));
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
   } catch {
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
