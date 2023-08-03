@@ -3,12 +3,12 @@ import { Navigate, Link } from 'react-router-dom';
 import Header from '../../components/header/header';
 import { AppRoute, CITIES, AuthorizationStatus } from '../../constants';
 import FormLogin from '../../components/form-login/form-login';
+import { getAuthStatus } from '../../store/action';
+import { useAppSelector } from '../../hooks';
 
-type LoginProps = {
-  authorizationStatus: (typeof AuthorizationStatus)[keyof typeof AuthorizationStatus];
-};
+function Login(): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthStatus);
 
-function Login({ authorizationStatus }: LoginProps): JSX.Element {
   if (authorizationStatus === AuthorizationStatus.Auth) {
     return <Navigate to={AppRoute.Root} />;
   }

@@ -14,6 +14,7 @@ import PrivateRoute from '../private-route/private-route';
 import { AuthorizationStatus } from '../../constants';
 import { Card, Review } from '../../types';
 import { useAppSelector } from '../../hooks';
+import { getAuthStatus, isOffersLoading } from '../../store/action';
 
 type AppProps = {
   cardList: Card[];
@@ -22,12 +23,10 @@ type AppProps = {
 };
 
 function App({ cardList, reviewList, favoriteList }: AppProps): JSX.Element {
-  const authorizationStatus = useAppSelector(
-    (state) => state.authorizationStatus
-  );
-  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
+  const authorizationStatus = useAppSelector(getAuthStatus);
+  const isOffersLoad = useAppSelector(isOffersLoading);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersLoading) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersLoad) {
     return <Loading />;
   }
 
@@ -37,10 +36,7 @@ function App({ cardList, reviewList, favoriteList }: AppProps): JSX.Element {
         <ScrollToTop />
         <Routes>
           <Route index element={<Main />} />
-          <Route
-            path={AppRoute.Login}
-            element={<Login authorizationStatus={authorizationStatus} />}
-          />
+          <Route path={AppRoute.Login} element={<Login />} />
           <Route
             path={AppRoute.Favorites}
             element={

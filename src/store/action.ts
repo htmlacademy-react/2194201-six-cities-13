@@ -28,6 +28,7 @@ const selectActiveCity = (state: State): CityNames => state.activeCity;
 const getOffers = (state: State) => state.offers;
 const selectActiveSort = (state: State) => state.activeSort;
 const getActiveOffer = (state: State) => state.activeOffer;
+const isOffersLoading = (state: State) => state.isOffersLoading;
 
 export {
   loadOffers,
@@ -44,4 +45,5 @@ export {
   getOffers,
   selectActiveSort,
   getActiveOffer,
+  isOffersLoading,
 };
