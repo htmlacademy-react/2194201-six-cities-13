@@ -7,16 +7,16 @@ import { Card } from '../../types';
 
 type CitiesProps = {
   currentOffers: Card[];
-  setCardId: (id: string) => void;
+  setOfferId: (id: string) => void;
 };
 
-function Places({ currentOffers, setCardId }: CitiesProps): JSX.Element {
+function Places({ currentOffers, setOfferId }: CitiesProps): JSX.Element {
   const activeSort = useAppSelector(selectActiveSort);
   const activeCity = useAppSelector(selectActiveCity);
   const sortOffers = useSortOffers(activeSort, currentOffers);
 
-  const handlePlaceCardMouseOver = (id: string) => setCardId(id);
-  const handlePlaceCardMouseLeave = () => setCardId('');
+  const handlePlaceCardMouseOver = (id: string) => setOfferId(id);
+  const handlePlaceCardMouseLeave = () => setOfferId('');
 
   return (
     <section className="cities__places places">

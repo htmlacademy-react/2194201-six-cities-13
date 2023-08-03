@@ -8,8 +8,9 @@ import { useAppSelector } from '../../hooks';
 
 function Login(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthStatus);
+  const isAuth = authorizationStatus === AuthorizationStatus.Auth;
 
-  if (authorizationStatus === AuthorizationStatus.Auth) {
+  if (isAuth) {
     return <Navigate to={AppRoute.Root} />;
   }
 
