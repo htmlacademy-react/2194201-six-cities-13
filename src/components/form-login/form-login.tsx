@@ -42,8 +42,7 @@ function FormLogin(): JSX.Element {
     value: string
   ) => {
     const { regex } = userAuth[name];
-    value.indexOf(' ');
-    const isValid = value.indexOf(' ') === -1 ? regex.test(value) : false;
+    const isValid = !value.includes(' ') && regex.test(value);
 
     setUserAuth((prevState) => ({
       ...prevState,
