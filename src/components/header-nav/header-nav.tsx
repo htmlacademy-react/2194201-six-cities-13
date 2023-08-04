@@ -1,13 +1,16 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getAuthStatus, getUserEmail } from '../../store/selectors/selectors';
+import {
+  selectAuthStatus,
+  selectUserEmail,
+} from '../../store/selectors/selectors';
 import { logoutAction } from '../../store/api-actions';
 
 function HeaderNav() {
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector(getAuthStatus);
-  const userEmail = useAppSelector(getUserEmail);
+  const authorizationStatus = useAppSelector(selectAuthStatus);
+  const userEmail = useAppSelector(selectUserEmail);
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
 
   const signInLink = (

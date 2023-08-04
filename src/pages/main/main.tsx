@@ -4,11 +4,14 @@ import Header from '../../components/header/header';
 import Tabs from '../../components/tabs/tabs';
 import Cities from '../../components/cities/cities';
 import { useAppSelector } from '../../hooks';
-import { selectActiveCity, getOffers } from '../../store/selectors/selectors';
+import {
+  selectActiveCity,
+  selectOffers,
+} from '../../store/selectors/selectors';
 
 function Main(): JSX.Element {
   const activeCity = useAppSelector(selectActiveCity);
-  const offers = useAppSelector(getOffers);
+  const offers = useAppSelector(selectOffers);
   const currentOffers = offers.filter(({ city }) => activeCity === city.name);
   const isNotEmpty = !!currentOffers.length;
 

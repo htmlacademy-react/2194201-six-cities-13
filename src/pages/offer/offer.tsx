@@ -18,8 +18,8 @@ import {
 } from '../../store/api-actions';
 import { useAppSelector } from '../../hooks';
 import {
-  getActiveOffer,
-  getOffersNearby,
+  selectActiveOffer,
+  selectOffersNearby,
 } from '../../store/selectors/selectors';
 
 function Offer(): JSX.Element {
@@ -33,8 +33,8 @@ function Offer(): JSX.Element {
     }
   }, [offerId, dispatch]);
 
-  const currentOffer = useAppSelector(getActiveOffer);
-  const offersNearby = useAppSelector(getOffersNearby).slice(
+  const currentOffer = useAppSelector(selectActiveOffer);
+  const offersNearby = useAppSelector(selectOffersNearby).slice(
     0,
     MAX_OFFERS_NEARBY
   );

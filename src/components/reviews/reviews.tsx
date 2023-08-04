@@ -3,8 +3,8 @@ import ReviewForm from '../review-form/review-form';
 import dayjs from 'dayjs';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
-  getAuthStatus,
-  getOfferReviews,
+  selectAuthStatus,
+  selectOfferReviews,
 } from '../../store/selectors/selectors';
 import {
   ONE_STAR_RATIO,
@@ -21,8 +21,8 @@ type ReviewsProps = {
 
 function Reviews({ offerId }: ReviewsProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector(getAuthStatus);
-  const reviewList = useAppSelector(getOfferReviews);
+  const authorizationStatus = useAppSelector(selectAuthStatus);
+  const reviewList = useAppSelector(selectOfferReviews);
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
 
   useEffect(() => {

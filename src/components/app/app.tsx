@@ -14,14 +14,17 @@ import PrivateRoute from '../private-route/private-route';
 import { AuthorizationStatus } from '../../constants';
 import { Card } from '../../types';
 import { useAppSelector } from '../../hooks';
-import { getAuthStatus, isOffersLoading } from '../../store/selectors/selectors';
+import {
+  selectAuthStatus,
+  isOffersLoading,
+} from '../../store/selectors/selectors';
 
 type AppProps = {
   favoriteList: Card[];
 };
 
 function App({ favoriteList }: AppProps): JSX.Element {
-  const authorizationStatus = useAppSelector(getAuthStatus);
+  const authorizationStatus = useAppSelector(selectAuthStatus);
   const isOffersLoad = useAppSelector(isOffersLoading);
 
   if (authorizationStatus === AuthorizationStatus.Unknown || isOffersLoad) {
