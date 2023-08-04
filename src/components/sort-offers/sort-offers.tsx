@@ -2,38 +2,38 @@ import cn from 'classnames';
 import { useState, useEffect } from 'react';
 import { SORT_ITEMS } from '../../constants';
 import { SortNames } from '../../types';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { selectActiveSort, changeActiveSort } from '../../store/action';
 
-type SortOffersProps = {
-  activeSort: SortNames;
-  handleSortItemClick?: (
-    item: SortNames,
-    setIsOpen: (isOpen: boolean) => void
-  ) => void;
-};
-
-function SortOffers({
-  activeSort,
-  handleSortItemClick,
-}: SortOffersProps): JSX.Element {
+function SortOffers(): JSX.Element {
+  const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const activeSort = useAppSelector(selectActiveSort);
+
+  const handleDocumentClick = (evt: Event) => {
+    const isSortList = !(evt.target as HTMLElement).closest('.places__options');
+
+    if (isSortList) {
+      setIsOpen(false);
+    }
+  };
+
+  const handleDocumentKeydown = (evt: KeyboardEvent) => {
+    if (evt.code === 'Escape') {
+      setIsOpen(false);
+    }
+  };
+
+  const handleSortButtonClick = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleSortItemClick = (item: SortNames) => {
+    dispatch(changeActiveSort(item));
+    setIsOpen(false);
+  };
 
   useEffect(() => {
-    const handleDocumentClick = (evt: Event) => {
-      const isSortList = !(evt.target as HTMLElement).closest(
-        '.places__options'
-      );
-
-      if (isSortList) {
-        setIsOpen(false);
-      }
-    };
-
-    const handleDocumentKeydown = (evt: KeyboardEvent) => {
-      if (evt.code === 'Escape') {
-        setIsOpen(false);
-      }
-    };
-
     if (isOpen) {
       document.addEventListener('click', handleDocumentClick, true);
       document.addEventListener('keydown', handleDocumentKeydown);
@@ -43,11 +43,7 @@ function SortOffers({
       document.removeEventListener('click', handleDocumentClick, true);
       document.removeEventListener('keydown', handleDocumentKeydown);
     };
-  });
-
-  const handleSortButtonClick = () => {
-    setIsOpen(!isOpen);
-  };
+  }, [isOpen]);
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -74,7 +70,7 @@ function SortOffers({
             })}
             tabIndex={0}
             key={item}
-            onClick={() => handleSortItemClick?.(item, setIsOpen)}
+            onClick={() => handleSortItemClick(item)}
           >
             {item}
           </li>

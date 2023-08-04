@@ -1,10 +1,9 @@
-import { CityNames } from '../../types';
+import { useAppSelector } from '../../hooks';
+import { selectActiveCity } from '../../store/action';
 
-type MainEmptyProps = {
-  activeCity: CityNames;
-};
+function MainEmpty(): JSX.Element {
+  const activeCity = useAppSelector(selectActiveCity);
 
-function MainEmpty({ activeCity }: MainEmptyProps): JSX.Element {
   return (
     <div className="cities__places-container cities__places-container--empty container">
       <section className="cities__no-places">

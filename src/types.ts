@@ -1,8 +1,9 @@
-import { CITIES, SORT_ITEMS } from './constants';
+import { AuthorizationStatus, CITIES, SORT_ITEMS } from './constants';
 import { store } from './store/index';
 
 export type CityNames = (typeof CITIES)[number];
 export type SortNames = (typeof SORT_ITEMS)[number];
+export type Token = string;
 
 type User = {
   name: string;
@@ -67,11 +68,31 @@ export type ReviewValues = {
 };
 
 export type AppProcess = {
-  activeCity: CityNames;
   offers: Card[];
+  isOffersLoading: boolean;
+  authorizationStatus: AuthorizationStatuses;
+  activeCity: CityNames;
   activeSort: SortNames;
+  error: string | null;
 };
 
-export type State = ReturnType<typeof store.getState>;
+export type AuthData = {
+  login: string;
+  password: string;
+};
 
+export type UserData = {
+  id: number;
+  email: string;
+  token: string;
+};
+
+export type DetailMessageType = {
+  type: string;
+  message: string;
+};
+
+export type AuthorizationStatuses =
+  (typeof AuthorizationStatus)[keyof typeof AuthorizationStatus];
+export type State = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

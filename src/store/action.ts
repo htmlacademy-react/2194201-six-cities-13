@@ -1,16 +1,34 @@
 import { createAction } from '@reduxjs/toolkit';
-import { CityNames, SortNames, State } from '../types';
+import {
+  Card,
+  CityNames,
+  SortNames,
+  State,
+  AuthorizationStatuses,
+} from '../types';
 
+const loadOffers = createAction<Card[]>('offers/fetch');
+const requireAuthorization = createAction<AuthorizationStatuses>(
+  'user/requireAuthorization'
+);
 const changeActiveCity = createAction<CityNames>('offers/changeActiveCity');
 const changeActiveSort = createAction<SortNames>('offers/changeActiveSort');
-const getActiveCity = (state: State): CityNames => state.activeCity;
+const setOffersLoadingStatus = createAction<boolean>(
+  'data/setOffersLoadingStatus'
+);
+const setError = createAction<string | null>('app/setError');
+const selectActiveCity = (state: State): CityNames => state.activeCity;
 const getOffers = (state: State) => state.offers;
-const getActiveSort = (state: State) => state.activeSort;
+const selectActiveSort = (state: State) => state.activeSort;
 
 export {
+  loadOffers,
+  requireAuthorization,
   changeActiveCity,
   changeActiveSort,
-  getActiveCity,
+  setOffersLoadingStatus,
+  setError,
+  selectActiveCity,
   getOffers,
-  getActiveSort,
+  selectActiveSort,
 };

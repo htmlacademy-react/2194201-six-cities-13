@@ -1,16 +1,18 @@
 import { PointExpression } from 'leaflet';
 
+const BACKEND_URL = 'https://13.design.pages.academy/six-cities';
+const REQUEST_TIMEOUT = 5000;
+const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
 const ONE_STAR_RATIO = 20;
 const MAX_OFFER_IMAGES = 6;
 const MAX_OFFERS_NEARBY = 3;
 const MAX_REVIEWS = 10;
-
+const TIMEOUT_SHOW_ERROR = 2000;
 const URL_PIN_DEFAULT = 'img/pin.svg';
 const URL_PIN_CURRENT = 'img/pin-active.svg';
 const ICON_SIZE = [27, 39] as PointExpression;
 const DATE = 'YYYY-MM-DD';
 const MONTH_TEXT = 'MMMM';
-
 const TILE_LAYER =
   'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
 const COPYRIGHT =
@@ -52,6 +54,12 @@ const AppRoute = {
   Offer: '/offer/:id',
 } as const;
 
+const APIRoute = {
+  Offers: '/offers',
+  Login: '/login',
+  Logout: '/logout',
+} as const;
+
 const AuthorizationStatus = {
   Auth: 'AUTH',
   NoAuth: 'NO_AUTH',
@@ -59,10 +67,14 @@ const AuthorizationStatus = {
 } as const;
 
 export {
+  BACKEND_URL,
+  REQUEST_TIMEOUT,
+  AUTH_TOKEN_KEY_NAME,
   ONE_STAR_RATIO,
   MAX_OFFERS_NEARBY,
   MAX_OFFER_IMAGES,
   MAX_REVIEWS,
+  TIMEOUT_SHOW_ERROR,
   URL_PIN_DEFAULT,
   URL_PIN_CURRENT,
   ICON_SIZE,
@@ -75,5 +87,6 @@ export {
   RATINGS,
   TextLength,
   AppRoute,
+  APIRoute,
   AuthorizationStatus,
 };
