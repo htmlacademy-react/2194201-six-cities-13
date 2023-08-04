@@ -1,9 +1,9 @@
-import './preloader.css';
+import preloader from './preloader.module.css';
 
 function Loading(): JSX.Element {
   return (
-    <div className="preloader">
-      <div className="preloader__row"></div>
+    <div className={preloader.preloader}>
+      <div className={preloader.preloader__row}></div>
     </div>
   );
 }

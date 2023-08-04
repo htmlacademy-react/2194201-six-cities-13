@@ -1,15 +1,10 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
-import {
-  ERROR_TEXT_EMAIL,
-  ERROR_TEXT_PASSWORD,
-  REGEX_EMAIL,
-  REGEX_PASSWORD,
-} from '../../constants';
+import { REGEX_EMAIL, REGEX_PASSWORD } from '../../constants';
 import { UserAuth } from '../../types';
-import { AuthFields } from '../../constants';
+import { AUTH_FIELDS } from '../../constants';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
-import './error.css';
+import message from './error.module.css';
 
 function FormLogin(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -17,20 +12,22 @@ function FormLogin(): JSX.Element {
     email: {
       value: '',
       isValid: false,
-      errorText: ERROR_TEXT_EMAIL,
+      errorText: 'Введите правильный Email!',
       regex: REGEX_EMAIL,
     },
     password: {
       value: '',
       isValid: false,
-      errorText: ERROR_TEXT_PASSWORD,
+      errorText: 'Минимум 1 цифра и 1 буква без пробелов!',
       regex: REGEX_PASSWORD,
     },
   });
 
+  const isValidValues = userAuth.email.isValid && userAuth.password.isValid;
+
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    if (userAuth.email.isValid && userAuth.password.isValid) {
+    if (isValidValues) {
       dispatch(
         loginAction({
           login: userAuth.email.value,
@@ -41,11 +38,12 @@ function FormLogin(): JSX.Element {
   };
 
   const handleInputsChange = (
-    name: (typeof AuthFields)[number]['name'],
+    name: (typeof AUTH_FIELDS)[number]['name'],
     value: string
   ) => {
     const { regex } = userAuth[name];
-    const isValid = regex.test(value);
+    value.indexOf(' ');
+    const isValid = value.indexOf(' ') === -1 ? regex.test(value) : false;
 
     setUserAuth((prevState) => ({
       ...prevState,
@@ -58,13 +56,8 @@ function FormLogin(): JSX.Element {
   };
 
   return (
-    <form
-      className="login__form form"
-      action="#"
-      method="post"
-      onSubmit={handleFormSubmit}
-    >
-      {AuthFields.map(({ name, label }) => {
+    <form className="login__form form" onSubmit={handleFormSubmit}>
+      {AUTH_FIELDS.map(({ name, label }) => {
         const { isValid } = userAuth[name];
 
         return (
@@ -82,7 +75,7 @@ function FormLogin(): JSX.Element {
               value={userAuth[name].value}
             />
             {!isValid && userAuth[name].value && (
-              <span className="error">{userAuth[name].errorText}</span>
+              <span className={message.error}>{userAuth[name].errorText}</span>
             )}
           </div>
         );
@@ -90,7 +83,7 @@ function FormLogin(): JSX.Element {
       <button
         className="login__submit form__submit button"
         type="submit"
-        disabled={!(userAuth.email.isValid && userAuth.password.isValid)}
+        disabled={!isValidValues}
       >
         Sign in
       </button>

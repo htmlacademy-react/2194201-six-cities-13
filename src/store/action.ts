@@ -34,6 +34,7 @@ const getActiveOffer = (state: State) => state.activeOffer;
 const getOffersNearby = (state: State) => state.offersNearby;
 const getOfferReviews = (state: State) => state.offerReviews;
 const isOffersLoading = (state: State) => state.isOffersLoading;
+const getErrorMessage = (state: State) => state.error;
 
 export {
   loadOffers,
@@ -56,4 +57,5 @@ export {
   getOffersNearby,
   getOfferReviews,
   isOffersLoading,
+  getErrorMessage,
 };
