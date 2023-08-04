@@ -8,12 +8,16 @@ import {
   requireAuthorization,
   setError,
   setOffersLoadingStatus,
+  setUserEmail,
+  setActiveOffer,
 } from './action';
 
 const initialState: AppProcess = {
   offers: [],
+  activeOffer: null,
   isOffersLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
+  user: null,
   activeCity: CITIES[0],
   activeSort: SORT_ITEMS[0],
   error: null,
@@ -27,8 +31,14 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setOffersLoadingStatus, (state, action) => {
       state.isOffersLoading = action.payload;
     })
+    .addCase(setActiveOffer, (state, action) => {
+      state.activeOffer = action.payload;
+    })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(setUserEmail, (state, action) => {
+      state.user = action.payload;
     })
     .addCase(changeActiveCity, (state, action) => {
       state.activeCity = action.payload;

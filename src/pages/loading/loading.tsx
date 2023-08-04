@@ -1,5 +1,11 @@
+import './preloader.css';
+
 function Loading(): JSX.Element {
-  return <p>Loading ...</p>;
+  return (
+    <div className="preloader">
+      <div className="preloader__row"></div>
+    </div>
+  );
 }
 
 export default Loading;

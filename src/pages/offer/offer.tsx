@@ -4,26 +4,34 @@ import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import { Reviews } from '../../components/reviews/reviews';
 import { ONE_STAR_RATIO } from '../../constants';
-import { Card, OfferCard, Review } from '../../types';
+import { Card, Review } from '../../types';
 import NotFound from '../not-found/not-found';
+import { useEffect } from 'react';
 import PlaceCard from '../../components/place-card/place-card';
 import Map from '../../components/map/map';
-import {
-  MAX_OFFER_IMAGES,
-  MAX_OFFERS_NEARBY,
-  AuthorizationStatus,
-} from '../../constants';
+import { MAX_OFFER_IMAGES, MAX_OFFERS_NEARBY } from '../../constants';
 import { getOffersLocation } from '../../helpers/get-offers-location';
+import { useAppDispatch } from '../../hooks';
+import { fetchActiveOfferAction } from '../../store/api-actions';
+import { useAppSelector } from '../../hooks';
+import { getActiveOffer } from '../../store/action';
 
 type OfferProps = {
   cardList: Card[];
-  offerList: OfferCard[];
   reviewList: Review[];
 };
 
-function Offer({ cardList, offerList, reviewList }: OfferProps): JSX.Element {
+function Offer({ cardList, reviewList }: OfferProps): JSX.Element {
   const { id } = useParams();
-  const currentOffer = offerList.find((item: OfferCard) => item.id === id);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchActiveOfferAction(id));
+    }
+  }, [id, dispatch]);
+
+  const currentOffer = useAppSelector(getActiveOffer);
 
   if (!currentOffer) {
     return <NotFound />;
@@ -166,10 +174,7 @@ function Offer({ cardList, offerList, reviewList }: OfferProps): JSX.Element {
                   <p className="offer__text">{description}</p>
                 </div>
               </div>
-              <Reviews
-                reviewList={reviewList}
-                authorizationStatus={AuthorizationStatus.Auth}
-              />
+              <Reviews reviewList={reviewList} />
             </div>
           </div>
           <Map

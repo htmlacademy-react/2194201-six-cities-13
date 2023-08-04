@@ -1,11 +1,11 @@
-import { AuthorizationStatus, CITIES, SORT_ITEMS } from './constants';
+import { AuthorizationStatus, CITIES, SORT_ITEMS, AppRoute } from './constants';
 import { store } from './store/index';
 
 export type CityNames = (typeof CITIES)[number];
 export type SortNames = (typeof SORT_ITEMS)[number];
 export type Token = string;
 
-type User = {
+export type User = {
   name: string;
   avatarUrl: string;
   isPro: boolean;
@@ -69,8 +69,10 @@ export type ReviewValues = {
 
 export type AppProcess = {
   offers: Card[];
+  activeOffer: OfferCard | null;
   isOffersLoading: boolean;
   authorizationStatus: AuthorizationStatuses;
+  user: string | null;
   activeCity: CityNames;
   activeSort: SortNames;
   error: string | null;
@@ -79,6 +81,18 @@ export type AppProcess = {
 export type AuthData = {
   login: string;
   password: string;
+};
+
+type UserAuthData = {
+  value: string;
+  isValid: boolean;
+  errorText: string;
+  regex: RegExp;
+};
+
+export type UserAuth = {
+  email: UserAuthData;
+  password: UserAuthData;
 };
 
 export type UserData = {
@@ -91,6 +105,8 @@ export type DetailMessageType = {
   type: string;
   message: string;
 };
+
+export type AppRoutes = (typeof AppRoute)[keyof typeof AppRoute];
 
 export type AuthorizationStatuses =
   (typeof AuthorizationStatus)[keyof typeof AuthorizationStatus];

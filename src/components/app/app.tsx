@@ -1,6 +1,8 @@
 import { HelmetProvider } from 'react-helmet-async';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Loading from '../../pages/loading/loading';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import Main from '../../pages/main/main';
 import Login from '../../pages/login/login';
@@ -10,46 +12,31 @@ import NotFound from '../../pages/not-found/not-found';
 import { AppRoute } from '../../constants';
 import PrivateRoute from '../private-route/private-route';
 import { AuthorizationStatus } from '../../constants';
-import { Card, OfferCard, Review } from '../../types';
+import { Card, Review } from '../../types';
 import { useAppSelector } from '../../hooks';
+import { getAuthStatus, isOffersLoading } from '../../store/action';
 
 type AppProps = {
   cardList: Card[];
-  offerList: OfferCard[];
   reviewList: Review[];
   favoriteList: Card[];
 };
 
-function App({
-  cardList,
-  offerList,
-  reviewList,
-  favoriteList,
-}: AppProps): JSX.Element {
-  const authorizationStatus = useAppSelector(
-    (state) => state.authorizationStatus
-  );
-  const isQuestionsDataLoading = useAppSelector(
-    (state) => state.isQuestionsDataLoading
-  );
+function App({ cardList, reviewList, favoriteList }: AppProps): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthStatus);
+  const isOffersLoad = useAppSelector(isOffersLoading);
 
-  if (
-    authorizationStatus === AuthorizationStatus.Unknown ||
-    isQuestionsDataLoading
-  ) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersLoad) {
     return <Loading />;
   }
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <ScrollToTop />
         <Routes>
           <Route index element={<Main />} />
-          <Route
-            path={AppRoute.Login}
-            element={<Login authorizationStatus={authorizationStatus} />}
-          />
+          <Route path={AppRoute.Login} element={<Login />} />
           <Route
             path={AppRoute.Favorites}
             element={
@@ -60,17 +47,11 @@ function App({
           />
           <Route
             path={AppRoute.Offer}
-            element={
-              <Offer
-                cardList={cardList}
-                offerList={offerList}
-                reviewList={reviewList}
-              />
-            }
+            element={<Offer cardList={cardList} reviewList={reviewList} />}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }

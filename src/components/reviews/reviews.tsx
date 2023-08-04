@@ -1,6 +1,8 @@
 import ReviewForm from '../review-form/review-form';
 import dayjs from 'dayjs';
 import { Review } from '../../types';
+import { useAppSelector } from '../../hooks';
+import { getAuthStatus } from '../../store/action';
 import {
   ONE_STAR_RATIO,
   MAX_REVIEWS,
@@ -11,11 +13,11 @@ import {
 
 type ReviewsProps = {
   reviewList: Review[];
-  authorizationStatus: (typeof AuthorizationStatus)[keyof typeof AuthorizationStatus];
 };
 
-function Reviews(props: ReviewsProps): JSX.Element {
-  const { reviewList, authorizationStatus } = props;
+function Reviews({ reviewList }: ReviewsProps): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthStatus);
+  const isAuth = authorizationStatus === AuthorizationStatus.Auth;
 
   reviewList.sort((a, b) => dayjs(b.date).diff(a.date));
 
@@ -68,7 +70,7 @@ function Reviews(props: ReviewsProps): JSX.Element {
           return null;
         })}
       </ul>
-      {authorizationStatus === AuthorizationStatus.Auth && <ReviewForm />}
+      {isAuth && <ReviewForm />}
     </section>
   );
 }
