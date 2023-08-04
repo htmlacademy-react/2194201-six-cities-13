@@ -3,7 +3,7 @@ import { Navigate, Link } from 'react-router-dom';
 import Header from '../../components/header/header';
 import { AppRoute, CITIES, AuthorizationStatus } from '../../constants';
 import FormLogin from '../../components/form-login/form-login';
-import { getAuthStatus } from '../../store/action';
+import { getAuthStatus } from '../../store/selectors/selectors';
 import { useAppSelector } from '../../hooks';
 
 function Login(): JSX.Element {

@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks';
-import { getErrorMessage } from '../../store/action';
+import { getErrorMessage } from '../../store/selectors/selectors';
 import message from './error-message.module.css';
 
 function ErrorMessage(): JSX.Element | boolean {

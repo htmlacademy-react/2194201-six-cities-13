@@ -2,7 +2,10 @@ import { useEffect } from 'react';
 import ReviewForm from '../review-form/review-form';
 import dayjs from 'dayjs';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getAuthStatus, getOfferReviews } from '../../store/action';
+import {
+  getAuthStatus,
+  getOfferReviews,
+} from '../../store/selectors/selectors';
 import {
   ONE_STAR_RATIO,
   MAX_REVIEWS,

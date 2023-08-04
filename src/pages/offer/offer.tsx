@@ -17,7 +17,10 @@ import {
   fetchOffersNearbyAction,
 } from '../../store/api-actions';
 import { useAppSelector } from '../../hooks';
-import { getActiveOffer, getOffersNearby } from '../../store/action';
+import {
+  getActiveOffer,
+  getOffersNearby,
+} from '../../store/selectors/selectors';
 
 function Offer(): JSX.Element {
   const { id: offerId } = useParams();

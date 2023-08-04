@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getAuthStatus, getUserEmail } from '../../store/action';
+import { getAuthStatus, getUserEmail } from '../../store/selectors/selectors';
 import { logoutAction } from '../../store/api-actions';
 
 function HeaderNav() {

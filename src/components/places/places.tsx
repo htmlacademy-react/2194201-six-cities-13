@@ -2,7 +2,10 @@ import SortOffers from '../sort-offers/sort-offers';
 import PlaceCard from '../place-card/place-card';
 import { useSortOffers } from '../../hooks/use-sort-offers/use-sort-offers';
 import { useAppSelector } from '../../hooks';
-import { selectActiveSort, selectActiveCity } from '../../store/action';
+import {
+  selectActiveSort,
+  selectActiveCity,
+} from '../../store/selectors/selectors';
 import { Card } from '../../types';
 
 type CitiesProps = {

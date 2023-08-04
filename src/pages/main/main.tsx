@@ -4,7 +4,7 @@ import Header from '../../components/header/header';
 import Tabs from '../../components/tabs/tabs';
 import Cities from '../../components/cities/cities';
 import { useAppSelector } from '../../hooks';
-import { selectActiveCity, getOffers } from '../../store/action';
+import { selectActiveCity, getOffers } from '../../store/selectors/selectors';
 
 function Main(): JSX.Element {
   const activeCity = useAppSelector(selectActiveCity);
