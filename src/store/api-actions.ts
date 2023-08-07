@@ -11,7 +11,6 @@ import {
   redirectToRoute,
   setActiveOffer,
   loadOffersNearby,
-  loadOfferReviews,
 } from './action';
 import { TIMEOUT_SHOW_ERROR, APIRoute, AppRoute } from '../constants';
 
@@ -48,7 +47,7 @@ const fetchOffersNearbyAction = createAsyncThunk<void, string, AxiosData>(
   }
 );
 
-const fetchReviewsAction = createAsyncThunk<void, string, AxiosData>(
+const fetchReviewsAction = createAsyncThunk<Review[], string, AxiosData>(
   'data/fetchReviews',
   async (offerId, { extra: api }) => {
     const { data } = await api.get<Review[]>(`${APIRoute.Reviews}/${offerId}`);
@@ -57,18 +56,18 @@ const fetchReviewsAction = createAsyncThunk<void, string, AxiosData>(
   }
 );
 
-export const postReviewAction = createAsyncThunk<void, ReviewValues, AxiosData>(
-  'data/postReview',
-  async ({ id, rating, comment }, { dispatch, getState, extra: api }) => {
-    const { data } = await api.post<Review>(`${APIRoute.Reviews}/${id}`, {
-      comment,
-      rating,
-    });
+export const postReviewAction = createAsyncThunk<
+  Review[],
+  ReviewValues,
+  AxiosData
+>('data/postReview', async ({ id, rating, comment }, { extra: api }) => {
+  const { data } = await api.post<Review[]>(`${APIRoute.Reviews}/${id}`, {
+    comment,
+    rating,
+  });
 
-    const { offerReviews } = getState();
-    dispatch(loadOfferReviews([...offerReviews, data]));
-  }
-);
+  return data;
+});
 
 const checkAuthAction = createAsyncThunk<void, undefined, AxiosData>(
   'user/checkAuth',
