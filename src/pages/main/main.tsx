@@ -4,10 +4,8 @@ import Header from '../../components/header/header';
 import TabList from '../../components/tab-list/tab-list';
 import Cities from '../../components/cities/cities';
 import { useAppSelector } from '../../hooks';
-import {
-  selectActiveCity,
-  selectOffers,
-} from '../../store/selectors/selectors';
+import { selectActiveCity } from '../../store/app-process/selectors';
+import { selectOffers } from '../../store/offers-data/selectors';
 
 function Main(): JSX.Element {
   const activeCity = useAppSelector(selectActiveCity);

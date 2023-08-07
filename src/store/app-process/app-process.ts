@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CITIES, SORT_ITEMS, NameSpace } from '../../constants';
 import { CityNames, SortNames } from '../../types';
 
@@ -16,10 +16,10 @@ export const appProcess = createSlice({
   name: NameSpace.App,
   initialState,
   reducers: {
-    changeActiveCity: (state, action) => {
+    changeActiveCity: (state, action: PayloadAction<CityNames>) => {
       state.activeCity = action.payload;
     },
-    changeActiveSort: (state, action) => {
+    changeActiveSort: (state, action: PayloadAction<SortNames>) => {
       state.activeSort = action.payload;
     },
   },

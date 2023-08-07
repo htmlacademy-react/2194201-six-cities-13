@@ -2,10 +2,8 @@ import { useEffect } from 'react';
 import ReviewForm from '../review-form/review-form';
 import dayjs from 'dayjs';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import {
-  selectAuthStatus,
-  selectOfferReviews,
-} from '../../store/selectors/selectors';
+import { selectOfferReviews } from '../../store/reviews-data/selectors';
+import { selectAuthStatus } from '../../store/user-process/selectors';
 import {
   ONE_STAR_RATIO,
   MAX_REVIEWS,

@@ -3,55 +3,44 @@ import { Card, Review, ReviewValues, AxiosData } from '../types';
 import { saveToken, dropToken } from '../services/token';
 import { AuthData, UserData, OfferCard } from '../types';
 import { store } from '../store';
-import {
-  loadOffers,
-  setError,
-  setOffersLoadingStatus,
-  setUserEmail,
-  redirectToRoute,
-  setActiveOffer,
-  loadOffersNearby,
-} from './action';
+import { setError, setUserEmail, redirectToRoute } from './action';
 import { TIMEOUT_SHOW_ERROR, APIRoute, AppRoute } from '../constants';
 
 const clearErrorAction = createAsyncThunk('app/clearError', () => {
   setTimeout(() => store.dispatch(setError(null)), TIMEOUT_SHOW_ERROR);
 });
 
-const fetchOffersAction = createAsyncThunk<void, undefined, AxiosData>(
+const fetchOffersAction = createAsyncThunk<Card[], undefined, AxiosData>(
   'data/fetchOffers',
-  async (_arg, { dispatch, extra: api }) => {
-    dispatch(setOffersLoadingStatus(true));
+  async (_arg, { extra: api }) => {
     const { data } = await api.get<Card[]>(APIRoute.Offers);
-    dispatch(setOffersLoadingStatus(false));
-    dispatch(loadOffers(data));
+    return data;
   }
 );
 
-const fetchActiveOfferAction = createAsyncThunk<void, string, AxiosData>(
+const fetchActiveOfferAction = createAsyncThunk<OfferCard, string, AxiosData>(
   'data/fetchActiveOffer',
-  async (offerId, { dispatch, extra: api }) => {
+  async (offerId, { extra: api }) => {
     const { data } = await api.get<OfferCard>(`${APIRoute.Offers}/${offerId}`);
-    dispatch(setActiveOffer(data));
+    return data;
   }
 );
 
-const fetchOffersNearbyAction = createAsyncThunk<void, string, AxiosData>(
-  'data/fetchOfferNearby',
-  async (offerId, { dispatch, extra: api }) => {
-    const { data } = await api.get<OfferCard[]>(
-      `${APIRoute.Offers}/${offerId}${APIRoute.Nearby}`
-    );
-
-    dispatch(loadOffersNearby(data));
-  }
-);
+const fetchOffersNearbyAction = createAsyncThunk<
+  OfferCard[],
+  string,
+  AxiosData
+>('data/fetchOfferNearby', async (offerId, { extra: api }) => {
+  const { data } = await api.get<OfferCard[]>(
+    `${APIRoute.Offers}/${offerId}${APIRoute.Nearby}`
+  );
+  return data;
+});
 
 const fetchReviewsAction = createAsyncThunk<Review[], string, AxiosData>(
   'data/fetchReviews',
   async (offerId, { extra: api }) => {
     const { data } = await api.get<Review[]>(`${APIRoute.Reviews}/${offerId}`);
-
     return data;
   }
 );
@@ -65,7 +54,6 @@ export const postReviewAction = createAsyncThunk<
     comment,
     rating,
   });
-
   return data;
 });
 

@@ -14,10 +14,8 @@ import PrivateRoute from '../private-route/private-route';
 import { AuthorizationStatus } from '../../constants';
 import { Card } from '../../types';
 import { useAppSelector } from '../../hooks';
-import {
-  selectAuthStatus,
-  isOffersLoading,
-} from '../../store/selectors/selectors';
+import { isOffersLoading } from '../../store/selectors/selectors';
+import { selectAuthStatus } from '../../store/user-process/selectors';
 
 type AppProps = {
   favoriteList: Card[];

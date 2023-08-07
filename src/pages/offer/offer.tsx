@@ -1,26 +1,26 @@
 import cn from 'classnames';
+import { useEffect } from 'react';
+import Header from '../../components/header/header';
+import NotFound from '../not-found/not-found';
+import PlaceCard from '../../components/place-card/place-card';
+import Map from '../../components/map/map';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
-import Header from '../../components/header/header';
 import { Reviews } from '../../components/reviews/reviews';
 import { ONE_STAR_RATIO } from '../../constants';
 import { Card } from '../../types';
-import NotFound from '../not-found/not-found';
-import { useEffect } from 'react';
-import PlaceCard from '../../components/place-card/place-card';
-import Map from '../../components/map/map';
 import { MAX_OFFER_IMAGES, MAX_OFFERS_NEARBY } from '../../constants';
 import { getOffersLocation } from '../../helpers/get-offers-location';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
   fetchActiveOfferAction,
   fetchOffersNearbyAction,
 } from '../../store/api-actions';
-import { useAppSelector } from '../../hooks';
+
 import {
   selectActiveOffer,
   selectOffersNearby,
-} from '../../store/selectors/selectors';
+} from '../../store/offers-data/selectors';
 
 function Offer(): JSX.Element {
   const { id: offerId } = useParams();
