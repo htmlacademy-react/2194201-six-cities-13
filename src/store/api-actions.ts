@@ -5,7 +5,6 @@ import { AuthData, UserData, OfferCard } from '../types';
 import { store } from '../store';
 import {
   loadOffers,
-  requireAuthorization,
   setError,
   setOffersLoadingStatus,
   setUserEmail,
@@ -14,12 +13,7 @@ import {
   loadOffersNearby,
   loadOfferReviews,
 } from './action';
-import {
-  TIMEOUT_SHOW_ERROR,
-  APIRoute,
-  AuthorizationStatus,
-  AppRoute,
-} from '../constants';
+import { TIMEOUT_SHOW_ERROR, APIRoute, AppRoute } from '../constants';
 
 const clearErrorAction = createAsyncThunk('app/clearError', () => {
   setTimeout(() => store.dispatch(setError(null)), TIMEOUT_SHOW_ERROR);
@@ -54,12 +48,12 @@ const fetchOffersNearbyAction = createAsyncThunk<void, string, AxiosData>(
   }
 );
 
-const fetchOfferReviewsAction = createAsyncThunk<void, string, AxiosData>(
-  'data/fetchOfferReviews',
-  async (offerId, { dispatch, extra: api }) => {
+const fetchReviewsAction = createAsyncThunk<void, string, AxiosData>(
+  'data/fetchReviews',
+  async (offerId, { extra: api }) => {
     const { data } = await api.get<Review[]>(`${APIRoute.Reviews}/${offerId}`);
 
-    dispatch(loadOfferReviews(data));
+    return data;
   }
 );
 
@@ -79,15 +73,10 @@ export const postReviewAction = createAsyncThunk<void, ReviewValues, AxiosData>(
 const checkAuthAction = createAsyncThunk<void, undefined, AxiosData>(
   'user/checkAuth',
   async (_arg, { dispatch, extra: api }) => {
-    try {
-      const {
-        data: { email },
-      } = await api.get<{ email: string }>(APIRoute.Login);
-      dispatch(setUserEmail(email));
-      dispatch(requireAuthorization(AuthorizationStatus.Auth));
-    } catch {
-      dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
-    }
+    const {
+      data: { email },
+    } = await api.get<{ email: string }>(APIRoute.Login);
+    dispatch(setUserEmail(email));
   }
 );
 
@@ -99,7 +88,6 @@ const loginAction = createAsyncThunk<void, AuthData, AxiosData>(
     } = await api.post<UserData>(APIRoute.Login, { email, password });
     saveToken(token);
     dispatch(setUserEmail(email));
-    dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(redirectToRoute(AppRoute.Root));
   }
 );
@@ -110,7 +98,6 @@ const logoutAction = createAsyncThunk<void, undefined, AxiosData>(
     await api.delete(APIRoute.Logout);
     dropToken();
     dispatch(setUserEmail(null));
-    dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   }
 );
 
@@ -119,7 +106,7 @@ export {
   fetchOffersAction,
   fetchActiveOfferAction,
   fetchOffersNearbyAction,
-  fetchOfferReviewsAction,
+  fetchReviewsAction,
   checkAuthAction,
   loginAction,
   logoutAction,

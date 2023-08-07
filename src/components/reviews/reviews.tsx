@@ -13,7 +13,7 @@ import {
   DATE,
   MONTH_TEXT,
 } from '../../constants';
-import { fetchOfferReviewsAction } from '../../store/api-actions';
+import { fetchReviewsAction } from '../../store/api-actions';
 
 type ReviewsProps = {
   offerId: string;
@@ -27,7 +27,7 @@ function Reviews({ offerId }: ReviewsProps): JSX.Element {
 
   useEffect(() => {
     if (offerId) {
-      dispatch(fetchOfferReviewsAction(offerId));
+      dispatch(fetchReviewsAction(offerId));
     }
   }, [offerId, dispatch]);
 

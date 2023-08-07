@@ -117,6 +117,10 @@ export type AxiosData = {
   extra: AxiosInstance;
 };
 
+export type UserProcess = {
+  authorizationStatus: AuthorizationStatuses;
+};
+
 export type AppRoutes = (typeof AppRoute)[keyof typeof AppRoute];
 
 export type AuthorizationStatuses =

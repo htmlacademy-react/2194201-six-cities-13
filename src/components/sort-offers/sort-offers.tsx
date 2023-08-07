@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { SORT_ITEMS } from '../../constants';
 import { SortNames } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectActiveSort } from '../../store/selectors/selectors';
-import { changeActiveSort } from '../../store/action';
+import { selectActiveSort } from '../../store/app-process/selectors';
+import { changeActiveSort } from '../../store/app-process/app-process';
 
 function SortOffers(): JSX.Element {
   const dispatch = useAppDispatch();

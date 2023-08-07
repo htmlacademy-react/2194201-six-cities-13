@@ -1,9 +1,8 @@
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks';
-import { changeActiveCity } from '../../store/action';
-import { useAppSelector } from '../../hooks';
-import { selectActiveCity } from '../../store/selectors/selectors';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { changeActiveCity } from '../../store/app-process/app-process';
+import { selectActiveCity } from '../../store/app-process/selectors';
 import { CityNames } from '../../types';
 
 type TabItemProps = {

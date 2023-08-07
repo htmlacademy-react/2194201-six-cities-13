@@ -2,10 +2,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { AuthorizationStatus, CITIES, SORT_ITEMS } from '../constants';
 import { AppProcess } from '../types';
 import {
-  changeActiveCity,
-  changeActiveSort,
   loadOffers,
-  requireAuthorization,
   setError,
   setOffersLoadingStatus,
   setUserEmail,
@@ -44,17 +41,8 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadOfferReviews, (state, action) => {
       state.offerReviews = action.payload;
     })
-    .addCase(requireAuthorization, (state, action) => {
-      state.authorizationStatus = action.payload;
-    })
     .addCase(setUserEmail, (state, action) => {
       state.user = action.payload;
-    })
-    .addCase(changeActiveCity, (state, action) => {
-      state.activeCity = action.payload;
-    })
-    .addCase(changeActiveSort, (state, action) => {
-      state.activeSort = action.payload;
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;

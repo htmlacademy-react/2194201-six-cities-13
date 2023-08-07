@@ -76,6 +76,14 @@ const AuthorizationStatus = {
   Unknown: 'UNKNOWN',
 } as const;
 
+const NameSpace = {
+  App: 'APP',
+  User: 'USER',
+  Offers: 'OFFERS',
+  Reviews: 'REVIEWS',
+  Favorites: 'FAVORITES',
+} as const;
+
 export {
   BACKEND_URL,
   REQUEST_TIMEOUT,
@@ -97,9 +105,10 @@ export {
   CITIES,
   SORT_ITEMS,
   RATINGS,
+  AUTH_FIELDS,
   TextLength,
   AppRoute,
   APIRoute,
   AuthorizationStatus,
-  AUTH_FIELDS,
+  NameSpace,
 };
