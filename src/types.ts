@@ -1,3 +1,4 @@
+import { AxiosInstance } from 'axios';
 import { AuthorizationStatus, CITIES, SORT_ITEMS, AppRoute } from './constants';
 import { store } from './store/index';
 
@@ -62,14 +63,18 @@ export type Review = {
   comment: string;
   rating: number;
 };
+
 export type ReviewValues = {
+  id: string;
   rating: number;
-  review: string;
+  comment: string;
 };
 
 export type AppProcess = {
   offers: Card[];
   activeOffer: OfferCard | null;
+  offersNearby: OfferCard[];
+  offerReviews: Review[];
   isOffersLoading: boolean;
   authorizationStatus: AuthorizationStatuses;
   user: string | null;
@@ -104,6 +109,12 @@ export type UserData = {
 export type DetailMessageType = {
   type: string;
   message: string;
+};
+
+export type AxiosData = {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
 };
 
 export type AppRoutes = (typeof AppRoute)[keyof typeof AppRoute];

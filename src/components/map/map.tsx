@@ -10,7 +10,7 @@ type MapProps = {
   cityInfo: City;
   offers: LocationMap[];
   height: string;
-  cardId?: string;
+  offerId?: string;
 };
 
 const defaultCustomPin: Icon = new Icon({
@@ -30,7 +30,7 @@ function Map({
   cityInfo,
   offers,
   height,
-  cardId,
+  offerId,
 }: MapProps): JSX.Element {
   const mapRef = useRef<HTMLElement | null>(null);
   const map = useMap(mapRef, cityInfo);
@@ -48,7 +48,7 @@ function Map({
         });
 
         marker.setIcon(
-          cardId && cardId === offer.id ? currentCustomPin : defaultCustomPin
+          offerId && offerId === offer.id ? currentCustomPin : defaultCustomPin
         );
         marker.addTo(markers);
       });
@@ -58,7 +58,7 @@ function Map({
     return () => {
       markers.clearLayers();
     };
-  }, [cardId, map, offers]);
+  }, [offerId, map, offers]);
 
   return (
     <section

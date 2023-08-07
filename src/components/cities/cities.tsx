@@ -10,29 +10,27 @@ type CitiesProps = {
 };
 
 function Cities({ currentOffers }: CitiesProps): JSX.Element {
-  const [cardId, setCardId] = useState<string>('');
+  const [offerId, setOfferId] = useState<string>('');
   const offersLocation = getOffersLocation(currentOffers);
   const isNotEmpty = !!currentOffers.length;
 
-  return (
-    <div className="cities">
-      {isNotEmpty ? (
-        <div className="cities__places-container container">
-          <Places currentOffers={currentOffers} setCardId={setCardId} />
-          <div className="cities__right-section">
-            <Map
-              className="cities"
-              height="100%"
-              cityInfo={currentOffers[0].city}
-              offers={offersLocation}
-              cardId={cardId}
-            />
-          </div>
-        </div>
-      ) : (
-        <MainEmpty />
-      )}
+  const citiesContainer = (
+    <div className="cities__places-container container">
+      <Places currentOffers={currentOffers} setOfferId={setOfferId} />
+      <div className="cities__right-section">
+        <Map
+          className="cities"
+          height="100%"
+          cityInfo={currentOffers[0].city}
+          offers={offersLocation}
+          offerId={offerId}
+        />
+      </div>
     </div>
+  );
+
+  return (
+    <div className="cities">{isNotEmpty ? citiesContainer : <MainEmpty />}</div>
   );
 }
 

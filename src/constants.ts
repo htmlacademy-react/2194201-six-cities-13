@@ -17,10 +17,8 @@ const TILE_LAYER =
   'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
 const COPYRIGHT =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
-const ERROR_TEXT_EMAIL = 'Введите правильный Email';
-const ERROR_TEXT_PASSWORD = 'Минимум 1 цифра и 1 буква';
 const REGEX_EMAIL =
-  /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+  /^[a-z0-9-]+(?:\.[a-z0-9-]+)*@(?:[a-z0-9](?:[a-z-]*[a-z])?\.)+[a-z]{2,4}$/;
 const REGEX_PASSWORD = /\d+[a-zA-Z]+|[a-zA-Z]+\d+/;
 
 const CITIES = [
@@ -47,6 +45,11 @@ const RATINGS = [
   { star: 1, title: 'terribly' },
 ] as const;
 
+const AUTH_FIELDS = [
+  { name: 'email', label: 'E-mail' },
+  { name: 'password', label: 'Password' },
+] as const;
+
 const TextLength = {
   min: 50,
   max: 300,
@@ -63,6 +66,8 @@ const APIRoute = {
   Offers: '/offers',
   Login: '/login',
   Logout: '/logout',
+  Nearby: '/nearby',
+  Reviews: '/comments',
 } as const;
 
 const AuthorizationStatus = {
@@ -70,11 +75,6 @@ const AuthorizationStatus = {
   NoAuth: 'NO_AUTH',
   Unknown: 'UNKNOWN',
 } as const;
-
-const AuthFields = [
-  { name: 'email', label: 'E-mail' },
-  { name: 'password', label: 'Password' },
-] as const;
 
 export {
   BACKEND_URL,
@@ -92,8 +92,6 @@ export {
   MONTH_TEXT,
   TILE_LAYER,
   COPYRIGHT,
-  ERROR_TEXT_EMAIL,
-  ERROR_TEXT_PASSWORD,
   REGEX_EMAIL,
   REGEX_PASSWORD,
   CITIES,
@@ -103,5 +101,5 @@ export {
   AppRoute,
   APIRoute,
   AuthorizationStatus,
-  AuthFields,
+  AUTH_FIELDS,
 };

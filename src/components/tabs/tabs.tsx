@@ -4,7 +4,7 @@ import { CITIES } from '../../constants';
 import { useAppDispatch } from '../../hooks';
 import { changeActiveCity } from '../../store/action';
 import { useAppSelector } from '../../hooks';
-import { selectActiveCity } from '../../store/action';
+import { selectActiveCity } from '../../store/selectors/selectors';
 
 function Tabs(): JSX.Element {
   const activeCity = useAppSelector(selectActiveCity);

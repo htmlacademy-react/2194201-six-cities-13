@@ -1,0 +1,27 @@
+.page__main--not-found {
+  flex-grow: 1;
+  max-width: 1086px;
+  margin: 0 auto;
+  padding: 100px 50px;
+  width: 100%;
+  font-size: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.page__status {
+  font-size: 130px;
+  margin-top: 25px;
+  margin-bottom: 35px;
+  color: #4481c3;
+}
+
+.page__link {
+  color: #4481c3;
+}
+
+.page__link:hover {
+  color: #2d5580;
+}

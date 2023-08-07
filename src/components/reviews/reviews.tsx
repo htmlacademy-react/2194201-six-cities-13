@@ -1,8 +1,11 @@
+import { useEffect } from 'react';
 import ReviewForm from '../review-form/review-form';
 import dayjs from 'dayjs';
-import { Review } from '../../types';
-import { useAppSelector } from '../../hooks';
-import { getAuthStatus } from '../../store/action';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import {
+  selectAuthStatus,
+  selectOfferReviews,
+} from '../../store/selectors/selectors';
 import {
   ONE_STAR_RATIO,
   MAX_REVIEWS,
@@ -10,16 +13,27 @@ import {
   DATE,
   MONTH_TEXT,
 } from '../../constants';
+import { fetchOfferReviewsAction } from '../../store/api-actions';
 
 type ReviewsProps = {
-  reviewList: Review[];
+  offerId: string;
 };
 
-function Reviews({ reviewList }: ReviewsProps): JSX.Element {
-  const authorizationStatus = useAppSelector(getAuthStatus);
+function Reviews({ offerId }: ReviewsProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector(selectAuthStatus);
+  const reviewList = useAppSelector(selectOfferReviews);
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
 
-  reviewList.sort((a, b) => dayjs(b.date).diff(a.date));
+  useEffect(() => {
+    if (offerId) {
+      dispatch(fetchOfferReviewsAction(offerId));
+    }
+  }, [offerId, dispatch]);
+
+  const sortedReviews = [...reviewList]
+    .sort((a, b) => dayjs(b.date).diff(a.date))
+    .slice(0, MAX_REVIEWS);
 
   return (
     <section className="offer__reviews reviews">
@@ -27,50 +41,46 @@ function Reviews({ reviewList }: ReviewsProps): JSX.Element {
         Reviews · <span className="reviews__amount">{reviewList.length}</span>
       </h2>
       <ul className="reviews__list">
-        {reviewList.map(({ id, date, user, comment, rating }, index) => {
+        {sortedReviews.map(({ id, date, user, comment, rating }) => {
           const reviewDate = dayjs(date).format(DATE);
           const year = dayjs(date).year();
           const month = dayjs(date).format(MONTH_TEXT);
 
-          if (index < MAX_REVIEWS) {
-            return (
-              <li className="reviews__item" key={id}>
-                <div className="reviews__user user">
-                  <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                    <img
-                      className="reviews__avatar user__avatar"
-                      src={user.avatarUrl}
-                      width={54}
-                      height={54}
-                      alt="Reviews avatar"
+          return (
+            <li className="reviews__item" key={id}>
+              <div className="reviews__user user">
+                <div className="reviews__avatar-wrapper user__avatar-wrapper">
+                  <img
+                    className="reviews__avatar user__avatar"
+                    src={user.avatarUrl}
+                    width={54}
+                    height={54}
+                    alt="Reviews avatar"
+                  />
+                </div>
+                <span className="reviews__user-name">{user.name}</span>
+              </div>
+              <div className="reviews__info">
+                <div className="reviews__rating rating">
+                  <div className="reviews__stars rating__stars">
+                    <span
+                      style={{
+                        width: `${rating * ONE_STAR_RATIO}%`,
+                      }}
                     />
+                    <span className="visually-hidden">Rating</span>
                   </div>
-                  <span className="reviews__user-name">{user.name}</span>
                 </div>
-                <div className="reviews__info">
-                  <div className="reviews__rating rating">
-                    <div className="reviews__stars rating__stars">
-                      <span
-                        style={{
-                          width: `${rating * ONE_STAR_RATIO}%`,
-                        }}
-                      />
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <p className="reviews__text">{comment}</p>
-                  <time className="reviews__time" dateTime={reviewDate}>
-                    {month} {year}
-                  </time>
-                </div>
-              </li>
-            );
-          }
-
-          return null;
+                <p className="reviews__text">{comment}</p>
+                <time className="reviews__time" dateTime={reviewDate}>
+                  {month} {year}
+                </time>
+              </div>
+            </li>
+          );
         })}
       </ul>
-      {isAuth && <ReviewForm />}
+      {isAuth && <ReviewForm offerId={offerId} />}
     </section>
   );
 }
