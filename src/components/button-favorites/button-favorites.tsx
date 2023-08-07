@@ -4,7 +4,7 @@ type ButtonFavoritesProps = {
   isFavorite: boolean;
 };
 
-function ButtonFavorites({ isFavorite }: ButtonFavoritesProps) {
+function ButtonFavorites({ isFavorite }: ButtonFavoritesProps): JSX.Element {
   return (
     <button
       className={cn('place-card__bookmark-button', 'button', {

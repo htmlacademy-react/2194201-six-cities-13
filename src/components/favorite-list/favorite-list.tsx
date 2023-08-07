@@ -6,7 +6,7 @@ type FavoriteListProps = {
   favoriteList: Card[];
 };
 
-function FavoriteList({ favoriteList }: FavoriteListProps) {
+function FavoriteList({ favoriteList }: FavoriteListProps): JSX.Element {
   return (
     <>
       <h1 className="favorites__title">Saved listing</h1>

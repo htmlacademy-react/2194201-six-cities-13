@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { Helmet } from 'react-helmet-async';
 import Header from '../../components/header/header';
-import Tabs from '../../components/tabs/tabs';
+import TabList from '../../components/tab-list/tab-list';
 import Cities from '../../components/cities/cities';
 import { useAppSelector } from '../../hooks';
 import {
@@ -27,7 +27,7 @@ function Main(): JSX.Element {
         })}
       >
         <h1 className="visually-hidden">Cities</h1>
-        <Tabs />
+        <TabList />
         <Cities currentOffers={currentOffers} />
       </main>
     </div>
