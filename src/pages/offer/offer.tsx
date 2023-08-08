@@ -36,10 +36,8 @@ function Offer(): JSX.Element {
 
   const status = useAppSelector(selectStatusOffer);
   const currentOffer = useAppSelector(selectActiveOffer);
-  const offersNearby = useAppSelector(selectOffersNearby).slice(
-    0,
-    MAX_OFFERS_NEARBY
-  );
+  const offersNearbyAll = useAppSelector(selectOffersNearby);
+  const offersNearbySlice = offersNearbyAll.slice(0, MAX_OFFERS_NEARBY);
 
   if (status === Status.Unknown || status === Status.Loading) {
     return <Loading />;
@@ -51,7 +49,7 @@ function Offer(): JSX.Element {
 
   const currentNearbyOffers = getOffersLocation([
     currentOffer,
-    ...offersNearby,
+    ...offersNearbySlice,
   ]);
 
   const {
@@ -190,7 +188,7 @@ function Offer(): JSX.Element {
               Other places in the neighbourhood
             </h2>
             <div className="near-places__list places__list">
-              {offersNearby.map((offer: Card) => (
+              {offersNearbySlice.map((offer: Card) => (
                 <PlaceCard
                   key={offer.id}
                   className="near-places"
