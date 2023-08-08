@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants';
-import PlaceCard from '../place-card/place-card';
 import { Card, CityNames } from '../../types';
+import { MemoPlaceCard } from '../place-card/memo-place-card';
 
 type FavoriteItemProps = {
   favoritesSortCity: Card[];
@@ -23,7 +23,7 @@ function FavoriteItem({
       </div>
       <div className="favorites__places">
         {favoritesSortCity.map((card) => (
-          <PlaceCard card={card} className="favorites" key={card.id} />
+          <MemoPlaceCard card={card} className="favorites" key={card.id} />
         ))}
       </div>
     </li>

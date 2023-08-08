@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FormEvent, useCallback } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { RATINGS, TextLength } from '../../constants';
 import { ReviewValues } from '../../types';
 import { useAppDispatch } from '../../hooks';
@@ -35,17 +35,14 @@ function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
     }
   };
 
-  const handleInputsChange = useCallback(
-    (evt: ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = evt.target;
+  const handleInputsChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = evt.target;
 
-      setFormData({
-        ...formData,
-        [name]: name === 'rating' ? +value : value,
-      });
-    },
-    []
-  );
+    setFormData({
+      ...formData,
+      [name]: name === 'rating' ? +value : value,
+    });
+  };
 
   const handleTextAreaChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = evt.target;

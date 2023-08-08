@@ -1,5 +1,4 @@
 import SortOffers from '../sort-offers/sort-offers';
-import PlaceCard from '../place-card/place-card';
 import { useSortOffers } from '../../hooks/use-sort-offers/use-sort-offers';
 import { useAppSelector } from '../../hooks';
 import { Card } from '../../types';
@@ -7,6 +6,8 @@ import {
   selectActiveCity,
   selectActiveSort,
 } from '../../store/app-process/selectors';
+import { MemoPlaceCard } from '../place-card/memo-place-card';
+import { useCallback } from 'react';
 
 type CitiesProps = {
   currentOffers: Card[];
@@ -18,8 +19,14 @@ function Places({ currentOffers, setOfferId }: CitiesProps): JSX.Element {
   const activeCity = useAppSelector(selectActiveCity);
   const sortOffers = useSortOffers(activeSort, currentOffers);
 
-  const handlePlaceCardMouseOver = (id: string) => setOfferId(id);
-  const handlePlaceCardMouseLeave = () => setOfferId('');
+  const handlePlaceCardMouseOver = useCallback(
+    (id: string) => setOfferId(id),
+    [setOfferId]
+  );
+  const handlePlaceCardMouseLeave = useCallback(
+    () => setOfferId(' '),
+    [setOfferId]
+  );
 
   return (
     <section className="cities__places places">
@@ -30,7 +37,7 @@ function Places({ currentOffers, setOfferId }: CitiesProps): JSX.Element {
       <SortOffers />
       <div className="cities__places-list places__list tabs__content">
         {sortOffers.map((offer) => (
-          <PlaceCard
+          <MemoPlaceCard
             card={offer}
             className="cities"
             key={offer.id}
