@@ -25,7 +25,7 @@ function FormReview(): JSX.Element {
   useEffect(() => {
     if (status === Status.Success && formRef.current !== null) {
       formRef.current.reset();
-      store.dispatch(setStatusPost(Status.Unknown));
+      store.dispatch(setStatusPost(Status.Idle));
       setFormData({ ...formData, rating: 0, comment: '' });
     }
   }, [formData, status]);

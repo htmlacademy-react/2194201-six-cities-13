@@ -12,7 +12,7 @@ function Main(): JSX.Element {
   const status = useAppSelector(selectStatusAll);
   const isEmpty = status === Status.Error;
 
-  if (status === Status.Unknown || status === Status.Loading) {
+  if (status === Status.Idle || status === Status.Loading) {
     return <Loading />;
   }
 

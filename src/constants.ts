@@ -94,7 +94,7 @@ const NameSpace = {
 } as const;
 
 const Status = {
-  Unknown: 'unknown',
+  Idle: 'idle',
   Loading: 'loading',
   Success: 'success',
   Error: 'error',

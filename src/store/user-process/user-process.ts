@@ -12,7 +12,7 @@ type UserProcess = {
 const initialState: UserProcess = {
   authorizationStatus: AuthorizationStatus.Unknown,
   user: null,
-  statusLogin: Status.Unknown,
+  statusLogin: Status.Idle,
 };
 
 export const userProcess = createSlice({

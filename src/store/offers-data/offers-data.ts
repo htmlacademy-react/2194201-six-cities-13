@@ -19,8 +19,8 @@ const initialState: OffersData = {
   offers: [],
   activeOffer: null,
   offersNearby: [],
-  statusAll: Status.Unknown,
-  statusOffer: Status.Unknown,
+  statusAll: Status.Idle,
+  statusOffer: Status.Idle,
 };
 
 export const offersData = createSlice({

@@ -10,7 +10,7 @@ type ReviewsData = {
 
 const initialState: ReviewsData = {
   reviews: [],
-  statusPost: Status.Unknown,
+  statusPost: Status.Idle,
 };
 
 export const reviewsData = createSlice({

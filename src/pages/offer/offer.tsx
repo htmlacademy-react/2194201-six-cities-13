@@ -39,7 +39,7 @@ function Offer(): JSX.Element {
   const offersNearbyAll = useAppSelector(selectOffersNearby);
   const offersNearbySlice = offersNearbyAll.slice(0, MAX_OFFERS_NEARBY);
 
-  if (status === Status.Unknown || status === Status.Loading) {
+  if (status === Status.Idle || status === Status.Loading) {
     return <Loading />;
   }
 
