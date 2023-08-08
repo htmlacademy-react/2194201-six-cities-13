@@ -1,5 +1,7 @@
+import { createSelector } from '@reduxjs/toolkit';
 import { NameSpace } from '../../constants';
-import { Card, OfferCard, State } from '../../types';
+import { Card, CityNames, OfferCard, State } from '../../types';
+import { selectActiveCity } from '../app-process/selectors';
 
 const selectOffers = (state: State): Card[] => state[NameSpace.Offers].offers;
 const selectActiveOffer = (state: State): OfferCard | null =>
@@ -11,10 +13,17 @@ const selectStatusAll = (state: State): string =>
 const selectStatusOffer = (state: State): string =>
   state[NameSpace.Offers].statusOffer;
 
+const selectCurrentOffers = createSelector(
+  [selectOffers, selectActiveCity],
+  (offers: Card[], activeCity: CityNames): Card[] =>
+    offers.filter(({ city }) => activeCity === city.name)
+);
+
 export {
   selectOffers,
   selectActiveOffer,
   selectOffersNearby,
   selectStatusAll,
   selectStatusOffer,
+  selectCurrentOffers,
 };
