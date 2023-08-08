@@ -4,8 +4,8 @@ import { UserAuth } from '../../types';
 import { AUTH_FIELDS } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
-import styles from './error.module.css';
 import { selectStatusLogin } from '../../store/user-process/selectors';
+import styles from './error.module.css';
 
 function FormLogin(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -78,7 +78,9 @@ function FormLogin(): JSX.Element {
               value={userAuth[name].value}
             />
             {!isValid && userAuth[name].value && (
-              <span className={styles.error}>{userAuth[name].errorText}</span>
+              <span className={styles['error-auth']}>
+                {userAuth[name].errorText}
+              </span>
             )}
           </div>
         );
@@ -90,6 +92,11 @@ function FormLogin(): JSX.Element {
       >
         {status === Status.Loading ? 'Waiting...' : 'Sign in'}
       </button>
+      {status === Status.Error && (
+        <p className={styles['error-status']}>
+          The form has not been sent, please try again!
+        </p>
+      )}
     </form>
   );
 }
