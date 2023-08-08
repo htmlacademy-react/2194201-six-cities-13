@@ -23,7 +23,7 @@ function Cities(): JSX.Element {
         <Map
           className="cities"
           height="100%"
-          cityInfo={currentOffers[0].city}
+          cityInfo={currentOffers[0]?.city}
           offers={offersLocation}
           offerId={offerId}
         />

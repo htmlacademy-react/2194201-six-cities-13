@@ -23,6 +23,7 @@ import {
   selectStatusOffer,
 } from '../../store/offers-data/selectors';
 import Loading from '../loading/loading';
+import ButtonFavorites from '../../components/button-favorites/button-favorites';
 
 function Offer(): JSX.Element {
   const { id: offerId } = useParams() as { id: string };
@@ -104,19 +105,12 @@ function Offer(): JSX.Element {
               )}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">{title}</h1>
-                <button
-                  className={cn('offer__bookmark-button', 'button', {
-                    'place-card__bookmark-button--active': isFavorite,
-                  })}
-                  type="button"
-                >
-                  <svg className="offer__bookmark-icon" width={31} height={33}>
-                    <use xlinkHref="#icon-bookmark" />
-                  </svg>
-                  <span className="visually-hidden">
-                    {isFavorite ? 'In bookmarks' : 'To bookmarks'}
-                  </span>
-                </button>
+                <ButtonFavorites
+                  className="offer"
+                  isFavorite={isFavorite}
+                  width={31}
+                  height={33}
+                />
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
