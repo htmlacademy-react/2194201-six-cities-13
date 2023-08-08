@@ -9,7 +9,7 @@ type ReviewFormProps = {
   offerId: string;
 };
 
-function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
+function FormReview({ offerId }: ReviewFormProps): JSX.Element {
   const dispatch = useAppDispatch();
   const { min, max } = TextLength;
 
@@ -97,4 +97,4 @@ function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
   );
 }
 
-export default ReviewForm;
+export default FormReview;

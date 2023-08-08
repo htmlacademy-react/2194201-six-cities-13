@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import ReviewForm from '../review-form/review-form';
+import FormReview from '../form-review/form-review';
 import dayjs from 'dayjs';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectOfferReviews } from '../../store/reviews-data/selectors';
@@ -78,7 +78,7 @@ function Reviews({ offerId }: ReviewsProps): JSX.Element {
           );
         })}
       </ul>
-      {isAuth && <ReviewForm offerId={offerId} />}
+      {isAuth && <FormReview offerId={offerId} />}
     </section>
   );
 }
