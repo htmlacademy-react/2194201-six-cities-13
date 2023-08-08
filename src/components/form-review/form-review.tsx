@@ -1,21 +1,34 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, useEffect, ChangeEvent, FormEvent, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { RATINGS, TextLength } from '../../constants';
+import { RATINGS, Status, TextLength } from '../../constants';
 import { ReviewValues } from '../../types';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
 import FormReviewRating from '../form-review-rating/form-review-rating';
+import { selectStatusPost } from '../../store/reviews-data/selectors';
+import { store } from '../../store';
+import { setStatusPost } from '../../store/reviews-data/reviews-data';
 
 function FormReview(): JSX.Element {
   const dispatch = useAppDispatch();
+  const status = useAppSelector(selectStatusPost);
   const { id: offerId } = useParams() as { id: string };
   const { min, max } = TextLength;
 
+  const formRef = useRef<HTMLFormElement | null>(null);
   const [formData, setFormData] = useState<ReviewValues>({
     id: offerId,
     rating: 0,
     comment: '',
   });
+
+  useEffect(() => {
+    if (status === Status.Success && formRef.current !== null) {
+      formRef.current.reset();
+      store.dispatch(setStatusPost(Status.Unknown));
+      setFormData({ ...formData, rating: 0, comment: '' });
+    }
+  }, [formData, status]);
 
   const { rating, comment } = formData;
   const isValid = !!rating && comment.length >= min && comment.length <= max;
@@ -23,12 +36,7 @@ function FormReview(): JSX.Element {
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    setFormData({ ...formData, rating: 0, comment: '' });
-
     if (isValid) {
-      const form = evt.target as HTMLFormElement;
-      form.reset();
-
       dispatch(postReviewAction(formData));
     }
   };
@@ -52,7 +60,11 @@ function FormReview(): JSX.Element {
   };
 
   return (
-    <form className="reviews__form form" onSubmit={handleFormSubmit}>
+    <form
+      className="reviews__form form"
+      ref={formRef}
+      onSubmit={handleFormSubmit}
+    >
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
@@ -86,9 +98,9 @@ function FormReview(): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={!isValid}
+          disabled={!isValid || status === Status.Loading}
         >
-          Submit
+          {status === Status.Loading ? 'Loading' : 'Submit'}
         </button>
       </div>
     </form>
