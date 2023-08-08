@@ -1,13 +1,15 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
-import { FormLoginData } from '../../constants';
+import { FormLoginData, Status } from '../../constants';
 import { UserAuth } from '../../types';
 import { AUTH_FIELDS } from '../../constants';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import styles from './error.module.css';
+import { selectStatusLogin } from '../../store/user-process/selectors';
 
 function FormLogin(): JSX.Element {
   const dispatch = useAppDispatch();
+  const status = useAppSelector(selectStatusLogin);
   const { email, password } = FormLoginData;
 
   const [userAuth, setUserAuth] = useState<UserAuth>({
@@ -84,9 +86,9 @@ function FormLogin(): JSX.Element {
       <button
         className="login__submit form__submit button"
         type="submit"
-        disabled={!isValidValues}
+        disabled={!isValidValues || status === Status.Loading}
       >
-        Sign in
+        {status === Status.Loading ? 'Waiting...' : 'Sign in'}
       </button>
     </form>
   );

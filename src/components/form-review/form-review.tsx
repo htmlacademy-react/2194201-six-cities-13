@@ -100,7 +100,7 @@ function FormReview(): JSX.Element {
           type="submit"
           disabled={!isValid || status === Status.Loading}
         >
-          {status === Status.Loading ? 'Loading' : 'Submit'}
+          {status === Status.Loading ? 'Waiting...' : 'Submit'}
         </button>
       </div>
     </form>
