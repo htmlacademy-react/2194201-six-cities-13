@@ -1,8 +1,9 @@
-import { Fragment, useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent, useCallback } from 'react';
 import { RATINGS, TextLength } from '../../constants';
 import { ReviewValues } from '../../types';
 import { useAppDispatch } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
+import FormReviewRating from '../form-review-rating/form-review-rating';
 
 type ReviewFormProps = {
   offerId: string;
@@ -34,14 +35,17 @@ function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
     }
   };
 
-  const handleInputsChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = evt.target;
+  const handleInputsChange = useCallback(
+    (evt: ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = evt.target;
 
-    setFormData({
-      ...formData,
-      [name]: name === 'rating' ? +value : value,
-    });
-  };
+      setFormData({
+        ...formData,
+        [name]: name === 'rating' ? +value : value,
+      });
+    },
+    []
+  );
 
   const handleTextAreaChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = evt.target;
@@ -59,25 +63,12 @@ function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
       </label>
       <div className="reviews__rating-form form__rating">
         {RATINGS.map(({ star, title }) => (
-          <Fragment key={star}>
-            <input
-              onChange={handleInputsChange}
-              className="form__rating-input visually-hidden"
-              name="rating"
-              value={star}
-              id={`${star}-star`}
-              type="radio"
-            />
-            <label
-              htmlFor={`${star}-star`}
-              className="reviews__rating-label form__rating-label"
-              title={title}
-            >
-              <svg className="form__star-image" width={37} height={33}>
-                <use xlinkHref="#icon-star" />
-              </svg>
-            </label>
-          </Fragment>
+          <FormReviewRating
+            key={star}
+            star={star}
+            title={title}
+            handleInputsChange={handleInputsChange}
+          />
         ))}
       </div>
       <textarea
