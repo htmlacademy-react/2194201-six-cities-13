@@ -20,6 +20,7 @@ function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
 
   const { rating, comment } = formData;
   const isValid = !!rating && comment.length >= min && comment.length <= max;
+
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 

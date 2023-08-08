@@ -1,8 +1,8 @@
 import cn from 'classnames';
+import ButtonFavorites from '../button-favorites/button-favorites';
 import { Link, generatePath } from 'react-router-dom';
 import { Card } from '../../types';
 import { ONE_STAR_RATIO, AppRoute } from '../../constants';
-import ButtonFavorites from '../button-favorites/button-favorites';
 
 type PlaceCardProps = {
   card: Card;

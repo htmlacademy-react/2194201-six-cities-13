@@ -6,14 +6,15 @@ const selectActiveOffer = (state: State): OfferCard | null =>
   state[NameSpace.Offers].activeOffer;
 const selectOffersNearby = (state: State): OfferCard[] =>
   state[NameSpace.Offers].offersNearby;
-const isOffersLoading = (state: State): boolean =>
-  state[NameSpace.Offers].isOffersLoading;
-const selectErrorMessage = (state: State) => state[NameSpace.Offers].error;
+const selectStatusAll = (state: State): string =>
+  state[NameSpace.Offers].statusAll;
+const selectStatusOffer = (state: State): string =>
+  state[NameSpace.Offers].statusOffer;
 
 export {
   selectOffers,
   selectActiveOffer,
   selectOffersNearby,
-  isOffersLoading,
-  selectErrorMessage,
+  selectStatusAll,
+  selectStatusOffer,
 };

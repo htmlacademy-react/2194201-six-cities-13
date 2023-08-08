@@ -1,9 +1,9 @@
 import { useState } from 'react';
+import Places from '../places/places';
 import Map from '../../components/map/map';
 import { Card } from '../../types';
 import { getOffersLocation } from '../../helpers/get-offers-location';
 import { MainEmpty } from '../../components/main-empty/main-empty';
-import Places from '../places/places';
 
 type CitiesProps = {
   currentOffers: Card[];
@@ -21,7 +21,7 @@ function Cities({ currentOffers }: CitiesProps): JSX.Element {
         <Map
           className="cities"
           height="100%"
-          cityInfo={currentOffers[0].city}
+          cityInfo={currentOffers[0]?.city}
           offers={offersLocation}
           offerId={offerId}
         />

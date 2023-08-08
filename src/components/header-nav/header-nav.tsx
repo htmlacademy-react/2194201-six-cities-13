@@ -1,14 +1,17 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectUserEmail } from '../../store/selectors/selectors';
-import { selectAuthStatus } from '../../store/user-process/selectors';
+import {
+  selectAuthStatus,
+  selectUser,
+} from '../../store/user-process/selectors';
 import { logoutAction } from '../../store/api-actions';
 
 function HeaderNav() {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(selectAuthStatus);
-  const userEmail = useAppSelector(selectUserEmail);
+  const user = useAppSelector(selectUser);
+
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
 
   const signInLink = (
@@ -27,7 +30,7 @@ function HeaderNav() {
       to={AppRoute.Favorites}
     >
       <div className="header__avatar-wrapper user__avatar-wrapper" />
-      <span className="header__user-name user__name">{userEmail}</span>
+      <span className="header__user-name user__name">{user?.email}</span>
       <span className="header__favorite-count">3</span>
     </Link>
   );

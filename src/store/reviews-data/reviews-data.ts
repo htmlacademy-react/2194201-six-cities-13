@@ -21,7 +21,7 @@ export const reviewsData = createSlice({
         state.reviews = action.payload;
       })
       .addCase(postReviewAction.fulfilled, (state, action) => {
-        state.reviews = action.payload;
+        state.reviews.push(action.payload);
       });
   },
 });

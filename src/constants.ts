@@ -84,6 +84,13 @@ const NameSpace = {
   Favorites: 'FAVORITES',
 } as const;
 
+const Status = {
+  Unknown: 'unknown',
+  Loading: 'loading',
+  Success: 'success',
+  Error: 'error',
+};
+
 export {
   BACKEND_URL,
   REQUEST_TIMEOUT,
@@ -111,4 +118,5 @@ export {
   APIRoute,
   AuthorizationStatus,
   NameSpace,
+  Status,
 };

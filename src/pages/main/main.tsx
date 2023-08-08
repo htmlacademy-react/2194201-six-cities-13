@@ -1,15 +1,26 @@
 import cn from 'classnames';
 import { Helmet } from 'react-helmet-async';
+import Loading from '../loading/loading';
 import Header from '../../components/header/header';
 import TabList from '../../components/tab-list/tab-list';
 import Cities from '../../components/cities/cities';
 import { useAppSelector } from '../../hooks';
 import { selectActiveCity } from '../../store/app-process/selectors';
-import { selectOffers } from '../../store/offers-data/selectors';
+import {
+  selectOffers,
+  selectStatusAll,
+} from '../../store/offers-data/selectors';
+import { Status } from '../../constants';
 
 function Main(): JSX.Element {
   const activeCity = useAppSelector(selectActiveCity);
   const offers = useAppSelector(selectOffers);
+  const status = useAppSelector(selectStatusAll);
+
+  if (status === Status.Unknown || status === Status.Loading) {
+    return <Loading />;
+  }
+
   const currentOffers = offers.filter(({ city }) => activeCity === city.name);
   const isNotEmpty = !!currentOffers.length;
 
