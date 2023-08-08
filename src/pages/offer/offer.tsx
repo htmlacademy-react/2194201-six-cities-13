@@ -25,14 +25,12 @@ import {
 import Loading from '../loading/loading';
 
 function Offer(): JSX.Element {
-  const { id: offerId } = useParams();
+  const { id: offerId } = useParams() as { id: string };
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (offerId) {
-      dispatch(fetchActiveOfferAction(offerId));
-      dispatch(fetchOffersNearbyAction(offerId));
-    }
+    dispatch(fetchActiveOfferAction(offerId));
+    dispatch(fetchOffersNearbyAction(offerId));
   }, [offerId, dispatch]);
 
   const status = useAppSelector(selectStatusOffer);
@@ -181,7 +179,7 @@ function Offer(): JSX.Element {
                   <p className="offer__text">{description}</p>
                 </div>
               </div>
-              {offerId && <Reviews offerId={offerId} />}
+              <Reviews />
             </div>
           </div>
           <Map

@@ -1,7 +1,6 @@
 import { NameSpace } from '../../constants';
-import { State, Review } from '../../types';
+import { State } from '../../types';
 
-const selectOfferReviews = (state: State): Review[] =>
-  state[NameSpace.Reviews].reviews;
+const selectOfferReviews = (state: State) => state[NameSpace.Reviews].reviews;
 
 export { selectOfferReviews };

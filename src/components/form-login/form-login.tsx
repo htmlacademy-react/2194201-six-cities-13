@@ -1,25 +1,27 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
-import { REGEX_EMAIL, REGEX_PASSWORD } from '../../constants';
+import { FormLoginData } from '../../constants';
 import { UserAuth } from '../../types';
 import { AUTH_FIELDS } from '../../constants';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
-import message from './error.module.css';
+import styles from './error.module.css';
 
 function FormLogin(): JSX.Element {
   const dispatch = useAppDispatch();
+  const { email, password } = FormLoginData;
+
   const [userAuth, setUserAuth] = useState<UserAuth>({
     email: {
       value: '',
       isValid: false,
-      errorText: 'Введите правильный Email!',
-      regex: REGEX_EMAIL,
+      errorText: email.textError,
+      regex: email.regEx,
     },
     password: {
       value: '',
       isValid: false,
-      errorText: 'Минимум 1 цифра и 1 буква без пробелов!',
-      regex: REGEX_PASSWORD,
+      errorText: password.textError,
+      regex: password.regEx,
     },
   });
 
@@ -74,7 +76,7 @@ function FormLogin(): JSX.Element {
               value={userAuth[name].value}
             />
             {!isValid && userAuth[name].value && (
-              <span className={message.error}>{userAuth[name].errorText}</span>
+              <span className={styles.error}>{userAuth[name].errorText}</span>
             )}
           </div>
         );

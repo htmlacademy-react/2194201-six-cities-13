@@ -1,9 +1,8 @@
 import { NameSpace } from '../../constants';
-import { State, AuthorizationStatuses, UserData } from '../../types';
+import { State } from '../../types';
 
-const selectAuthStatus = (state: State): AuthorizationStatuses =>
+const selectAuthStatus = (state: State) =>
   state[NameSpace.User].authorizationStatus;
-const selectUser = (state: State): UserData | null =>
-  state[NameSpace.User].user;
+const selectUser = (state: State) => state[NameSpace.User].user;
 
 export { selectAuthStatus, selectUser };

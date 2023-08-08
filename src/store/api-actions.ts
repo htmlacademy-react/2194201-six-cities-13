@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Card, Review, ReviewValues, AxiosData, User } from '../types';
+import { Card, Review, ReviewValues, ThunkConfig, User } from '../types';
 import { saveToken, dropToken } from '../services/token';
 import { AuthData, UserData, OfferCard } from '../types';
 import { store } from '../store';
@@ -11,7 +11,7 @@ const clearErrorAction = createAsyncThunk('app/clearError', () => {
   setTimeout(() => store.dispatch(setError(null)), TIMEOUT_SHOW_ERROR);
 });
 
-const fetchOffersAction = createAsyncThunk<Card[], undefined, AxiosData>(
+const fetchOffersAction = createAsyncThunk<Card[], undefined, ThunkConfig>(
   'data/fetchOffers',
   async (_arg, { extra: api }) => {
     const { data } = await api.get<Card[]>(APIRoute.Offers);
@@ -19,7 +19,7 @@ const fetchOffersAction = createAsyncThunk<Card[], undefined, AxiosData>(
   }
 );
 
-const fetchActiveOfferAction = createAsyncThunk<OfferCard, string, AxiosData>(
+const fetchActiveOfferAction = createAsyncThunk<OfferCard, string, ThunkConfig>(
   'data/fetchActiveOffer',
   async (offerId, { extra: api }) => {
     const { data } = await api.get<OfferCard>(`${APIRoute.Offers}/${offerId}`);
@@ -30,7 +30,7 @@ const fetchActiveOfferAction = createAsyncThunk<OfferCard, string, AxiosData>(
 const fetchOffersNearbyAction = createAsyncThunk<
   OfferCard[],
   string,
-  AxiosData
+  ThunkConfig
 >('data/fetchOfferNearby', async (offerId, { extra: api }) => {
   const { data } = await api.get<OfferCard[]>(
     `${APIRoute.Offers}/${offerId}${APIRoute.Nearby}`
@@ -38,7 +38,7 @@ const fetchOffersNearbyAction = createAsyncThunk<
   return data;
 });
 
-const fetchReviewsAction = createAsyncThunk<Review[], string, AxiosData>(
+const fetchReviewsAction = createAsyncThunk<Review[], string, ThunkConfig>(
   'data/fetchReviews',
   async (offerId, { extra: api }) => {
     const { data } = await api.get<Review[]>(`${APIRoute.Reviews}/${offerId}`);
@@ -46,7 +46,7 @@ const fetchReviewsAction = createAsyncThunk<Review[], string, AxiosData>(
   }
 );
 
-const postReviewAction = createAsyncThunk<Review, ReviewValues, AxiosData>(
+const postReviewAction = createAsyncThunk<Review, ReviewValues, ThunkConfig>(
   'data/postReview',
   async ({ id, rating, comment }, { extra: api }) => {
     const { data } = await api.post<Review>(`${APIRoute.Reviews}/${id}`, {
@@ -58,15 +58,16 @@ const postReviewAction = createAsyncThunk<Review, ReviewValues, AxiosData>(
   }
 );
 
-const checkAuthAction = createAsyncThunk<User & UserData, undefined, AxiosData>(
-  'user/checkAuth',
-  async (_arg, { extra: api }) => {
-    const { data } = await api.get<User & UserData>(APIRoute.Login);
-    return data;
-  }
-);
+const checkAuthAction = createAsyncThunk<
+  User & UserData,
+  undefined,
+  ThunkConfig
+>('user/checkAuth', async (_arg, { extra: api }) => {
+  const { data } = await api.get<User & UserData>(APIRoute.Login);
+  return data;
+});
 
-const loginAction = createAsyncThunk<User & UserData, AuthData, AxiosData>(
+const loginAction = createAsyncThunk<User & UserData, AuthData, ThunkConfig>(
   'user/login',
   async ({ login: email, password }, { dispatch, extra: api }) => {
     const { data } = await api.post<User & UserData>(APIRoute.Login, {
@@ -79,7 +80,7 @@ const loginAction = createAsyncThunk<User & UserData, AuthData, AxiosData>(
   }
 );
 
-const logoutAction = createAsyncThunk<void, undefined, AxiosData>(
+const logoutAction = createAsyncThunk<void, undefined, ThunkConfig>(
   'user/logout',
   async (_arg, { extra: api }) => {
     await api.delete(APIRoute.Logout);

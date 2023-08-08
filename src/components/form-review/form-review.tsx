@@ -1,16 +1,14 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
+import { useParams } from 'react-router-dom';
 import { RATINGS, TextLength } from '../../constants';
 import { ReviewValues } from '../../types';
 import { useAppDispatch } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
 import FormReviewRating from '../form-review-rating/form-review-rating';
 
-type ReviewFormProps = {
-  offerId: string;
-};
-
-function FormReview({ offerId }: ReviewFormProps): JSX.Element {
+function FormReview(): JSX.Element {
   const dispatch = useAppDispatch();
+  const { id: offerId } = useParams() as { id: string };
   const { min, max } = TextLength;
 
   const [formData, setFormData] = useState<ReviewValues>({

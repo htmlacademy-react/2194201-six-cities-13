@@ -17,9 +17,6 @@ const TILE_LAYER =
   'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
 const COPYRIGHT =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
-const REGEX_EMAIL =
-  /^[a-z0-9-]+(?:\.[a-z0-9-]+)*@(?:[a-z0-9](?:[a-z-]*[a-z])?\.)+[a-z]{2,4}$/;
-const REGEX_PASSWORD = /\d+[a-zA-Z]+|[a-zA-Z]+\d+/;
 
 const CITIES = [
   'Paris',
@@ -53,6 +50,18 @@ const AUTH_FIELDS = [
 const TextLength = {
   min: 50,
   max: 300,
+} as const;
+
+const FormLoginData = {
+  email: {
+    textError: 'Введите правильный Email!',
+    regEx:
+      /^[a-z0-9-]+(?:\.[a-z0-9-]+)*@(?:[a-z0-9](?:[a-z-]*[a-z])?\.)+[a-z]{2,4}$/,
+  },
+  password: {
+    textError: 'Минимум 1 цифра и 1 буква без пробелов!',
+    regEx: /\d+[a-zA-Z]+|[a-zA-Z]+\d+/,
+  },
 } as const;
 
 const AppRoute = {
@@ -107,13 +116,12 @@ export {
   MONTH_TEXT,
   TILE_LAYER,
   COPYRIGHT,
-  REGEX_EMAIL,
-  REGEX_PASSWORD,
   CITIES,
   SORT_ITEMS,
   RATINGS,
   AUTH_FIELDS,
   TextLength,
+  FormLoginData,
   AppRoute,
   APIRoute,
   AuthorizationStatus,

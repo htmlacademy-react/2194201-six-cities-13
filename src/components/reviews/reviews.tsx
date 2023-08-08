@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import FormReview from '../form-review/form-review';
 import dayjs from 'dayjs';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -13,20 +14,15 @@ import {
 } from '../../constants';
 import { fetchReviewsAction } from '../../store/api-actions';
 
-type ReviewsProps = {
-  offerId: string;
-};
-
-function Reviews({ offerId }: ReviewsProps): JSX.Element {
+function Reviews(): JSX.Element {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(selectAuthStatus);
   const reviewList = useAppSelector(selectOfferReviews);
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
+  const { id: offerId } = useParams() as { id: string };
 
   useEffect(() => {
-    if (offerId) {
-      dispatch(fetchReviewsAction(offerId));
-    }
+    dispatch(fetchReviewsAction(offerId));
   }, [offerId, dispatch]);
 
   const sortedReviews = [...reviewList]
@@ -78,7 +74,7 @@ function Reviews({ offerId }: ReviewsProps): JSX.Element {
           );
         })}
       </ul>
-      {isAuth && <FormReview offerId={offerId} />}
+      {isAuth && <FormReview />}
     </section>
   );
 }
