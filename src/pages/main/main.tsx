@@ -5,21 +5,16 @@ import Header from '../../components/header/header';
 import TabList from '../../components/tab-list/tab-list';
 import Cities from '../../components/cities/cities';
 import { useAppSelector } from '../../hooks';
-import {
-  selectCurrentOffers,
-  selectStatusAll,
-} from '../../store/offers-data/selectors';
+import { selectStatusAll } from '../../store/offers-data/selectors';
 import { Status } from '../../constants';
 
 function Main(): JSX.Element {
-  const currentOffers = useAppSelector(selectCurrentOffers);
   const status = useAppSelector(selectStatusAll);
+  const isEmpty = status === Status.Error;
 
   if (status === Status.Unknown || status === Status.Loading) {
     return <Loading />;
   }
-
-  const isNotEmpty = !!currentOffers.length;
 
   return (
     <div className="page page--gray page--main">
@@ -29,12 +24,12 @@ function Main(): JSX.Element {
       <Header isUserNav />
       <main
         className={cn('page__main', 'page__main--index', {
-          'page__main--index-empty': !isNotEmpty,
+          'page__main--index-empty': isEmpty,
         })}
       >
         <h1 className="visually-hidden">Cities</h1>
         <TabList />
-        <Cities currentOffers={currentOffers} />
+        <Cities />
       </main>
     </div>
   );
