@@ -1,62 +1,63 @@
-import { useState, useEffect, ChangeEvent, FormEvent, useRef } from 'react';
+import {
+  useState,
+  useEffect,
+  ChangeEvent,
+  FormEvent,
+  useRef,
+  useCallback,
+} from 'react';
 import { useParams } from 'react-router-dom';
 import { RATINGS, Status, TextLength } from '../../constants';
-import { ReviewValues } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
-import FormReviewRating from '../form-review-rating/form-review-rating';
 import { selectStatusPost } from '../../store/reviews-data/selectors';
 import { store } from '../../store';
 import { setStatusPost } from '../../store/reviews-data/reviews-data';
+import { FormReviewRatingMemo } from '../form-review-rating/form-review-rating-memo';
 
 function FormReview(): JSX.Element {
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectStatusPost);
-  const { id: offerId } = useParams() as { id: string };
+  const { id } = useParams() as { id: string };
   const { min, max } = TextLength;
 
   const formRef = useRef<HTMLFormElement | null>(null);
-  const [formData, setFormData] = useState<ReviewValues>({
-    id: offerId,
-    rating: 0,
-    comment: '',
-  });
+  const [rating, setRating] = useState<number>(0);
+  const [comment, setComment] = useState<string>('');
 
   useEffect(() => {
     if (status === Status.Success && formRef.current !== null) {
       formRef.current.reset();
       store.dispatch(setStatusPost(Status.Idle));
-      setFormData({ ...formData, rating: 0, comment: '' });
+      setRating(0);
+      setComment('');
     }
-  }, [formData, status]);
+  }, [status]);
 
-  const { rating, comment } = formData;
   const isValid = !!rating && comment.length >= min && comment.length <= max;
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     if (isValid) {
-      dispatch(postReviewAction(formData));
+      dispatch(
+        postReviewAction({
+          id,
+          rating,
+          comment,
+        })
+      );
     }
   };
 
-  const handleInputsChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = evt.target;
-
-    setFormData({
-      ...formData,
-      [name]: name === 'rating' ? +value : value,
-    });
-  };
+  const handleInputsChange = useCallback((star: number) => {
+    setRating(star);
+  }, []);
 
   const handleTextAreaChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    const { name, value } = evt.target;
+    const { value } = evt.target;
 
-    setFormData({
-      ...formData,
-      [name]: name === 'rating' ? +value : value,
-    });
+    setComment(value);
   };
 
   return (
@@ -70,7 +71,7 @@ function FormReview(): JSX.Element {
       </label>
       <div className="reviews__rating-form form__rating">
         {RATINGS.map(({ star, title }) => (
-          <FormReviewRating
+          <FormReviewRatingMemo
             key={star}
             star={star}
             title={title}

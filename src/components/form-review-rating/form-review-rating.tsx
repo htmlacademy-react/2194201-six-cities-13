@@ -1,9 +1,7 @@
-import { ChangeEvent } from 'react';
-
 type FormReviewRatingProps = {
   star: number;
   title: string;
-  handleInputsChange: (evt: ChangeEvent<HTMLInputElement>) => void;
+  handleInputsChange: (star: number) => void;
 };
 
 function FormReviewRating({
@@ -14,7 +12,7 @@ function FormReviewRating({
   return (
     <>
       <input
-        onChange={handleInputsChange}
+        onChange={() => handleInputsChange?.(star)}
         className="form__rating-input visually-hidden"
         name="rating"
         value={star}

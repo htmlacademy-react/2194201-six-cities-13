@@ -6,7 +6,7 @@ import {
   selectActiveCity,
   selectActiveSort,
 } from '../../store/app-process/selectors';
-import { MemoPlaceCard } from '../place-card/memo-place-card';
+import { PlaceCardMemo } from '../place-card/place-card-memo';
 import { useCallback } from 'react';
 
 type CitiesProps = {
@@ -37,7 +37,7 @@ function Places({ currentOffers, setOfferId }: CitiesProps): JSX.Element {
       <SortOffers />
       <div className="cities__places-list places__list tabs__content">
         {sortOffers.map((offer) => (
-          <MemoPlaceCard
+          <PlaceCardMemo
             card={offer}
             className="cities"
             key={offer.id}
