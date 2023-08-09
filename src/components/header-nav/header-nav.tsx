@@ -6,11 +6,13 @@ import {
   selectUser,
 } from '../../store/user-process/selectors';
 import { logoutAction } from '../../store/api-actions';
+import { selectFavorites } from '../../store/favorites-data/selectors';
 
 function HeaderNav() {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(selectAuthStatus);
   const user = useAppSelector(selectUser);
+  const favorites = useAppSelector(selectFavorites);
 
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
 
@@ -31,7 +33,7 @@ function HeaderNav() {
     >
       <div className="header__avatar-wrapper user__avatar-wrapper" />
       <span className="header__user-name user__name">{user?.email}</span>
-      <span className="header__favorite-count">3</span>
+      <span className="header__favorite-count">{favorites.length}</span>
     </Link>
   );
 

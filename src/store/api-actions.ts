@@ -38,6 +38,14 @@ const fetchOffersNearbyAction = createAsyncThunk<
   return data;
 });
 
+const fetchFavoritesAction = createAsyncThunk<Card[], undefined, ThunkConfig>(
+  'data/fetchFavorites',
+  async (_arg, { extra: api }) => {
+    const { data } = await api.get<Card[]>(APIRoute.Favorite);
+    return data;
+  }
+);
+
 const fetchReviewsAction = createAsyncThunk<Review[], string, ThunkConfig>(
   'data/fetchReviews',
   async (offerId, { extra: api }) => {
@@ -93,6 +101,7 @@ export {
   fetchOffersAction,
   fetchActiveOfferAction,
   fetchOffersNearbyAction,
+  fetchFavoritesAction,
   fetchReviewsAction,
   postReviewAction,
   checkAuthAction,

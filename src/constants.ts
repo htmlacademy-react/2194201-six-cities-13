@@ -77,6 +77,7 @@ const AppRoute = {
 
 const APIRoute = {
   Offers: '/offers',
+  Favorite: '/favorite',
   Login: '/login',
   Logout: '/logout',
   Nearby: '/nearby',
