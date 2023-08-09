@@ -6,11 +6,14 @@ import TabList from '../../components/tab-list/tab-list';
 import Cities from '../../components/cities/cities';
 import { useAppSelector } from '../../hooks';
 import { selectStatusAll } from '../../store/offers-data/selectors';
-import { Status } from '../../constants';
+import { AUTH_ERROR_TEXT, Status } from '../../constants';
+import { useStatusError } from '../../hooks/use-status-error/use-status-error';
 
 function Main(): JSX.Element {
   const status = useAppSelector(selectStatusAll);
   const isEmpty = status === Status.Error;
+
+  useStatusError(selectStatusAll, AUTH_ERROR_TEXT);
 
   if (status === Status.Idle || status === Status.Loading) {
     return <Loading />;

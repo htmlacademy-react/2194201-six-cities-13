@@ -1,11 +1,12 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
-import { FormLoginData, Status } from '../../constants';
+import { FormLoginData, SEND_ERROR_TEXT, Status } from '../../constants';
 import { UserAuth } from '../../types';
 import { AUTH_FIELDS } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { selectStatusLogin } from '../../store/user-process/selectors';
 import styles from './error.module.css';
+import { useStatusError } from '../../hooks/use-status-error/use-status-error';
 
 function FormLogin(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -26,6 +27,8 @@ function FormLogin(): JSX.Element {
       regex: password.regEx,
     },
   });
+
+  useStatusError(selectStatusLogin, SEND_ERROR_TEXT);
 
   const isValidValues = userAuth.email.isValid && userAuth.password.isValid;
 
@@ -92,11 +95,6 @@ function FormLogin(): JSX.Element {
       >
         {status === Status.Loading ? 'Waiting...' : 'Sign in'}
       </button>
-      {status === Status.Error && (
-        <p className={styles['error-status']}>
-          The form has not been sent, please try again!
-        </p>
-      )}
     </form>
   );
 }

@@ -7,13 +7,14 @@ import {
   useCallback,
 } from 'react';
 import { useParams } from 'react-router-dom';
-import { RATINGS, Status, TextLength } from '../../constants';
+import { RATINGS, SEND_ERROR_TEXT, Status, TextLength } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
 import { selectStatusPost } from '../../store/reviews-data/selectors';
 import { store } from '../../store';
 import { setStatusPost } from '../../store/reviews-data/reviews-data';
 import { FormReviewRatingMemo } from '../form-review-rating/form-review-rating-memo';
+import { useStatusError } from '../../hooks/use-status-error/use-status-error';
 
 function FormReview(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -33,6 +34,8 @@ function FormReview(): JSX.Element {
       setComment('');
     }
   }, [status]);
+
+  useStatusError(selectStatusPost, SEND_ERROR_TEXT);
 
   const isValid = !!rating && comment.length >= min && comment.length <= max;
 
