@@ -1,19 +1,23 @@
 import cn from 'classnames';
 import { Helmet } from 'react-helmet-async';
+import Loading from '../loading/loading';
 import Header from '../../components/header/header';
-import Tabs from '../../components/tabs/tabs';
+import TabList from '../../components/tab-list/tab-list';
 import Cities from '../../components/cities/cities';
 import { useAppSelector } from '../../hooks';
-import {
-  selectActiveCity,
-  selectOffers,
-} from '../../store/selectors/selectors';
+import { selectStatusAll } from '../../store/offers-data/selectors';
+import { AUTH_ERROR_TEXT, Status } from '../../constants';
+import { useStatusError } from '../../hooks/use-status-error/use-status-error';
 
 function Main(): JSX.Element {
-  const activeCity = useAppSelector(selectActiveCity);
-  const offers = useAppSelector(selectOffers);
-  const currentOffers = offers.filter(({ city }) => activeCity === city.name);
-  const isNotEmpty = !!currentOffers.length;
+  const status = useAppSelector(selectStatusAll);
+  const isEmpty = status === Status.Error;
+
+  useStatusError(selectStatusAll, AUTH_ERROR_TEXT);
+
+  if (status === Status.Idle || status === Status.Loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="page page--gray page--main">
@@ -23,12 +27,12 @@ function Main(): JSX.Element {
       <Header isUserNav />
       <main
         className={cn('page__main', 'page__main--index', {
-          'page__main--index-empty': !isNotEmpty,
+          'page__main--index-empty': isEmpty,
         })}
       >
         <h1 className="visually-hidden">Cities</h1>
-        <Tabs />
-        <Cities currentOffers={currentOffers} />
+        <TabList />
+        <Cities />
       </main>
     </div>
   );

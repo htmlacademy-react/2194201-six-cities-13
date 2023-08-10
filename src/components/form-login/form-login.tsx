@@ -1,27 +1,34 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
-import { REGEX_EMAIL, REGEX_PASSWORD } from '../../constants';
+import { FormLoginData, SEND_ERROR_TEXT, Status } from '../../constants';
 import { UserAuth } from '../../types';
 import { AUTH_FIELDS } from '../../constants';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
-import message from './error.module.css';
+import { selectStatusLogin } from '../../store/user-process/selectors';
+import styles from './error.module.css';
+import { useStatusError } from '../../hooks/use-status-error/use-status-error';
 
 function FormLogin(): JSX.Element {
   const dispatch = useAppDispatch();
+  const status = useAppSelector(selectStatusLogin);
+  const { email, password } = FormLoginData;
+
   const [userAuth, setUserAuth] = useState<UserAuth>({
     email: {
       value: '',
       isValid: false,
-      errorText: 'Введите правильный Email!',
-      regex: REGEX_EMAIL,
+      errorText: email.textError,
+      regex: email.regEx,
     },
     password: {
       value: '',
       isValid: false,
-      errorText: 'Минимум 1 цифра и 1 буква без пробелов!',
-      regex: REGEX_PASSWORD,
+      errorText: password.textError,
+      regex: password.regEx,
     },
   });
+
+  useStatusError(selectStatusLogin, SEND_ERROR_TEXT);
 
   const isValidValues = userAuth.email.isValid && userAuth.password.isValid;
 
@@ -74,7 +81,9 @@ function FormLogin(): JSX.Element {
               value={userAuth[name].value}
             />
             {!isValid && userAuth[name].value && (
-              <span className={message.error}>{userAuth[name].errorText}</span>
+              <span className={styles['error-auth']}>
+                {userAuth[name].errorText}
+              </span>
             )}
           </div>
         );
@@ -82,9 +91,9 @@ function FormLogin(): JSX.Element {
       <button
         className="login__submit form__submit button"
         type="submit"
-        disabled={!isValidValues}
+        disabled={!isValidValues || status === Status.Loading}
       >
-        Sign in
+        {status === Status.Loading ? 'Waiting...' : 'Sign in'}
       </button>
     </form>
   );

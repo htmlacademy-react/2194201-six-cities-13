@@ -2,8 +2,8 @@ import { useRef, useEffect } from 'react';
 import leaflet, { Icon, Marker } from 'leaflet';
 import useMap from '../../hooks/use-map/use-map';
 import { City, LocationMap } from '../../types';
-import 'leaflet/dist/leaflet.css';
 import { URL_PIN_CURRENT, URL_PIN_DEFAULT, ICON_SIZE } from '../../constants';
+import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
   className: string;

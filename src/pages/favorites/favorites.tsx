@@ -1,12 +1,10 @@
 import cn from 'classnames';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
 import { Card } from '../../types';
-import { AppRoute, CITIES } from '../../constants';
 import Header from '../../components/header/header';
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
-import PlaceCard from '../../components/place-card/place-card';
 import Footer from '../../components/footer/footer';
+import FavoriteList from '../../components/favorite-list/favorite-list';
 
 type FavoritesProps = {
   favoriteList: Card[];
@@ -33,42 +31,7 @@ function Favorites({ favoriteList }: FavoritesProps): JSX.Element {
             })}
           >
             {isNotEmpty ? (
-              <>
-                <h1 className="favorites__title">Saved listing</h1>
-                <ul className="favorites__list">
-                  {CITIES.map((city) => {
-                    const favoritesSortCity = favoriteList.filter(
-                      (card) => city === card.city.name
-                    );
-
-                    if (favoritesSortCity.length) {
-                      return (
-                        <li className="favorites__locations-items" key={city}>
-                          <div className="favorites__locations locations locations--current">
-                            <div className="locations__item">
-                              <Link
-                                className="locations__item-link"
-                                to={AppRoute.Root}
-                              >
-                                <span>{city}</span>
-                              </Link>
-                            </div>
-                          </div>
-                          <div className="favorites__places">
-                            {favoritesSortCity.map((card) => (
-                              <PlaceCard
-                                card={card}
-                                className="favorites"
-                                key={card.id}
-                              />
-                            ))}
-                          </div>
-                        </li>
-                      );
-                    }
-                  })}
-                </ul>
-              </>
+              <FavoriteList favoriteList={favoriteList} />
             ) : (
               <FavoritesEmpty />
             )}

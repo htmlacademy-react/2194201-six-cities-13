@@ -111,7 +111,7 @@ export type DetailMessageType = {
   message: string;
 };
 
-export type AxiosData = {
+export type ThunkConfig = {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;

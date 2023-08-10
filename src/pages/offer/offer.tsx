@@ -1,51 +1,58 @@
 import cn from 'classnames';
-import { Helmet } from 'react-helmet-async';
-import { useParams } from 'react-router-dom';
-import Header from '../../components/header/header';
-import { Reviews } from '../../components/reviews/reviews';
-import { ONE_STAR_RATIO } from '../../constants';
-import { Card } from '../../types';
-import NotFound from '../not-found/not-found';
 import { useEffect } from 'react';
+import Header from '../../components/header/header';
+import NotFound from '../not-found/not-found';
 import PlaceCard from '../../components/place-card/place-card';
 import Map from '../../components/map/map';
+import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
+import { Reviews } from '../../components/reviews/reviews';
+import { OFFER_ERROR_TEXT, ONE_STAR_RATIO, Status } from '../../constants';
+import { Card } from '../../types';
 import { MAX_OFFER_IMAGES, MAX_OFFERS_NEARBY } from '../../constants';
 import { getOffersLocation } from '../../helpers/get-offers-location';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
   fetchActiveOfferAction,
   fetchOffersNearbyAction,
 } from '../../store/api-actions';
-import { useAppSelector } from '../../hooks';
+
 import {
   selectActiveOffer,
   selectOffersNearby,
-} from '../../store/selectors/selectors';
+  selectStatusOffer,
+} from '../../store/offers-data/selectors';
+import Loading from '../loading/loading';
+import ButtonFavorites from '../../components/button-favorites/button-favorites';
+import { useStatusError } from '../../hooks/use-status-error/use-status-error';
 
 function Offer(): JSX.Element {
-  const { id: offerId } = useParams();
+  const { id: offerId } = useParams() as { id: string };
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (offerId) {
-      dispatch(fetchActiveOfferAction(offerId));
-      dispatch(fetchOffersNearbyAction(offerId));
-    }
+    dispatch(fetchActiveOfferAction(offerId));
+    dispatch(fetchOffersNearbyAction(offerId));
   }, [offerId, dispatch]);
 
-  const currentOffer = useAppSelector(selectActiveOffer);
-  const offersNearby = useAppSelector(selectOffersNearby).slice(
-    0,
-    MAX_OFFERS_NEARBY
-  );
+  useStatusError(selectStatusOffer, OFFER_ERROR_TEXT);
 
-  if (!currentOffer) {
+  const status = useAppSelector(selectStatusOffer);
+  const currentOffer = useAppSelector(selectActiveOffer);
+  const offersNearbyAll = useAppSelector(selectOffersNearby);
+  const offersNearbySlice = offersNearbyAll.slice(0, MAX_OFFERS_NEARBY);
+
+  if (status === Status.Idle || status === Status.Loading) {
+    return <Loading />;
+  }
+
+  if (status === Status.Error || !currentOffer) {
     return <NotFound />;
   }
 
   const currentNearbyOffers = getOffersLocation([
     currentOffer,
-    ...offersNearby,
+    ...offersNearbySlice,
   ]);
 
   const {
@@ -99,19 +106,12 @@ function Offer(): JSX.Element {
               )}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">{title}</h1>
-                <button
-                  className={cn('offer__bookmark-button', 'button', {
-                    'place-card__bookmark-button--active': isFavorite,
-                  })}
-                  type="button"
-                >
-                  <svg className="offer__bookmark-icon" width={31} height={33}>
-                    <use xlinkHref="#icon-bookmark" />
-                  </svg>
-                  <span className="visually-hidden">
-                    {isFavorite ? 'In bookmarks' : 'To bookmarks'}
-                  </span>
-                </button>
+                <ButtonFavorites
+                  className="offer"
+                  isFavorite={isFavorite}
+                  width={31}
+                  height={33}
+                />
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
@@ -174,7 +174,7 @@ function Offer(): JSX.Element {
                   <p className="offer__text">{description}</p>
                 </div>
               </div>
-              {offerId && <Reviews offerId={offerId} />}
+              <Reviews />
             </div>
           </div>
           <Map
@@ -191,7 +191,7 @@ function Offer(): JSX.Element {
               Other places in the neighbourhood
             </h2>
             <div className="near-places__list places__list">
-              {offersNearby.map((offer: Card) => (
+              {offersNearbySlice.map((offer: Card) => (
                 <PlaceCard
                   key={offer.id}
                   className="near-places"

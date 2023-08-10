@@ -13,13 +13,14 @@ const URL_PIN_CURRENT = 'img/pin-active.svg';
 const ICON_SIZE = [27, 39] as PointExpression;
 const DATE = 'YYYY-MM-DD';
 const MONTH_TEXT = 'MMMM';
+const SEND_ERROR_TEXT = 'The form has not been sent, please try again!';
+const OFFER_ERROR_TEXT = 'Error loading the offer. Refresh the page!';
+const AUTH_ERROR_TEXT =
+  'The list of offers could not be loaded. Refresh the page!';
 const TILE_LAYER =
   'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
 const COPYRIGHT =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
-const REGEX_EMAIL =
-  /^[a-z0-9-]+(?:\.[a-z0-9-]+)*@(?:[a-z0-9](?:[a-z-]*[a-z])?\.)+[a-z]{2,4}$/;
-const REGEX_PASSWORD = /\d+[a-zA-Z]+|[a-zA-Z]+\d+/;
 
 const CITIES = [
   'Paris',
@@ -55,6 +56,18 @@ const TextLength = {
   max: 300,
 } as const;
 
+const FormLoginData = {
+  email: {
+    textError: 'Введите правильный Email!',
+    regEx:
+      /^[a-z0-9-]+(?:\.[a-z0-9-]+)*@(?:[a-z0-9](?:[a-z-]*[a-z])?\.)+[a-z]{2,4}$/,
+  },
+  password: {
+    textError: 'Минимум 1 цифра и 1 буква без пробелов!',
+    regEx: /\d+[a-zA-Z]+|[a-zA-Z]+\d+/,
+  },
+} as const;
+
 const AppRoute = {
   Root: '/',
   Login: '/login',
@@ -76,6 +89,21 @@ const AuthorizationStatus = {
   Unknown: 'UNKNOWN',
 } as const;
 
+const NameSpace = {
+  App: 'APP',
+  User: 'USER',
+  Offers: 'OFFERS',
+  Reviews: 'REVIEWS',
+  Favorites: 'FAVORITES',
+} as const;
+
+const Status = {
+  Idle: 'idle',
+  Loading: 'loading',
+  Success: 'success',
+  Error: 'error',
+};
+
 export {
   BACKEND_URL,
   REQUEST_TIMEOUT,
@@ -90,16 +118,20 @@ export {
   ICON_SIZE,
   DATE,
   MONTH_TEXT,
+  SEND_ERROR_TEXT,
+  OFFER_ERROR_TEXT,
+  AUTH_ERROR_TEXT,
   TILE_LAYER,
   COPYRIGHT,
-  REGEX_EMAIL,
-  REGEX_PASSWORD,
   CITIES,
   SORT_ITEMS,
   RATINGS,
+  AUTH_FIELDS,
   TextLength,
+  FormLoginData,
   AppRoute,
   APIRoute,
   AuthorizationStatus,
-  AUTH_FIELDS,
+  NameSpace,
+  Status,
 };

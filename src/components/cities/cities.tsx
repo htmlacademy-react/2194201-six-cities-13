@@ -1,18 +1,20 @@
 import { useState } from 'react';
+import Places from '../places/places';
 import Map from '../../components/map/map';
-import { Card } from '../../types';
 import { getOffersLocation } from '../../helpers/get-offers-location';
 import { MainEmpty } from '../../components/main-empty/main-empty';
-import Places from '../places/places';
+import { useAppSelector } from '../../hooks';
+import {
+  selectStatusAll,
+  selectCurrentOffers,
+} from '../../store/offers-data/selectors';
+import { Status } from '../../constants';
 
-type CitiesProps = {
-  currentOffers: Card[];
-};
-
-function Cities({ currentOffers }: CitiesProps): JSX.Element {
+function Cities(): JSX.Element {
   const [offerId, setOfferId] = useState<string>('');
+  const status = useAppSelector(selectStatusAll);
+  const currentOffers = useAppSelector(selectCurrentOffers);
   const offersLocation = getOffersLocation(currentOffers);
-  const isNotEmpty = !!currentOffers.length;
 
   const citiesContainer = (
     <div className="cities__places-container container">
@@ -21,7 +23,7 @@ function Cities({ currentOffers }: CitiesProps): JSX.Element {
         <Map
           className="cities"
           height="100%"
-          cityInfo={currentOffers[0].city}
+          cityInfo={currentOffers[0]?.city}
           offers={offersLocation}
           offerId={offerId}
         />
@@ -30,7 +32,9 @@ function Cities({ currentOffers }: CitiesProps): JSX.Element {
   );
 
   return (
-    <div className="cities">{isNotEmpty ? citiesContainer : <MainEmpty />}</div>
+    <div className="cities">
+      {status === Status.Error ? <MainEmpty /> : citiesContainer}
+    </div>
   );
 }
 

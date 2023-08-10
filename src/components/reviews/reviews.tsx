@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
-import ReviewForm from '../review-form/review-form';
+import { useParams } from 'react-router-dom';
+import FormReview from '../form-review/form-review';
 import dayjs from 'dayjs';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import {
-  selectAuthStatus,
-  selectOfferReviews,
-} from '../../store/selectors/selectors';
+import { selectOfferReviews } from '../../store/reviews-data/selectors';
+import { selectAuthStatus } from '../../store/user-process/selectors';
 import {
   ONE_STAR_RATIO,
   MAX_REVIEWS,
@@ -13,22 +12,17 @@ import {
   DATE,
   MONTH_TEXT,
 } from '../../constants';
-import { fetchOfferReviewsAction } from '../../store/api-actions';
+import { fetchReviewsAction } from '../../store/api-actions';
 
-type ReviewsProps = {
-  offerId: string;
-};
-
-function Reviews({ offerId }: ReviewsProps): JSX.Element {
+function Reviews(): JSX.Element {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(selectAuthStatus);
   const reviewList = useAppSelector(selectOfferReviews);
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
+  const { id: offerId } = useParams() as { id: string };
 
   useEffect(() => {
-    if (offerId) {
-      dispatch(fetchOfferReviewsAction(offerId));
-    }
+    dispatch(fetchReviewsAction(offerId));
   }, [offerId, dispatch]);
 
   const sortedReviews = [...reviewList]
@@ -80,7 +74,7 @@ function Reviews({ offerId }: ReviewsProps): JSX.Element {
           );
         })}
       </ul>
-      {isAuth && <ReviewForm offerId={offerId} />}
+      {isAuth && <FormReview />}
     </section>
   );
 }
