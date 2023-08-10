@@ -7,6 +7,7 @@ import {
   fetchOffersNearbyAction,
   postFavoriteStatusAction,
 } from '../api-actions';
+import { changeOfferFavorite } from '../../helpers/change-offer-favorite';
 
 type OffersData = {
   offers: Card[];
@@ -54,22 +55,11 @@ export const offersData = createSlice({
         state.offersNearby = action.payload;
       })
       .addCase(postFavoriteStatusAction.fulfilled, (state, action) => {
-        const offers = state.offers;
-        const activeOffer = state.activeOffer;
-        const favoriteOffer = action.payload;
-
-        offers.map((offer) => {
-          if (offer.id === favoriteOffer.id) {
-            offer.isFavorite = favoriteOffer.isFavorite;
-          }
-        });
-
-        if (
-          activeOffer &&
-          activeOffer.isFavorite !== favoriteOffer.isFavorite
-        ) {
-          activeOffer.isFavorite = favoriteOffer.isFavorite;
-        }
+        changeOfferFavorite(
+          [state.offers, state.offersNearby],
+          state.activeOffer,
+          action.payload
+        );
       });
   },
 });
