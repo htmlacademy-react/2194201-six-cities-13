@@ -5,6 +5,7 @@ import {
   fetchOffersAction,
   fetchActiveOfferAction,
   fetchOffersNearbyAction,
+  postFavoriteStatusAction,
 } from '../api-actions';
 
 type OffersData = {
@@ -51,6 +52,15 @@ export const offersData = createSlice({
       })
       .addCase(fetchOffersNearbyAction.fulfilled, (state, action) => {
         state.offersNearby = action.payload;
+      })
+      .addCase(postFavoriteStatusAction.fulfilled, (state, action) => {
+        const favoriteOffer = action.payload;
+
+        state.offers.map((offer) => {
+          if (offer.id === favoriteOffer.id) {
+            offer.isFavorite = favoriteOffer.isFavorite;
+          }
+        });
       });
   },
 });
