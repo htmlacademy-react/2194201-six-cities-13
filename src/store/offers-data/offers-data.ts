@@ -54,13 +54,22 @@ export const offersData = createSlice({
         state.offersNearby = action.payload;
       })
       .addCase(postFavoriteStatusAction.fulfilled, (state, action) => {
+        const offers = state.offers;
+        const activeOffer = state.activeOffer;
         const favoriteOffer = action.payload;
 
-        state.offers.map((offer) => {
+        offers.map((offer) => {
           if (offer.id === favoriteOffer.id) {
             offer.isFavorite = favoriteOffer.isFavorite;
           }
         });
+
+        if (
+          activeOffer &&
+          activeOffer.isFavorite !== favoriteOffer.isFavorite
+        ) {
+          activeOffer.isFavorite = favoriteOffer.isFavorite;
+        }
       });
   },
 });
