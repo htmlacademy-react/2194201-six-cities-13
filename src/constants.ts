@@ -32,12 +32,12 @@ const CITIES = [
   'Dusseldorf',
 ] as const;
 
-const SORT_ITEMS = [
-  'Popular',
-  'Price: low to high',
-  'Price: high to low',
-  'Top rated first',
-] as const;
+const SortName = {
+  Popular: 'Popular',
+  LowPrice: 'Price: low to high',
+  HighPrice: 'Price: high to low',
+  TopRating: 'Top rated first',
+} as const;
 
 const RATINGS = [
   { star: 5, title: 'perfect' },
@@ -127,11 +127,11 @@ export {
   TILE_LAYER,
   COPYRIGHT,
   CITIES,
-  SORT_ITEMS,
   RATINGS,
   AUTH_FIELDS,
   TextLength,
   FormLoginData,
+  SortName,
   AppRoute,
   APIRoute,
   AuthorizationStatus,
