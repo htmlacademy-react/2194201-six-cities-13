@@ -6,7 +6,7 @@ import Map from '../../components/map/map';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { Reviews } from '../../components/reviews/reviews';
-import { OFFER_ERROR_TEXT, ONE_STAR_RATIO, Status } from '../../constants';
+import { ONE_STAR_RATIO, Status } from '../../constants';
 import { Card } from '../../types';
 import { MAX_OFFER_IMAGES, MAX_OFFERS_NEARBY } from '../../constants';
 import { getOffersLocation } from '../../helpers/get-offers-location';
@@ -23,7 +23,6 @@ import {
 } from '../../store/offers-data/selectors';
 import Loading from '../loading/loading';
 import ButtonFavorites from '../../components/button-favorites/button-favorites';
-import { useStatusError } from '../../hooks/use-status-error/use-status-error';
 import { PlaceCardMemo } from '../../components/place-card/place-card-memo';
 
 function Offer(): JSX.Element {
@@ -34,8 +33,6 @@ function Offer(): JSX.Element {
     dispatch(fetchActiveOfferAction(offerId));
     dispatch(fetchOffersNearbyAction(offerId));
   }, [offerId, dispatch]);
-
-  useStatusError(selectStatusOffer, OFFER_ERROR_TEXT);
 
   const status = useAppSelector(selectStatusOffer);
   const currentOffer = useAppSelector(selectActiveOffer);

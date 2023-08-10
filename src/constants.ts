@@ -14,10 +14,6 @@ const URL_PIN_CURRENT = 'img/pin-active.svg';
 const ICON_SIZE = [27, 39] as PointExpression;
 const DATE = 'YYYY-MM-DD';
 const MONTH_TEXT = 'MMMM';
-const SEND_ERROR_TEXT = 'The form has not been sent, please try again!';
-const OFFER_ERROR_TEXT = 'Error loading the offer. Refresh the page!';
-const AUTH_ERROR_TEXT =
-  'The list of offers could not be loaded. Refresh the page!';
 const TILE_LAYER =
   'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
 const COPYRIGHT =
@@ -121,9 +117,6 @@ export {
   ICON_SIZE,
   DATE,
   MONTH_TEXT,
-  SEND_ERROR_TEXT,
-  OFFER_ERROR_TEXT,
-  AUTH_ERROR_TEXT,
   TILE_LAYER,
   COPYRIGHT,
   CITIES,
