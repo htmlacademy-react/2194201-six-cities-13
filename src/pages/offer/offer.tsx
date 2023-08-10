@@ -2,7 +2,6 @@ import cn from 'classnames';
 import { useEffect } from 'react';
 import Header from '../../components/header/header';
 import NotFound from '../not-found/not-found';
-import PlaceCard from '../../components/place-card/place-card';
 import Map from '../../components/map/map';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
@@ -25,6 +24,7 @@ import {
 import Loading from '../loading/loading';
 import ButtonFavorites from '../../components/button-favorites/button-favorites';
 import { useStatusError } from '../../hooks/use-status-error/use-status-error';
+import { PlaceCardMemo } from '../../components/place-card/place-card-memo';
 
 function Offer(): JSX.Element {
   const { id: offerId } = useParams() as { id: string };
@@ -193,7 +193,7 @@ function Offer(): JSX.Element {
             </h2>
             <div className="near-places__list places__list">
               {offersNearbySlice.map((offer: Card) => (
-                <PlaceCard
+                <PlaceCardMemo
                   key={offer.id}
                   className="near-places"
                   card={offer}
