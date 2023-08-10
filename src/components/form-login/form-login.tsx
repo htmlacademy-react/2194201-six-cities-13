@@ -10,20 +10,20 @@ import styles from './error.module.css';
 function FormLogin(): JSX.Element {
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectStatusLogin);
-  const { email, password } = FormLoginData;
+  const { Email, Password } = FormLoginData;
 
   const [userAuth, setUserAuth] = useState<UserAuth>({
     email: {
       value: '',
       isValid: false,
-      errorText: email.textError,
-      regex: email.regEx,
+      errorText: Email.TextError,
+      regex: Email.RegEx,
     },
     password: {
       value: '',
       isValid: false,
-      errorText: password.textError,
-      regex: password.regEx,
+      errorText: Password.TextError,
+      regex: Password.RegEx,
     },
   });
 

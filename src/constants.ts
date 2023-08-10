@@ -49,19 +49,19 @@ const AUTH_FIELDS = [
 ] as const;
 
 const TextLength = {
-  min: 50,
-  max: 300,
+  Min: 50,
+  Max: 300,
 } as const;
 
 const FormLoginData = {
-  email: {
-    textError: 'Введите правильный Email!',
-    regEx:
+  Email: {
+    TextError: 'Введите правильный Email!',
+    RegEx:
       /^[a-z0-9-]+(?:\.[a-z0-9-]+)*@(?:[a-z0-9](?:[a-z-]*[a-z])?\.)+[a-z]{2,4}$/,
   },
-  password: {
-    textError: 'Минимум 1 цифра и 1 буква без пробелов!',
-    regEx: /\d+[a-zA-Z]+|[a-zA-Z]+\d+/,
+  Password: {
+    TextError: 'Минимум 1 цифра и 1 буква без пробелов!',
+    RegEx: /\d+[a-zA-Z]+|[a-zA-Z]+\d+/,
   },
 } as const;
 

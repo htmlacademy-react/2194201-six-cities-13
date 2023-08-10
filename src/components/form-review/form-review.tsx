@@ -19,7 +19,7 @@ function FormReview(): JSX.Element {
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectStatusPost);
   const { id } = useParams() as { id: string };
-  const { min, max } = TextLength;
+  const { Min, Max } = TextLength;
 
   const formRef = useRef<HTMLFormElement | null>(null);
   const [rating, setRating] = useState<number>(0);
@@ -34,7 +34,7 @@ function FormReview(): JSX.Element {
     }
   }, [status]);
 
-  const isValid = !!rating && comment.length >= min && comment.length <= max;
+  const isValid = !!rating && comment.length >= Min && comment.length <= Max;
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -86,14 +86,14 @@ function FormReview(): JSX.Element {
         name="comment"
         placeholder="Tell how was your stay, what you like and what can be improved"
         defaultValue=""
-        minLength={min}
-        maxLength={max}
+        minLength={Min}
+        maxLength={Max}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set{' '}
           <span className="reviews__star">rating</span> and describe your stay
-          with at least <b className="reviews__text-amount">{min} characters</b>
+          with at least <b className="reviews__text-amount">{Min} characters</b>
           .
         </p>
         <button
