@@ -109,6 +109,7 @@ function Offer(): JSX.Element {
                 <ButtonFavorites
                   className="offer"
                   isFavorite={isFavorite}
+                  offerId={offerId}
                   width={31}
                   height={33}
                 />

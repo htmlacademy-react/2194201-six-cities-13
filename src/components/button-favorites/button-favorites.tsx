@@ -1,12 +1,14 @@
 import cn from 'classnames';
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectAuthStatus } from '../../store/user-process/selectors';
 import { AppRoute, AuthorizationStatus } from '../../constants';
+import { postFavoriteStatusAction } from '../../store/api-actions';
 
 type ButtonFavoritesProps = {
   className: string;
   isFavorite: boolean;
+  offerId: string;
   width: number;
   height: number;
 };
@@ -14,16 +16,27 @@ type ButtonFavoritesProps = {
 function ButtonFavorites({
   className,
   isFavorite,
+  offerId,
   width,
   height,
 }: ButtonFavoritesProps): JSX.Element {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(selectAuthStatus);
+
   const buttonActiveClass = `${className}__bookmark-button--active`;
+  const status = Number(!isFavorite);
 
   const handleFavoritesButtonClick = () => {
     if (authorizationStatus === AuthorizationStatus.NoAuth) {
       return navigate(AppRoute.Login);
+    } else {
+      dispatch(
+        postFavoriteStatusAction({
+          offerId,
+          status,
+        })
+      );
     }
   };
 

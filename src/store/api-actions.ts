@@ -1,5 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Card, Review, ReviewValues, ThunkConfig, User } from '../types';
+import {
+  Card,
+  FavoriteData,
+  Review,
+  ReviewValues,
+  ThunkConfig,
+  User,
+} from '../types';
 import { saveToken, dropToken } from '../services/token';
 import { AuthData, UserData, OfferCard } from '../types';
 import { store } from '../store';
@@ -45,6 +52,18 @@ const fetchFavoritesAction = createAsyncThunk<Card[], undefined, ThunkConfig>(
     return data;
   }
 );
+
+const postFavoriteStatusAction = createAsyncThunk<
+  OfferCard,
+  FavoriteData,
+  ThunkConfig
+>('data/postFavorite', async ({ offerId, status }, { extra: api }) => {
+  const { data } = await api.post<OfferCard>(
+    `${APIRoute.Favorite}/${offerId}/${status}`
+  );
+
+  return data;
+});
 
 const fetchReviewsAction = createAsyncThunk<Review[], string, ThunkConfig>(
   'data/fetchReviews',
@@ -102,6 +121,7 @@ export {
   fetchActiveOfferAction,
   fetchOffersNearbyAction,
   fetchFavoritesAction,
+  postFavoriteStatusAction,
   fetchReviewsAction,
   postReviewAction,
   checkAuthAction,

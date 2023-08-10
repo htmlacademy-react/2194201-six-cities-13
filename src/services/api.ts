@@ -13,6 +13,7 @@ import { DetailMessageType } from '../types';
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
   [StatusCodes.NOT_FOUND]: true,
+  [StatusCodes.CONFLICT]: true,
 };
 
 const shouldDisplayError = (response: AxiosResponse) =>

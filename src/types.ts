@@ -56,6 +56,11 @@ export type OfferCard = {
   maxAdults: number;
 } & Card;
 
+export type FavoriteData = {
+  offerId: string;
+  status: number;
+};
+
 export type Review = {
   id: string;
   date: string;

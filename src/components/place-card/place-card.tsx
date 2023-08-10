@@ -63,6 +63,7 @@ function PlaceCard({
           <ButtonFavorites
             className="place-card"
             isFavorite={isFavorite}
+            offerId={id}
             width={18}
             height={19}
           />
