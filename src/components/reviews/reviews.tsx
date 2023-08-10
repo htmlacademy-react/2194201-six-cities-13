@@ -13,13 +13,14 @@ import {
   MONTH_TEXT,
 } from '../../constants';
 import { fetchReviewsAction } from '../../store/api-actions';
+import { ParamsId } from '../../types';
 
 function Reviews(): JSX.Element {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(selectAuthStatus);
   const reviewList = useAppSelector(selectOfferReviews);
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
-  const { id: offerId } = useParams() as { id: string };
+  const { id: offerId } = useParams() as ParamsId;
 
   useEffect(() => {
     dispatch(fetchReviewsAction(offerId));

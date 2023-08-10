@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace, Status } from '../../constants';
 import { Card } from '../../types';
-import { fetchFavoritesAction, postFavoriteStatusAction } from '../api-actions';
+import {
+  fetchFavoritesAction,
+  changeFavoriteStatusAction,
+} from '../api-actions';
 
 type FavoritesData = {
   favorites: Card[];
@@ -31,10 +34,10 @@ export const favoritesData = createSlice({
       .addCase(fetchFavoritesAction.rejected, (state) => {
         state.statusAll = Status.Error;
       })
-      .addCase(postFavoriteStatusAction.pending, (state) => {
+      .addCase(changeFavoriteStatusAction.pending, (state) => {
         state.statusPost = Status.Loading;
       })
-      .addCase(postFavoriteStatusAction.fulfilled, (state, action) => {
+      .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
         const favoriteOffers = state.favorites;
         const { id, isFavorite } = action.payload;
 
@@ -46,7 +49,7 @@ export const favoritesData = createSlice({
 
         state.statusPost = Status.Success;
       })
-      .addCase(postFavoriteStatusAction.rejected, (state) => {
+      .addCase(changeFavoriteStatusAction.rejected, (state) => {
         state.statusPost = Status.Error;
       });
   },

@@ -74,7 +74,7 @@ const fetchFavoritesAction = createAsyncThunk<Card[], undefined, ThunkConfig>(
   }
 );
 
-const postFavoriteStatusAction = createAsyncThunk<
+const changeFavoriteStatusAction = createAsyncThunk<
   OfferCard,
   FavoriteData,
   ThunkConfig
@@ -168,7 +168,7 @@ export {
   fetchActiveOfferAction,
   fetchOffersNearbyAction,
   fetchFavoritesAction,
-  postFavoriteStatusAction,
+  changeFavoriteStatusAction,
   fetchReviewsAction,
   postReviewAction,
   checkAuthAction,

@@ -1,18 +1,16 @@
+import { memo } from 'react';
+
 type FormReviewRatingProps = {
   star: number;
   title: string;
-  handleInputsChange: (star: number) => void;
+  onInputsChange: (star: number) => void;
 };
 
-function FormReviewRating({
-  star,
-  title,
-  handleInputsChange,
-}: FormReviewRatingProps) {
-  return (
+const FormReviewRating = memo(
+  ({ star, title, onInputsChange }: FormReviewRatingProps) => (
     <>
       <input
-        onChange={() => handleInputsChange?.(star)}
+        onChange={() => onInputsChange?.(star)}
         className="form__rating-input visually-hidden"
         name="rating"
         value={star}
@@ -29,7 +27,9 @@ function FormReviewRating({
         </svg>
       </label>
     </>
-  );
-}
+  )
+);
+
+FormReviewRating.displayName = 'FormReviewRating';
 
 export default FormReviewRating;

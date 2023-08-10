@@ -13,12 +13,13 @@ import { postReviewAction } from '../../store/api-actions';
 import { selectStatusPost } from '../../store/reviews-data/selectors';
 import { store } from '../../store';
 import { setStatusPost } from '../../store/reviews-data/reviews-data';
-import { FormReviewRatingMemo } from '../form-review-rating/form-review-rating-memo';
+import FormReviewRating from '../form-review-rating/form-review-rating';
+import { ParamsId } from '../../types';
 
 function FormReview(): JSX.Element {
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectStatusPost);
-  const { id } = useParams() as { id: string };
+  const { id } = useParams() as ParamsId;
   const { Min, Max } = TextLength;
 
   const formRef = useRef<HTMLFormElement | null>(null);
@@ -50,7 +51,7 @@ function FormReview(): JSX.Element {
     }
   };
 
-  const handleInputsChange = useCallback((star: number) => {
+  const onInputsChange = useCallback((star: number) => {
     setRating(star);
   }, []);
 
@@ -71,11 +72,11 @@ function FormReview(): JSX.Element {
       </label>
       <div className="reviews__rating-form form__rating">
         {RATINGS.map(({ star, title }) => (
-          <FormReviewRatingMemo
+          <FormReviewRating
             key={star}
             star={star}
             title={title}
-            handleInputsChange={handleInputsChange}
+            onInputsChange={onInputsChange}
           />
         ))}
       </div>

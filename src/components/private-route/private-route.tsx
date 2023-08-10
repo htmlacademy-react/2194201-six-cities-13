@@ -11,8 +11,9 @@ type PrivateRouteProps = {
 function PrivateRoute({ children }: PrivateRouteProps): JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthStatus);
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
+  const isAuthUnknown = authorizationStatus === AuthorizationStatus.Unknown;
 
-  if (authorizationStatus === AuthorizationStatus.Unknown) {
+  if (isAuthUnknown) {
     return <Loading />;
   }
 

@@ -6,6 +6,8 @@ export type CityNames = (typeof CITIES)[number];
 export type SortNames = (typeof SortName)[keyof typeof SortName];
 export type Token = string;
 
+export type ParamsId = Pick<Card, 'id'>;
+
 export type User = {
   name: string;
   avatarUrl: string;

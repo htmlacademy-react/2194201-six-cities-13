@@ -5,7 +5,7 @@ import {
   fetchOffersAction,
   fetchActiveOfferAction,
   fetchOffersNearbyAction,
-  postFavoriteStatusAction,
+  changeFavoriteStatusAction,
 } from '../api-actions';
 import { changeOfferFavorite } from '../../helpers/change-offer-favorite';
 
@@ -54,7 +54,7 @@ export const offersData = createSlice({
       .addCase(fetchOffersNearbyAction.fulfilled, (state, action) => {
         state.offersNearby = action.payload;
       })
-      .addCase(postFavoriteStatusAction.fulfilled, (state, action) => {
+      .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
         changeOfferFavorite(
           [state.offers, state.offersNearby],
           state.activeOffer,

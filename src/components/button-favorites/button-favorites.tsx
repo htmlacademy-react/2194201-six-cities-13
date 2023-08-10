@@ -8,7 +8,7 @@ import {
   AuthorizationStatus,
   FAVORITES_TIMEOUT,
 } from '../../constants';
-import { postFavoriteStatusAction } from '../../store/api-actions';
+import { changeFavoriteStatusAction } from '../../store/api-actions';
 
 type ButtonFavoritesProps = {
   className: string;
@@ -29,13 +29,14 @@ function ButtonFavorites({
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const authorizationStatus = useAppSelector(selectAuthStatus);
+  const isNoAuth = authorizationStatus === AuthorizationStatus.NoAuth;
 
   const buttonActiveClass = `${className}__bookmark-button--active`;
   const status = Number(!isFavorite);
 
   const changeFavoriteStatus = () => {
     dispatch(
-      postFavoriteStatusAction({
+      changeFavoriteStatusAction({
         offerId,
         status,
       })
@@ -48,7 +49,7 @@ function ButtonFavorites({
   );
 
   const handleFavoritesButtonClick = () => {
-    if (authorizationStatus === AuthorizationStatus.NoAuth) {
+    if (isNoAuth) {
       return navigate(AppRoute.Login);
     } else {
       if (pathname === AppRoute.Favorites) {

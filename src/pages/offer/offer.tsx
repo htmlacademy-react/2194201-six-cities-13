@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { Reviews } from '../../components/reviews/reviews';
 import { ONE_STAR_RATIO, Status } from '../../constants';
-import { Card } from '../../types';
+import { Card, ParamsId } from '../../types';
 import { MAX_OFFER_IMAGES, MAX_OFFERS_NEARBY } from '../../constants';
 import { getOffersLocation } from '../../helpers/get-offers-location';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -23,10 +23,10 @@ import {
 } from '../../store/offers-data/selectors';
 import Loading from '../loading/loading';
 import ButtonFavorites from '../../components/button-favorites/button-favorites';
-import { PlaceCardMemo } from '../../components/place-card/place-card-memo';
+import PlaceCard from '../../components/place-card/place-card';
 
 function Offer(): JSX.Element {
-  const { id: offerId } = useParams() as { id: string };
+  const { id: offerId } = useParams() as ParamsId;
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -190,7 +190,7 @@ function Offer(): JSX.Element {
             </h2>
             <div className="near-places__list places__list">
               {offersNearbySlice.map((offer: Card) => (
-                <PlaceCardMemo
+                <PlaceCard
                   key={offer.id}
                   className="near-places"
                   card={offer}
