@@ -1,8 +1,13 @@
 import cn from 'classnames';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { debounce } from 'ts-debounce';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectAuthStatus } from '../../store/user-process/selectors';
-import { AppRoute, AuthorizationStatus } from '../../constants';
+import {
+  AppRoute,
+  AuthorizationStatus,
+  FAVORITES_TIMEOUT,
+} from '../../constants';
 import { postFavoriteStatusAction } from '../../store/api-actions';
 
 type ButtonFavoritesProps = {
@@ -22,21 +27,35 @@ function ButtonFavorites({
 }: ButtonFavoritesProps): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { pathname } = useLocation();
   const authorizationStatus = useAppSelector(selectAuthStatus);
 
   const buttonActiveClass = `${className}__bookmark-button--active`;
   const status = Number(!isFavorite);
 
+  const changeFavoriteStatus = () => {
+    dispatch(
+      postFavoriteStatusAction({
+        offerId,
+        status,
+      })
+    );
+  };
+
+  const favoriteStatusTimeout = debounce(
+    changeFavoriteStatus,
+    FAVORITES_TIMEOUT
+  );
+
   const handleFavoritesButtonClick = () => {
     if (authorizationStatus === AuthorizationStatus.NoAuth) {
       return navigate(AppRoute.Login);
     } else {
-      dispatch(
-        postFavoriteStatusAction({
-          offerId,
-          status,
-        })
-      );
+      if (pathname === AppRoute.Favorites) {
+        changeFavoriteStatus();
+      } else {
+        favoriteStatusTimeout();
+      }
     }
   };
 
