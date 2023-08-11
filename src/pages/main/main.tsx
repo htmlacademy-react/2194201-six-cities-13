@@ -5,14 +5,18 @@ import Header from '../../components/header/header';
 import TabList from '../../components/tab-list/tab-list';
 import Cities from '../../components/cities/cities';
 import { useAppSelector } from '../../hooks';
-import { selectStatusAll } from '../../store/offers-data/selectors';
+import {
+  selectCurrentOffers,
+  selectStatusAll,
+} from '../../store/offers-data/selectors';
 import { Status } from '../../constants';
 
 function Main(): JSX.Element {
+  const currentOffers = useAppSelector(selectCurrentOffers);
   const status = useAppSelector(selectStatusAll);
-  const isEmpty = status === Status.Error;
+  const isEmpty = !currentOffers.length;
 
-  if (status === Status.Idle || status === Status.Loading) {
+  if (status === Status.Loading) {
     return <Loading />;
   }
 
@@ -29,7 +33,7 @@ function Main(): JSX.Element {
       >
         <h1 className="visually-hidden">Cities</h1>
         <TabList />
-        <Cities />
+        <Cities currentOffers={currentOffers} />
       </main>
     </div>
   );

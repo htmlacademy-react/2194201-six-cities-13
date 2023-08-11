@@ -3,18 +3,16 @@ import Places from '../places/places';
 import Map from '../../components/map/map';
 import { getOffersLocation } from '../../helpers/get-offers-location';
 import { MainEmpty } from '../../components/main-empty/main-empty';
-import { useAppSelector } from '../../hooks';
-import {
-  selectStatusAll,
-  selectCurrentOffers,
-} from '../../store/offers-data/selectors';
-import { Status } from '../../constants';
+import { Card } from '../../types';
 
-function Cities(): JSX.Element {
+type currentOffersProps = {
+  currentOffers: Card[];
+};
+
+function Cities({ currentOffers }: currentOffersProps): JSX.Element {
   const [offerId, setOfferId] = useState<string>('');
-  const status = useAppSelector(selectStatusAll);
-  const currentOffers = useAppSelector(selectCurrentOffers);
   const offersLocation = getOffersLocation(currentOffers);
+  const isEmpty = !currentOffers.length;
 
   const citiesContainer = (
     <div className="cities__places-container container">
@@ -32,9 +30,7 @@ function Cities(): JSX.Element {
   );
 
   return (
-    <div className="cities">
-      {status === Status.Error ? <MainEmpty /> : citiesContainer}
-    </div>
+    <div className="cities">{isEmpty ? <MainEmpty /> : citiesContainer}</div>
   );
 }
 
