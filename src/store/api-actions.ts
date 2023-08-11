@@ -123,13 +123,14 @@ const checkAuthAction = createAsyncThunk<
   User & UserData,
   undefined,
   ThunkConfig
->('user/checkAuth', async (_arg, { extra: api }) => {
+>('user/checkAuth', async (_arg, { dispatch, extra: api }) => {
   const { data } = await api
     .get<User & UserData>(APIRoute.Login)
     .catch((error: AxiosError) => {
       processErrorHandle(error.message);
       throw error.message;
     });
+  dispatch(fetchFavoritesAction());
   return data;
 });
 
