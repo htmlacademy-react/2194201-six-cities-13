@@ -1,16 +1,17 @@
 import { Helmet } from 'react-helmet-async';
 import { Navigate, Link } from 'react-router-dom';
 import Header from '../../components/header/header';
-import { AppRoute, AuthorizationStatus } from '../../constants';
+import { AppRoute, AuthorizationStatus, CITIES } from '../../constants';
 import FormLogin from '../../components/form-login/form-login';
 import { selectAuthStatus } from '../../store/user-process/selectors';
-import { useAppSelector } from '../../hooks';
-import { selectActiveCity } from '../../store/app-process/selectors';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { changeActiveCity } from '../../store/app-process/app-process';
 
 function Login(): JSX.Element {
-  const activeCity = useAppSelector(selectActiveCity);
+  const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(selectAuthStatus);
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
+  const randomCity = CITIES[Math.floor(Math.random() * CITIES.length)];
 
   if (isAuth) {
     return <Navigate to={AppRoute.Root} />;
@@ -30,8 +31,12 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to={AppRoute.Root}>
-                <span>{activeCity}</span>
+              <Link
+                className="locations__item-link"
+                to={AppRoute.Root}
+                onClick={() => dispatch(changeActiveCity(randomCity))}
+              >
+                <span>{randomCity}</span>
               </Link>
             </div>
           </section>
