@@ -1,12 +1,14 @@
 import { Helmet } from 'react-helmet-async';
 import { Navigate, Link } from 'react-router-dom';
 import Header from '../../components/header/header';
-import { AppRoute, CITIES, AuthorizationStatus } from '../../constants';
+import { AppRoute, AuthorizationStatus } from '../../constants';
 import FormLogin from '../../components/form-login/form-login';
 import { selectAuthStatus } from '../../store/user-process/selectors';
 import { useAppSelector } from '../../hooks';
+import { selectActiveCity } from '../../store/app-process/selectors';
 
 function Login(): JSX.Element {
+  const activeCity = useAppSelector(selectActiveCity);
   const authorizationStatus = useAppSelector(selectAuthStatus);
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
 
@@ -29,7 +31,7 @@ function Login(): JSX.Element {
           <section className="locations locations--login locations--current">
             <div className="locations__item">
               <Link className="locations__item-link" to={AppRoute.Root}>
-                <span>{CITIES[3]}</span>
+                <span>{activeCity}</span>
               </Link>
             </div>
           </section>
