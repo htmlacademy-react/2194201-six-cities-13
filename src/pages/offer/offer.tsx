@@ -124,7 +124,7 @@ function Offer(): JSX.Element {
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  {type}
+                  {type[0].toUpperCase() + type.slice(1)}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
                   {bedrooms} Bedrooms
