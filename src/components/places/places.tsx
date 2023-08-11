@@ -29,7 +29,8 @@ function Places({ currentOffers, setOfferId }: CitiesProps): JSX.Element {
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">
-        {sortOffers.length} places to stay in {activeCity}
+        {sortOffers.length} place{sortOffers.length > 1 && 's'} to stay in{' '}
+        {activeCity}
       </b>
       <SortOffers />
       <div className="cities__places-list places__list tabs__content">
