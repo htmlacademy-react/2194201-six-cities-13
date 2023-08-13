@@ -2,15 +2,25 @@ import { makeFakeOffers } from '../utils/mocks/offers';
 import { getOffersLocation } from './get-offers-location';
 
 describe('Function: getOffersLocation', () => {
-  it('Return an array with {id, location} objects', () => {
-    const mockOffers = makeFakeOffers();
+  const mockOffers = makeFakeOffers();
+
+  it('Return an array with {id, location} objects for map is correct', () => {
     const offersLocation = mockOffers.map((offer) => ({
       id: offer.id,
       location: offer.location,
     }));
-
     const result = getOffersLocation(mockOffers);
 
-    expect(result).toStrictEqual(offersLocation);
+    expect(result).toEqual(offersLocation);
+  });
+
+  it('Return an array with {id, location} objects for map is incorrect', () => {
+    const offersLocation = mockOffers.map(() => ({
+      id: 'unknown',
+      location: 'unknown',
+    }));
+    const result = getOffersLocation(mockOffers);
+
+    expect(result).not.toStrictEqual(offersLocation);
   });
 });
