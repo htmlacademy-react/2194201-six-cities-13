@@ -6,15 +6,21 @@ import FormLogin from '../../components/form-login/form-login';
 import { selectAuthStatus } from '../../store/user-process/selectors';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { changeActiveCity } from '../../store/app-process/app-process';
+import Loading from '../loading/loading';
 
 function Login(): JSX.Element {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(selectAuthStatus);
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
+  const isAuthUnknown = authorizationStatus === AuthorizationStatus.Unknown;
   const randomCity = CITIES[Math.floor(Math.random() * CITIES.length)];
 
   if (isAuth) {
     return <Navigate to={AppRoute.Root} />;
+  }
+
+  if (isAuthUnknown) {
+    return <Loading />;
   }
 
   return (
