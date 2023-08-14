@@ -3,12 +3,16 @@ import { NameSpace } from '../../constants';
 import { Card, CityNames, State } from '../../types';
 import { selectActiveCity } from '../app-process/selectors';
 
-const selectOffers = (state: State) => state[NameSpace.Offers].offers;
-const selectActiveOffer = (state: State) => state[NameSpace.Offers].activeOffer;
-const selectOffersNearby = (state: State) =>
+const selectOffers = (state: Pick<State, typeof NameSpace.Offers>) =>
+  state[NameSpace.Offers].offers;
+const selectActiveOffer = (state: Pick<State, typeof NameSpace.Offers>) =>
+  state[NameSpace.Offers].activeOffer;
+const selectOffersNearby = (state: Pick<State, typeof NameSpace.Offers>) =>
   state[NameSpace.Offers].offersNearby;
-const selectStatusAll = (state: State) => state[NameSpace.Offers].statusAll;
-const selectStatusOffer = (state: State) => state[NameSpace.Offers].statusOffer;
+const selectStatusAll = (state: Pick<State, typeof NameSpace.Offers>) =>
+  state[NameSpace.Offers].statusAll;
+const selectStatusOffer = (state: Pick<State, typeof NameSpace.Offers>) =>
+  state[NameSpace.Offers].statusOffer;
 
 const selectCurrentOffers = createSelector(
   selectOffers,
