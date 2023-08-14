@@ -6,14 +6,12 @@ import { AuthorizationStatuses, User, UserData } from '../../types';
 type UserProcess = {
   authorizationStatus: AuthorizationStatuses;
   user: (User & UserData) | null;
-  statusAuth: string;
   statusLogin: string;
 };
 
 const initialState: UserProcess = {
   authorizationStatus: AuthorizationStatus.Unknown,
   user: null,
-  statusAuth: Status.Idle,
   statusLogin: Status.Idle,
 };
 
@@ -23,17 +21,12 @@ export const userProcess = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(checkAuthAction.pending, (state) => {
-        state.statusAuth = Status.Loading;
-      })
       .addCase(checkAuthAction.fulfilled, (state, action) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
         state.user = action.payload;
-        state.statusAuth = Status.Success;
       })
       .addCase(checkAuthAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
-        state.statusAuth = Status.Error;
       })
       .addCase(loginAction.pending, (state) => {
         state.statusLogin = Status.Loading;
