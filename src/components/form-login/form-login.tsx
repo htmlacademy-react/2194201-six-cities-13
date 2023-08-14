@@ -1,34 +1,31 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
-import { FormLoginData, SEND_ERROR_TEXT, Status } from '../../constants';
+import { FormLoginData, Status } from '../../constants';
 import { UserAuth } from '../../types';
 import { AUTH_FIELDS } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { selectStatusLogin } from '../../store/user-process/selectors';
 import styles from './error.module.css';
-import { useStatusError } from '../../hooks/use-status-error/use-status-error';
 
 function FormLogin(): JSX.Element {
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectStatusLogin);
-  const { email, password } = FormLoginData;
+  const { Email, Password } = FormLoginData;
 
   const [userAuth, setUserAuth] = useState<UserAuth>({
     email: {
       value: '',
       isValid: false,
-      errorText: email.textError,
-      regex: email.regEx,
+      errorText: Email.TextError,
+      regex: Email.RegEx,
     },
     password: {
       value: '',
       isValid: false,
-      errorText: password.textError,
-      regex: password.regEx,
+      errorText: Password.TextError,
+      regex: Password.RegEx,
     },
   });
-
-  useStatusError(selectStatusLogin, SEND_ERROR_TEXT);
 
   const isValidValues = userAuth.email.isValid && userAuth.password.isValid;
 
@@ -44,7 +41,7 @@ function FormLogin(): JSX.Element {
     }
   };
 
-  const handleInputsChange = (
+  const onInputsChange = (
     name: (typeof AUTH_FIELDS)[number]['name'],
     value: string
   ) => {
@@ -71,7 +68,7 @@ function FormLogin(): JSX.Element {
             <label className="visually-hidden">{label}</label>
             <input
               onChange={(evt: ChangeEvent<HTMLInputElement>) =>
-                handleInputsChange(name, evt.target.value)
+                onInputsChange(name, evt.target.value)
               }
               className="login__input form__input"
               type={name}

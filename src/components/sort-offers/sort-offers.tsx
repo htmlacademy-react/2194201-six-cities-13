@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import { useState, useEffect } from 'react';
-import { SORT_ITEMS } from '../../constants';
+import { SortName } from '../../constants';
 import { SortNames } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectActiveSort } from '../../store/app-process/selectors';
@@ -64,7 +64,7 @@ function SortOffers(): JSX.Element {
           'places__options--opened': isOpen,
         })}
       >
-        {SORT_ITEMS.map((item) => (
+        {Object.values(SortName).map((item) => (
           <li
             className={cn('places__option', {
               'places__option--active': activeSort === item,

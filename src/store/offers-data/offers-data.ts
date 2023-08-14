@@ -5,7 +5,9 @@ import {
   fetchOffersAction,
   fetchActiveOfferAction,
   fetchOffersNearbyAction,
+  changeFavoriteStatusAction,
 } from '../api-actions';
+import { changeOfferFavorite } from '../../helpers/change-offer-favorite';
 
 type OffersData = {
   offers: Card[];
@@ -51,6 +53,13 @@ export const offersData = createSlice({
       })
       .addCase(fetchOffersNearbyAction.fulfilled, (state, action) => {
         state.offersNearby = action.payload;
+      })
+      .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
+        changeOfferFavorite(
+          [state.offers, state.offersNearby],
+          state.activeOffer,
+          action.payload
+        );
       });
   },
 });

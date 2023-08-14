@@ -1,17 +1,25 @@
 import cn from 'classnames';
 import { Helmet } from 'react-helmet-async';
-import { Card } from '../../types';
+import Loading from '../loading/loading';
 import Header from '../../components/header/header';
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import Footer from '../../components/footer/footer';
 import FavoriteList from '../../components/favorite-list/favorite-list';
+import { useAppSelector } from '../../hooks';
+import {
+  selectFavorites,
+  selectStatusAll,
+} from '../../store/favorites-data/selectors';
+import { Status } from '../../constants';
 
-type FavoritesProps = {
-  favoriteList: Card[];
-};
+function Favorites(): JSX.Element {
+  const favorites = useAppSelector(selectFavorites);
+  const status = useAppSelector(selectStatusAll);
+  const isNotEmpty = !!favorites.length;
 
-function Favorites({ favoriteList }: FavoritesProps): JSX.Element {
-  const isNotEmpty = !!favoriteList.length;
+  if (status === Status.Loading) {
+    return <Loading />;
+  }
 
   return (
     <div className={cn('page', { 'page--favorites-empty': !isNotEmpty })}>
@@ -31,7 +39,7 @@ function Favorites({ favoriteList }: FavoritesProps): JSX.Element {
             })}
           >
             {isNotEmpty ? (
-              <FavoriteList favoriteList={favoriteList} />
+              <FavoriteList favoriteList={favorites} />
             ) : (
               <FavoritesEmpty />
             )}

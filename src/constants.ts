@@ -2,6 +2,7 @@ import { PointExpression } from 'leaflet';
 
 const BACKEND_URL = 'https://13.design.pages.academy/six-cities';
 const REQUEST_TIMEOUT = 5000;
+const FAVORITES_TIMEOUT = 500;
 const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
 const ONE_STAR_RATIO = 20;
 const MAX_OFFER_IMAGES = 6;
@@ -13,10 +14,6 @@ const URL_PIN_CURRENT = 'img/pin-active.svg';
 const ICON_SIZE = [27, 39] as PointExpression;
 const DATE = 'YYYY-MM-DD';
 const MONTH_TEXT = 'MMMM';
-const SEND_ERROR_TEXT = 'The form has not been sent, please try again!';
-const OFFER_ERROR_TEXT = 'Error loading the offer. Refresh the page!';
-const AUTH_ERROR_TEXT =
-  'The list of offers could not be loaded. Refresh the page!';
 const TILE_LAYER =
   'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
 const COPYRIGHT =
@@ -31,12 +28,12 @@ const CITIES = [
   'Dusseldorf',
 ] as const;
 
-const SORT_ITEMS = [
-  'Popular',
-  'Price: low to high',
-  'Price: high to low',
-  'Top rated first',
-] as const;
+const SortName = {
+  Popular: 'Popular',
+  LowPrice: 'Price: low to high',
+  HighPrice: 'Price: high to low',
+  TopRating: 'Top rated first',
+} as const;
 
 const RATINGS = [
   { star: 5, title: 'perfect' },
@@ -52,19 +49,19 @@ const AUTH_FIELDS = [
 ] as const;
 
 const TextLength = {
-  min: 50,
-  max: 300,
+  Min: 50,
+  Max: 300,
 } as const;
 
 const FormLoginData = {
-  email: {
-    textError: 'Введите правильный Email!',
-    regEx:
+  Email: {
+    TextError: 'Введите правильный Email!',
+    RegEx:
       /^[a-z0-9-]+(?:\.[a-z0-9-]+)*@(?:[a-z0-9](?:[a-z-]*[a-z])?\.)+[a-z]{2,4}$/,
   },
-  password: {
-    textError: 'Минимум 1 цифра и 1 буква без пробелов!',
-    regEx: /\d+[a-zA-Z]+|[a-zA-Z]+\d+/,
+  Password: {
+    TextError: 'Минимум 1 цифра и 1 буква без пробелов!',
+    RegEx: /\d+[a-zA-Z]+|[a-zA-Z]+\d+/,
   },
 } as const;
 
@@ -77,6 +74,7 @@ const AppRoute = {
 
 const APIRoute = {
   Offers: '/offers',
+  Favorite: '/favorite',
   Login: '/login',
   Logout: '/logout',
   Nearby: '/nearby',
@@ -106,6 +104,7 @@ const Status = {
 
 export {
   BACKEND_URL,
+  FAVORITES_TIMEOUT,
   REQUEST_TIMEOUT,
   AUTH_TOKEN_KEY_NAME,
   ONE_STAR_RATIO,
@@ -118,17 +117,14 @@ export {
   ICON_SIZE,
   DATE,
   MONTH_TEXT,
-  SEND_ERROR_TEXT,
-  OFFER_ERROR_TEXT,
-  AUTH_ERROR_TEXT,
   TILE_LAYER,
   COPYRIGHT,
   CITIES,
-  SORT_ITEMS,
   RATINGS,
   AUTH_FIELDS,
   TextLength,
   FormLoginData,
+  SortName,
   AppRoute,
   APIRoute,
   AuthorizationStatus,

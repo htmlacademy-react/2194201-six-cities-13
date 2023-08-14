@@ -2,13 +2,12 @@ import cn from 'classnames';
 import { useEffect } from 'react';
 import Header from '../../components/header/header';
 import NotFound from '../not-found/not-found';
-import PlaceCard from '../../components/place-card/place-card';
 import Map from '../../components/map/map';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { Reviews } from '../../components/reviews/reviews';
-import { OFFER_ERROR_TEXT, ONE_STAR_RATIO, Status } from '../../constants';
-import { Card } from '../../types';
+import { ONE_STAR_RATIO, Status } from '../../constants';
+import { Card, ParamsId } from '../../types';
 import { MAX_OFFER_IMAGES, MAX_OFFERS_NEARBY } from '../../constants';
 import { getOffersLocation } from '../../helpers/get-offers-location';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -24,18 +23,16 @@ import {
 } from '../../store/offers-data/selectors';
 import Loading from '../loading/loading';
 import ButtonFavorites from '../../components/button-favorites/button-favorites';
-import { useStatusError } from '../../hooks/use-status-error/use-status-error';
+import PlaceCard from '../../components/place-card/place-card';
 
 function Offer(): JSX.Element {
-  const { id: offerId } = useParams() as { id: string };
+  const { id: offerId } = useParams() as ParamsId;
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchActiveOfferAction(offerId));
     dispatch(fetchOffersNearbyAction(offerId));
   }, [offerId, dispatch]);
-
-  useStatusError(selectStatusOffer, OFFER_ERROR_TEXT);
 
   const status = useAppSelector(selectStatusOffer);
   const currentOffer = useAppSelector(selectActiveOffer);
@@ -109,6 +106,7 @@ function Offer(): JSX.Element {
                 <ButtonFavorites
                   className="offer"
                   isFavorite={isFavorite}
+                  offerId={offerId}
                   width={31}
                   height={33}
                 />

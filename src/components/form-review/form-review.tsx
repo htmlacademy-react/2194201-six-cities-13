@@ -7,20 +7,20 @@ import {
   useCallback,
 } from 'react';
 import { useParams } from 'react-router-dom';
-import { RATINGS, SEND_ERROR_TEXT, Status, TextLength } from '../../constants';
+import { RATINGS, Status, TextLength } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
 import { selectStatusPost } from '../../store/reviews-data/selectors';
 import { store } from '../../store';
 import { setStatusPost } from '../../store/reviews-data/reviews-data';
-import { FormReviewRatingMemo } from '../form-review-rating/form-review-rating-memo';
-import { useStatusError } from '../../hooks/use-status-error/use-status-error';
+import FormReviewRating from '../form-review-rating/form-review-rating';
+import { ParamsId } from '../../types';
 
 function FormReview(): JSX.Element {
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectStatusPost);
-  const { id } = useParams() as { id: string };
-  const { min, max } = TextLength;
+  const { id } = useParams() as ParamsId;
+  const { Min, Max } = TextLength;
 
   const formRef = useRef<HTMLFormElement | null>(null);
   const [rating, setRating] = useState<number>(0);
@@ -35,9 +35,7 @@ function FormReview(): JSX.Element {
     }
   }, [status]);
 
-  useStatusError(selectStatusPost, SEND_ERROR_TEXT);
-
-  const isValid = !!rating && comment.length >= min && comment.length <= max;
+  const isValid = !!rating && comment.length >= Min && comment.length <= Max;
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -53,7 +51,7 @@ function FormReview(): JSX.Element {
     }
   };
 
-  const handleInputsChange = useCallback((star: number) => {
+  const onInputsChange = useCallback((star: number) => {
     setRating(star);
   }, []);
 
@@ -74,11 +72,11 @@ function FormReview(): JSX.Element {
       </label>
       <div className="reviews__rating-form form__rating">
         {RATINGS.map(({ star, title }) => (
-          <FormReviewRatingMemo
+          <FormReviewRating
             key={star}
             star={star}
             title={title}
-            handleInputsChange={handleInputsChange}
+            onInputsChange={onInputsChange}
           />
         ))}
       </div>
@@ -89,14 +87,14 @@ function FormReview(): JSX.Element {
         name="comment"
         placeholder="Tell how was your stay, what you like and what can be improved"
         defaultValue=""
-        minLength={min}
-        maxLength={max}
+        minLength={Min}
+        maxLength={Max}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set{' '}
           <span className="reviews__star">rating</span> and describe your stay
-          with at least <b className="reviews__text-amount">{min} characters</b>
+          with at least <b className="reviews__text-amount">{Min} characters</b>
           .
         </p>
         <button

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CITIES, SORT_ITEMS, NameSpace } from '../../constants';
+import { CITIES, NameSpace, SortName } from '../../constants';
 import { CityNames, SortNames } from '../../types';
 
 type AppProcess = {
@@ -10,7 +10,7 @@ type AppProcess = {
 
 const initialState: AppProcess = {
   activeCity: CITIES[0],
-  activeSort: SORT_ITEMS[0],
+  activeSort: SortName.Popular,
   error: null,
 };
 

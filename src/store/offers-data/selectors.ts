@@ -11,7 +11,8 @@ const selectStatusAll = (state: State) => state[NameSpace.Offers].statusAll;
 const selectStatusOffer = (state: State) => state[NameSpace.Offers].statusOffer;
 
 const selectCurrentOffers = createSelector(
-  [selectOffers, selectActiveCity],
+  selectOffers,
+  selectActiveCity,
   (offers: Card[], activeCity: CityNames): Card[] =>
     offers.filter(({ city }) => activeCity === city.name)
 );

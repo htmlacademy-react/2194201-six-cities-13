@@ -1,10 +1,12 @@
 import { AxiosInstance } from 'axios';
-import { AuthorizationStatus, CITIES, SORT_ITEMS, AppRoute } from './constants';
+import { AuthorizationStatus, CITIES, AppRoute, SortName } from './constants';
 import { store } from './store/index';
 
 export type CityNames = (typeof CITIES)[number];
-export type SortNames = (typeof SORT_ITEMS)[number];
+export type SortNames = (typeof SortName)[keyof typeof SortName];
 export type Token = string;
+
+export type ParamsId = Pick<Card, 'id'>;
 
 export type User = {
   name: string;
@@ -55,6 +57,11 @@ export type OfferCard = {
   images: string[];
   maxAdults: number;
 } & Card;
+
+export type FavoriteData = {
+  offerId: string;
+  status: number;
+};
 
 export type Review = {
   id: string;

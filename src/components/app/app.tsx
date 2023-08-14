@@ -10,13 +10,8 @@ import Offer from '../../pages/offer/offer';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 import { AppRoute } from '../../constants';
-import { Card } from '../../types';
 
-type AppProps = {
-  favoriteList: Card[];
-};
-
-function App({ favoriteList }: AppProps): JSX.Element {
+function App(): JSX.Element {
   return (
     <HelmetProvider>
       <HistoryRouter history={browserHistory}>
@@ -28,7 +23,7 @@ function App({ favoriteList }: AppProps): JSX.Element {
             path={AppRoute.Favorites}
             element={
               <PrivateRoute>
-                <Favorites favoriteList={favoriteList} />
+                <Favorites />
               </PrivateRoute>
             }
           />
