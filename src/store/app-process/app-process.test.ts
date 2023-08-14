@@ -7,7 +7,7 @@ import {
 } from './app-process';
 
 describe('AppProcess Slice', () => {
-  it('should return default initial state with empty action and undefined state', () => {
+  it('should return initial state with empty action', () => {
     const emptyAction = { type: '' };
     const expectedState = {
       activeCity: CITIES[2],
@@ -59,7 +59,7 @@ describe('AppProcess Slice', () => {
       changeActiveSort(SortName.TopRating)
     );
 
-    expect(result.activeSort).toEqual(expectedActiveSort);
+    expect(result.activeSort).toBe(expectedActiveSort);
   });
 
   it('should error response with "setError" action', () => {
@@ -71,6 +71,6 @@ describe('AppProcess Slice', () => {
     const expectedError = 'Error 404. Page not found';
     const result = appProcess.reducer(initialState, setError(expectedError));
 
-    expect(result.error).toEqual(expectedError);
+    expect(result.error).toBe(expectedError);
   });
 });
