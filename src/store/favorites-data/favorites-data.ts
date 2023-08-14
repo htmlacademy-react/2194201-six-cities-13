@@ -9,13 +9,11 @@ import {
 type FavoritesData = {
   favorites: Card[];
   statusAll: string;
-  statusPost: string;
 };
 
 const initialState: FavoritesData = {
   favorites: [],
   statusAll: Status.Idle,
-  statusPost: Status.Idle,
 };
 
 export const favoritesData = createSlice({
@@ -34,9 +32,6 @@ export const favoritesData = createSlice({
       .addCase(fetchFavoritesAction.rejected, (state) => {
         state.statusAll = Status.Error;
       })
-      .addCase(changeFavoriteStatusAction.pending, (state) => {
-        state.statusPost = Status.Loading;
-      })
       .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
         const favoriteOffers = state.favorites;
         const { id, isFavorite } = action.payload;
@@ -46,11 +41,6 @@ export const favoritesData = createSlice({
         } else {
           state.favorites.push(action.payload);
         }
-
-        state.statusPost = Status.Success;
-      })
-      .addCase(changeFavoriteStatusAction.rejected, (state) => {
-        state.statusPost = Status.Error;
       });
   },
 });
