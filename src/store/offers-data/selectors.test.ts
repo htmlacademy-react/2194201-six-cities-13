@@ -11,11 +11,12 @@ import {
 
 describe('OffersData selectors', () => {
   const offerList = makeFakeOffers();
+  const offersNear = makeFakeActiveOffer();
   const state = {
     [NameSpace.Offers]: {
       offers: offerList,
       activeOffer: makeFakeActiveOffer(),
-      offersNearby: offerList,
+      offersNearby: [offersNear, offersNear, offersNear],
       statusAll: Status.Idle,
       statusOffer: Status.Idle,
     },
