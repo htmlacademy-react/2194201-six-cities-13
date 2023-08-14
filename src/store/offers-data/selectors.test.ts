@@ -39,13 +39,13 @@ describe('OffersData selectors', () => {
     expect(result).toBe(offersNearby);
   });
 
-  it('should return status offers reject value from state', () => {
+  it('should return status offers response value from state', () => {
     const { statusAll } = state[NameSpace.Offers];
     const result = selectStatusAll(state);
     expect(result).toBe(statusAll);
   });
 
-  it('should return status active offer reject value from state', () => {
+  it('should return status active offer response value from state', () => {
     const { statusOffer } = state[NameSpace.Offers];
     const result = selectStatusOffer(state);
     expect(result).toBe(statusOffer);
