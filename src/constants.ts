@@ -2,7 +2,6 @@ import { PointExpression } from 'leaflet';
 
 const BACKEND_URL = 'https://13.design.pages.academy/six-cities';
 const REQUEST_TIMEOUT = 5000;
-const FAVORITES_TIMEOUT = 500;
 const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
 const ONE_STAR_RATIO = 20;
 const MAX_OFFER_IMAGES = 6;
@@ -104,7 +103,6 @@ const Status = {
 
 export {
   BACKEND_URL,
-  FAVORITES_TIMEOUT,
   REQUEST_TIMEOUT,
   AUTH_TOKEN_KEY_NAME,
   ONE_STAR_RATIO,
