@@ -5,5 +5,7 @@ const selectFavorites = (state: Pick<State, typeof NameSpace.Favorites>) =>
   state[NameSpace.Favorites].favorites;
 const selectStatusAll = (state: Pick<State, typeof NameSpace.Favorites>) =>
   state[NameSpace.Favorites].statusAll;
+const selectStatusChange = (state: Pick<State, typeof NameSpace.Favorites>) =>
+  state[NameSpace.Favorites].statusChange;
 
-export { selectFavorites, selectStatusAll };
+export { selectFavorites, selectStatusAll, selectStatusChange };
