@@ -1,18 +1,17 @@
 import { CITIES } from '../../constants';
-import { Card } from '../../types';
 import FavoriteItem from '../favorite-item/favorite-item';
+import { useAppSelector } from '../../hooks';
+import { selectFavorites } from '../../store/favorites-data/selectors';
 
-type FavoriteListProps = {
-  favoriteList: Card[];
-};
+function FavoriteList(): JSX.Element {
+  const favorites = useAppSelector(selectFavorites);
 
-function FavoriteList({ favoriteList }: FavoriteListProps): JSX.Element {
   return (
     <>
       <h1 className="favorites__title">Saved listing</h1>
       <ul className="favorites__list">
         {CITIES.map((city) => {
-          const favoritesSortCity = favoriteList.filter(
+          const favoritesSortCity = favorites.filter(
             (card) => city === card.city.name
           );
 
