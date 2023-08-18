@@ -56,7 +56,7 @@ const FormLoginData = {
   Email: {
     TextError: 'Введите правильный Email!',
     RegEx:
-      /^[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*@(?:[A-Za-z0-9](?:[A-Za-z-]*[a-z])?\.)+[a-z]{2,4}$/,
+      /^[a-z0-9-]+(?:\.[a-z0-9-]+)*@(?:[a-z0-9](?:[a-z-]*[a-z])?\.)+[a-z]{2,4}$/i,
   },
   Password: {
     TextError: 'Минимум 1 цифра и 1 буква без пробелов!',

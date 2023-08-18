@@ -25,6 +25,7 @@ import Loading from '../loading/loading';
 import ButtonFavorites from '../../components/button-favorites/button-favorites';
 import PlaceCard from '../../components/place-card/place-card';
 import { pluralize } from '../../helpers/pluralize';
+import { increaseFirstLetter } from '../../helpers/increase-first-letter';
 
 function Offer(): JSX.Element {
   const { id: offerId } = useParams() as ParamsId;
@@ -123,9 +124,10 @@ function Offer(): JSX.Element {
                   {rating}
                 </span>
               </div>
+              s
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  {type[0].toUpperCase() + type.slice(1)}
+                  {increaseFirstLetter(type)}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
                   {bedrooms} {pluralize('Bedroom', bedrooms)}
