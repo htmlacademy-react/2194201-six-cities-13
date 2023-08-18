@@ -9,7 +9,7 @@ type OffersParameters = {
 };
 
 const getRandomIndex = (min: number, max: number) =>
-  Math.round(Math.random() * (max - min) + min);
+  Math.floor(Math.random() * (max - min) + min);
 
 const makeFakeOffers = (parameters?: OffersParameters): Card[] => {
   const arrayLength = 5;
@@ -19,7 +19,7 @@ const makeFakeOffers = (parameters?: OffersParameters): Card[] => {
     (_item, index) =>
       ({
         id:
-          parameters?.isOneIdLiteral && index === randomIndex
+          parameters?.id && index === randomIndex
             ? parameters?.id
             : datatype.uuid(),
         title: name.title(),

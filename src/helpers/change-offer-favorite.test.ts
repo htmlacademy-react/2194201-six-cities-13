@@ -14,7 +14,6 @@ describe('Function: changeOffersFavorite', () => {
     mockOffers = makeFakeOffers({
       id: offerId,
       isFavorite: false,
-      isOneIdLiteral: true,
     });
     mockActiveOffer = makeFakeActiveOffer({
       id: offerId,
@@ -34,11 +33,19 @@ describe('Function: changeOffersFavorite', () => {
     expect(result).toHaveProperty('id', offerId);
   });
 
-  it('The expected offer ID does not match in any element of the array', () => {
+  it('The selected offer in the array must have the property "isFavorite: true"', () => {
     changeOffersFavorite(mockOffers, mockActiveOffer, mockFavoriteOffer);
 
     const result = mockOffers.find((offer) => offer.id === offerId);
 
-    expect(result).not.toHaveProperty('id', 'unknown');
+    expect(result).toHaveProperty('isFavorite', true);
+  });
+
+  it('The active offer must have the "isFavorite: true" property', () => {
+    changeOffersFavorite(mockOffers, mockActiveOffer, mockFavoriteOffer);
+
+    const result = mockActiveOffer;
+
+    expect(result).toHaveProperty('isFavorite', true);
   });
 });
