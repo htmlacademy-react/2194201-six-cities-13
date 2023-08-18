@@ -38,11 +38,7 @@ function Favorites(): JSX.Element {
               'favorites--empty': !isNotEmpty,
             })}
           >
-            {isNotEmpty ? (
-              <FavoriteList favoriteList={favorites} />
-            ) : (
-              <FavoritesEmpty />
-            )}
+            {isNotEmpty ? <FavoriteList /> : <FavoritesEmpty />}
           </section>
         </div>
       </main>

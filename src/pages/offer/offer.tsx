@@ -124,13 +124,13 @@ function Offer(): JSX.Element {
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  {type}
+                  {type[0].toUpperCase() + type.slice(1)}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  {bedrooms} Bedrooms
+                  {bedrooms} Bedroom{bedrooms > 1 && 's'}
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max {maxAdults} adults
+                  Max {maxAdults} adult{maxAdults > 1 && 's'}
                 </li>
               </ul>
               <div className="offer__price">

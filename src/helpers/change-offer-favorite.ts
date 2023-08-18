@@ -1,16 +1,14 @@
-import { Card } from '../types';
+import { Card, OfferCard } from '../types';
 
-const changeOfferFavorite = (
-  offerArray: Card[][],
-  activeOffer: Card | null,
-  favoriteOffer: Card
+const changeOffersFavorite = (
+  offers: Card[],
+  activeOffer: OfferCard | null,
+  favoriteOffer: OfferCard
 ) => {
-  offerArray.forEach((offers) => {
-    offers.map((offer) => {
-      if (offer.id === favoriteOffer.id) {
-        offer.isFavorite = favoriteOffer.isFavorite;
-      }
-    });
+  offers.map((offer) => {
+    if (offer.id === favoriteOffer.id) {
+      offer.isFavorite = favoriteOffer.isFavorite;
+    }
   });
 
   if (activeOffer && activeOffer.isFavorite !== favoriteOffer.isFavorite) {
@@ -18,4 +16,4 @@ const changeOfferFavorite = (
   }
 };
 
-export { changeOfferFavorite };
+export { changeOffersFavorite };

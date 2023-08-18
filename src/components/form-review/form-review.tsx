@@ -3,7 +3,6 @@ import {
   useEffect,
   ChangeEvent,
   FormEvent,
-  useRef,
   useCallback,
 } from 'react';
 import { useParams } from 'react-router-dom';
@@ -11,8 +10,6 @@ import { RATINGS, Status, TextLength } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
 import { selectStatusPost } from '../../store/reviews-data/selectors';
-import { store } from '../../store';
-import { setStatusPost } from '../../store/reviews-data/reviews-data';
 import FormReviewRating from '../form-review-rating/form-review-rating';
 import { ParamsId } from '../../types';
 
@@ -22,14 +19,11 @@ function FormReview(): JSX.Element {
   const { id } = useParams() as ParamsId;
   const { Min, Max } = TextLength;
 
-  const formRef = useRef<HTMLFormElement | null>(null);
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>('');
 
   useEffect(() => {
-    if (status === Status.Success && formRef.current !== null) {
-      formRef.current.reset();
-      store.dispatch(setStatusPost(Status.Idle));
+    if (status === Status.Success) {
       setRating(0);
       setComment('');
     }
@@ -55,18 +49,14 @@ function FormReview(): JSX.Element {
     setRating(star);
   }, []);
 
-  const handleTextAreaChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    const { value } = evt.target;
-
-    setComment(value);
+  const handleTextAreaChange = ({
+    target,
+  }: ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(target.value);
   };
 
   return (
-    <form
-      className="reviews__form form"
-      ref={formRef}
-      onSubmit={handleFormSubmit}
-    >
+    <form className="reviews__form form" onSubmit={handleFormSubmit}>
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
@@ -76,6 +66,7 @@ function FormReview(): JSX.Element {
             key={star}
             star={star}
             title={title}
+            currentValue={rating}
             onInputsChange={onInputsChange}
           />
         ))}
@@ -84,11 +75,10 @@ function FormReview(): JSX.Element {
         onChange={handleTextAreaChange}
         className="reviews__textarea form__textarea"
         id="review"
-        name="comment"
+        name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        defaultValue=""
-        minLength={Min}
-        maxLength={Max}
+        value={comment}
+        disabled={status === Status.Loading}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

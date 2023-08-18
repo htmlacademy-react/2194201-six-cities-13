@@ -2,15 +2,14 @@ import { PointExpression } from 'leaflet';
 
 const BACKEND_URL = 'https://13.design.pages.academy/six-cities';
 const REQUEST_TIMEOUT = 5000;
-const FAVORITES_TIMEOUT = 500;
 const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
 const ONE_STAR_RATIO = 20;
 const MAX_OFFER_IMAGES = 6;
 const MAX_OFFERS_NEARBY = 3;
 const MAX_REVIEWS = 10;
 const TIMEOUT_SHOW_ERROR = 2000;
-const URL_PIN_DEFAULT = 'img/pin.svg';
-const URL_PIN_CURRENT = 'img/pin-active.svg';
+const URL_PIN_DEFAULT = '/img/pin.svg';
+const URL_PIN_CURRENT = '/img/pin-active.svg';
 const ICON_SIZE = [27, 39] as PointExpression;
 const DATE = 'YYYY-MM-DD';
 const MONTH_TEXT = 'MMMM';
@@ -57,7 +56,7 @@ const FormLoginData = {
   Email: {
     TextError: 'Введите правильный Email!',
     RegEx:
-      /^[a-z0-9-]+(?:\.[a-z0-9-]+)*@(?:[a-z0-9](?:[a-z-]*[a-z])?\.)+[a-z]{2,4}$/,
+      /^[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*@(?:[A-Za-z0-9](?:[A-Za-z-]*[a-z])?\.)+[a-z]{2,4}$/,
   },
   Password: {
     TextError: 'Минимум 1 цифра и 1 буква без пробелов!',
@@ -104,7 +103,6 @@ const Status = {
 
 export {
   BACKEND_URL,
-  FAVORITES_TIMEOUT,
   REQUEST_TIMEOUT,
   AUTH_TOKEN_KEY_NAME,
   ONE_STAR_RATIO,

@@ -9,13 +9,13 @@ import {
 type FavoritesData = {
   favorites: Card[];
   statusAll: string;
-  statusPost: string;
+  statusChange: string;
 };
 
 const initialState: FavoritesData = {
   favorites: [],
   statusAll: Status.Idle,
-  statusPost: Status.Idle,
+  statusChange: Status.Idle,
 };
 
 export const favoritesData = createSlice({
@@ -35,22 +35,21 @@ export const favoritesData = createSlice({
         state.statusAll = Status.Error;
       })
       .addCase(changeFavoriteStatusAction.pending, (state) => {
-        state.statusPost = Status.Loading;
+        state.statusChange = Status.Loading;
       })
       .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
         const favoriteOffers = state.favorites;
         const { id, isFavorite } = action.payload;
+        state.statusChange = Status.Success;
 
         if (!isFavorite) {
           state.favorites = favoriteOffers.filter((data) => data.id !== id);
         } else {
           state.favorites.push(action.payload);
         }
-
-        state.statusPost = Status.Success;
       })
       .addCase(changeFavoriteStatusAction.rejected, (state) => {
-        state.statusPost = Status.Error;
+        state.statusChange = Status.Error;
       });
   },
 });

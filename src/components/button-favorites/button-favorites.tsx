@@ -1,14 +1,10 @@
 import cn from 'classnames';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { debounce } from 'ts-debounce';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectAuthStatus } from '../../store/user-process/selectors';
-import {
-  AppRoute,
-  AuthorizationStatus,
-  FAVORITES_TIMEOUT,
-} from '../../constants';
+import { AppRoute, AuthorizationStatus, Status } from '../../constants';
 import { changeFavoriteStatusAction } from '../../store/api-actions';
+import { selectStatusChange } from '../../store/favorites-data/selectors';
 
 type ButtonFavoritesProps = {
   className: string;
@@ -27,36 +23,22 @@ function ButtonFavorites({
 }: ButtonFavoritesProps): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { pathname } = useLocation();
   const authorizationStatus = useAppSelector(selectAuthStatus);
+  const statusChange = useAppSelector(selectStatusChange);
   const isNoAuth = authorizationStatus === AuthorizationStatus.NoAuth;
-
   const buttonActiveClass = `${className}__bookmark-button--active`;
   const status = Number(!isFavorite);
-
-  const changeFavoriteStatus = () => {
-    dispatch(
-      changeFavoriteStatusAction({
-        offerId,
-        status,
-      })
-    );
-  };
-
-  const favoriteStatusTimeout = debounce(
-    changeFavoriteStatus,
-    FAVORITES_TIMEOUT
-  );
 
   const handleFavoritesButtonClick = () => {
     if (isNoAuth) {
       return navigate(AppRoute.Login);
     } else {
-      if (pathname === AppRoute.Favorites) {
-        changeFavoriteStatus();
-      } else {
-        favoriteStatusTimeout();
-      }
+      dispatch(
+        changeFavoriteStatusAction({
+          offerId,
+          status,
+        })
+      );
     }
   };
 
@@ -67,6 +49,7 @@ function ButtonFavorites({
       })}
       onClick={handleFavoritesButtonClick}
       type="button"
+      disabled={statusChange === Status.Loading}
     >
       <svg
         className={`${className}__bookmark-icon`}
