@@ -1,11 +1,11 @@
 import { address, name, random, datatype, commerce, system } from 'faker';
-import { Card } from '../../types';
+import { Card, LocationMap } from '../../types';
 
-const makeFakeOffers = (): Card[] =>
+const makeFakeOffers = (parameters: LocationMap): Card[] =>
   new Array(5).fill(null).map(
     () =>
       ({
-        id: datatype.uuid(),
+        id: parameters?.id ?? datatype.uuid(),
         title: name.title(),
         type: random.word(),
         price: +commerce.price(),
@@ -17,7 +17,7 @@ const makeFakeOffers = (): Card[] =>
             zoom: datatype.number(20),
           },
         },
-        location: {
+        location: parameters?.location ?? {
           latitude: +address.latitude(),
           longitude: +address.longitude(),
           zoom: datatype.number(20),
