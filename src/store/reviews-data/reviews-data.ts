@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace, Status } from '../../constants';
 import { fetchReviewsAction, postReviewAction } from '../api-actions';
 import { Review } from '../../types';
@@ -16,11 +16,7 @@ const initialState: ReviewsData = {
 export const reviewsData = createSlice({
   name: NameSpace.Reviews,
   initialState,
-  reducers: {
-    setStatusPost: (state, action: PayloadAction<string>) => {
-      state.statusPost = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(fetchReviewsAction.fulfilled, (state, action) => {
@@ -38,5 +34,3 @@ export const reviewsData = createSlice({
       });
   },
 });
-
-export const { setStatusPost } = reviewsData.actions;
