@@ -9,14 +9,14 @@ import {
 } from 'faker';
 import { OfferCard } from '../../types';
 
-type OfferParameters = {
+type OfferConfig = {
   id?: string;
   isFavorite?: boolean;
 };
 
-const makeFakeActiveOffer = (parameters?: OfferParameters): OfferCard =>
+const makeFakeActiveOffer = (config?: OfferConfig): OfferCard =>
   ({
-    id: parameters?.id ?? datatype.uuid(),
+    id: config?.id ?? datatype.uuid(),
     title: name.title(),
     type: random.word(),
     price: +commerce.price(),
@@ -33,7 +33,7 @@ const makeFakeActiveOffer = (parameters?: OfferParameters): OfferCard =>
       longitude: +address.longitude(),
       zoom: datatype.number(20),
     },
-    isFavorite: parameters?.isFavorite ?? datatype.boolean(),
+    isFavorite: config?.isFavorite ?? datatype.boolean(),
     isPremium: datatype.boolean(),
     rating: datatype.number(5),
     description: lorem.slug(),

@@ -4,7 +4,7 @@ import { makeFakeOffers } from '../utils/mocks/offers';
 import { changeOffersFavorite } from './change-offer-favorite';
 
 describe('Function: changeOffersFavorite', () => {
-  const offerId = 'adj4ag4k6a4jk6da8';
+  const OFFER_ID = 'adj4ag4k6a4jk6da8';
 
   let mockOffers: Card[];
   let mockActiveOffer: OfferCard | null;
@@ -12,15 +12,15 @@ describe('Function: changeOffersFavorite', () => {
 
   beforeEach(() => {
     mockOffers = makeFakeOffers({
-      id: offerId,
+      id: OFFER_ID,
       isFavorite: false,
     });
     mockActiveOffer = makeFakeActiveOffer({
-      id: offerId,
+      id: OFFER_ID,
       isFavorite: false,
     });
     mockFavoriteOffer = makeFakeActiveOffer({
-      id: offerId,
+      id: OFFER_ID,
       isFavorite: true,
     });
   });
@@ -28,15 +28,15 @@ describe('Function: changeOffersFavorite', () => {
   it('The expected offer ID matches at least one element of the array', () => {
     changeOffersFavorite(mockOffers, mockActiveOffer, mockFavoriteOffer);
 
-    const result = mockOffers.find((offer) => offer.id === offerId);
+    const result = mockOffers.find((offer) => offer.id === OFFER_ID);
 
-    expect(result).toHaveProperty('id', offerId);
+    expect(result).toHaveProperty('id', OFFER_ID);
   });
 
   it('The selected offer in the array must have the property "isFavorite: true"', () => {
     changeOffersFavorite(mockOffers, mockActiveOffer, mockFavoriteOffer);
 
-    const result = mockOffers.find((offer) => offer.id === offerId);
+    const result = mockOffers.find((offer) => offer.id === OFFER_ID);
 
     expect(result).toHaveProperty('isFavorite', true);
   });

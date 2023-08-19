@@ -6,7 +6,7 @@ import axios, {
 } from 'axios';
 import { StatusCodes } from 'http-status-codes';
 import { getToken } from './token';
-import { BACKEND_URL, REQUEST_TIMEOUT } from '../constants';
+import { APIConfig } from '../constants';
 import { processErrorHandle } from './process-error-handle';
 import { DetailMessageType } from '../types';
 
@@ -21,8 +21,8 @@ const shouldDisplayError = (response: AxiosResponse) =>
 
 const createAPI = (): AxiosInstance => {
   const api = axios.create({
-    baseURL: BACKEND_URL,
-    timeout: REQUEST_TIMEOUT,
+    baseURL: APIConfig.BackendUrl,
+    timeout: APIConfig.RequestTimeout,
   });
 
   api.interceptors.request.use((config: AxiosRequestConfig) => {

@@ -6,7 +6,7 @@ import { reviewsData } from './reviews-data';
 vi.mock('../root-reducer', () => ({ rootReducer: vi.fn() }));
 
 describe('ReviewsData Slice', () => {
-  const offerId = 'adj4ag4k6a4jk6da8';
+  const OFFER_ID = 'adj4ag4k6a4jk6da8';
 
   it('should return initial state with empty action', () => {
     const emptyAction = { type: '' };
@@ -40,7 +40,7 @@ describe('ReviewsData Slice', () => {
 
     const result = reviewsData.reducer(
       undefined,
-      fetchReviewsAction.fulfilled(mockReviews, '', offerId)
+      fetchReviewsAction.fulfilled(mockReviews, '', OFFER_ID)
     );
 
     expect(result).toEqual(expectedState);

@@ -11,7 +11,7 @@ import { offersData } from './offers-data';
 vi.mock('../root-reducer', () => ({ rootReducer: vi.fn() }));
 
 describe('OffersData Slice', () => {
-  const offerId = 'adg65b45ek3j3l45fd6d';
+  const OFFER_ID = 'adg65b45ek3j3l45fd6d';
   const mockOffers = makeFakeOffers();
   const mockActiveOffer = makeFakeActiveOffer();
 
@@ -117,7 +117,7 @@ describe('OffersData Slice', () => {
 
     const result = offersData.reducer(
       undefined,
-      fetchActiveOfferAction.fulfilled(mockActiveOffer, '', offerId)
+      fetchActiveOfferAction.fulfilled(mockActiveOffer, '', OFFER_ID)
     );
 
     expect(result).toEqual(expectedState);
@@ -151,7 +151,7 @@ describe('OffersData Slice', () => {
 
     const result = offersData.reducer(
       undefined,
-      fetchOffersNearbyAction.fulfilled([mockActiveOffer], '', offerId)
+      fetchOffersNearbyAction.fulfilled([mockActiveOffer], '', OFFER_ID)
     );
 
     expect(result).toEqual(expectedState);

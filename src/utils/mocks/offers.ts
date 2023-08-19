@@ -1,7 +1,9 @@
 import { address, name, random, datatype, commerce, system } from 'faker';
 import { Card } from '../../types';
 
-type OffersParameters = {
+const ARRAY_LENGTH = 5;
+
+type OffersConfig = {
   id?: string;
   location?: Location;
   isFavorite?: boolean;
@@ -11,17 +13,13 @@ type OffersParameters = {
 const getRandomIndex = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min) + min);
 
-const makeFakeOffers = (parameters?: OffersParameters): Card[] => {
-  const arrayLength = 5;
-  const randomIndex = getRandomIndex(0, arrayLength);
+const makeFakeOffers = (config?: OffersConfig): Card[] => {
+  const randomIndex = getRandomIndex(0, ARRAY_LENGTH);
 
-  return new Array(arrayLength).fill(null).map(
+  return new Array(ARRAY_LENGTH).fill(null).map(
     (_item, index) =>
       ({
-        id:
-          parameters?.id && index === randomIndex
-            ? parameters?.id
-            : datatype.uuid(),
+        id: config?.id && index === randomIndex ? config?.id : datatype.uuid(),
         title: name.title(),
         type: random.word(),
         price: +commerce.price(),
@@ -33,12 +31,12 @@ const makeFakeOffers = (parameters?: OffersParameters): Card[] => {
             zoom: datatype.number(20),
           },
         },
-        location: parameters?.location ?? {
+        location: config?.location ?? {
           latitude: +address.latitude(),
           longitude: +address.longitude(),
           zoom: datatype.number(20),
         },
-        isFavorite: parameters?.isFavorite ?? datatype.boolean(),
+        isFavorite: config?.isFavorite ?? datatype.boolean(),
         isPremium: datatype.boolean(),
         rating: datatype.number(5),
         previewImage: system.filePath(),

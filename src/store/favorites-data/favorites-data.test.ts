@@ -10,7 +10,7 @@ import { favoritesData } from './favorites-data';
 vi.mock('../root-reducer', () => ({ rootReducer: vi.fn() }));
 
 describe('FavoritesData Slice', () => {
-  const offerId = 'adj4ag4k6a4jk6da8';
+  const OFFER_ID = 'adj4ag4k6a4jk6da8';
 
   it('should return initial state with empty action', () => {
     const emptyAction = { type: '' };
@@ -54,7 +54,7 @@ describe('FavoritesData Slice', () => {
 
   it('The value of the "statusAll" property should change to "Status.Success" and load an array of selected offers witch fetchFavoritesAction.fulfilled', () => {
     const mockOffers = makeFakeOffers({
-      id: offerId,
+      id: OFFER_ID,
       isFavorite: false,
     });
 
@@ -105,7 +105,7 @@ describe('FavoritesData Slice', () => {
   it('If "isFavorite: true", then the selected offer should be added to the array and the value of the "statusChange" property should change to "Status.Success" witch changeFavoriteStatusAction.fulfilled', () => {
     const mockOffers = [
       makeFakeActiveOffer({
-        id: offerId,
+        id: OFFER_ID,
         isFavorite: true,
       }),
     ];
@@ -120,7 +120,7 @@ describe('FavoritesData Slice', () => {
     const result = favoritesData.reducer(
       undefined,
       changeFavoriteStatusAction.fulfilled(mockFavoriteOffer, '', {
-        offerId,
+        offerId: OFFER_ID,
         status: 1,
       })
     );
@@ -130,7 +130,7 @@ describe('FavoritesData Slice', () => {
 
   it('If "isFavorite: false", then the selected offer should be removed from the array and the value of the "statusChange" property should change to "Status.Success" witch changeFavoriteStatusAction.fulfilled', () => {
     const mockFavoriteOffer = makeFakeActiveOffer({
-      id: offerId,
+      id: OFFER_ID,
       isFavorite: false,
     });
 
@@ -143,7 +143,7 @@ describe('FavoritesData Slice', () => {
     const result = favoritesData.reducer(
       undefined,
       changeFavoriteStatusAction.fulfilled(mockFavoriteOffer, '', {
-        offerId,
+        offerId: OFFER_ID,
         status: 0,
       })
     );

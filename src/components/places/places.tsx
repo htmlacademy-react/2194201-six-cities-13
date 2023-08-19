@@ -10,12 +10,12 @@ import PlaceCard from '../place-card/place-card';
 import { useCallback } from 'react';
 import { pluralize } from '../../helpers/pluralize';
 
-type CitiesProps = {
+type PlacesProps = {
   currentOffers: Card[];
   setOfferId: (id: string) => void;
 };
 
-function Places({ currentOffers, setOfferId }: CitiesProps): JSX.Element {
+function Places({ currentOffers, setOfferId }: PlacesProps): JSX.Element {
   const activeSort = useAppSelector(selectActiveSort);
   const activeCity = useAppSelector(selectActiveCity);
   const sortOffers = useSortOffers(activeSort, currentOffers);

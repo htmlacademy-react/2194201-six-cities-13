@@ -9,8 +9,7 @@ import {
   ONE_STAR_RATIO,
   MAX_REVIEWS,
   AuthorizationStatus,
-  DATE,
-  MONTH_TEXT,
+  DateType,
 } from '../../constants';
 import { fetchReviewsAction } from '../../store/api-actions';
 import { ParamsId } from '../../types';
@@ -37,9 +36,9 @@ function Reviews(): JSX.Element {
       </h2>
       <ul className="reviews__list">
         {sortedReviews.map(({ id, date, user, comment, rating }) => {
-          const reviewDate = dayjs(date).format(DATE);
+          const reviewDate = dayjs(date).format(DateType.Date);
           const year = dayjs(date).year();
-          const month = dayjs(date).format(MONTH_TEXT);
+          const month = dayjs(date).format(DateType.Month);
 
           return (
             <li className="reviews__item" key={id}>
