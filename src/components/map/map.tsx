@@ -5,14 +5,6 @@ import { City, LocationMap } from '../../types';
 import { MapConfig } from '../../constants';
 import 'leaflet/dist/leaflet.css';
 
-type MapProps = {
-  className: string;
-  cityInfo: City;
-  offers: LocationMap[];
-  height: string;
-  offerId?: string;
-};
-
 const { IconSize, IconAnchor, UrlPinDefault, UrlPinCurrent } = MapConfig;
 
 const defaultCustomPin: Icon = new Icon({
@@ -26,6 +18,14 @@ const currentCustomPin: Icon = new Icon({
   iconSize: IconSize,
   iconAnchor: IconAnchor,
 });
+
+type MapProps = {
+  className: string;
+  cityInfo: City;
+  offers: LocationMap[];
+  height: string;
+  offerId?: string;
+};
 
 function Map({
   className,
