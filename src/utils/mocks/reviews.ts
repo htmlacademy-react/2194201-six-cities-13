@@ -1,8 +1,8 @@
 import { name, datatype, system, date, lorem } from 'faker';
 import { Review } from '../../types';
 
-const makeFakeReviews = (): Review[] =>
-  new Array(3).fill(null).map(
+const makeFakeReviews = (length = 3): Review[] =>
+  new Array(length).fill(null).map(
     () =>
       ({
         id: datatype.uuid(),

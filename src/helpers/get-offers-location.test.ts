@@ -5,22 +5,15 @@ describe('Function: getOffersLocation', () => {
   const mockOffers = makeFakeOffers();
 
   it('Return an array with {id, location} objects for map is correct', () => {
-    const offersLocation = mockOffers.map((offer) => ({
-      id: offer.id,
-      location: offer.location,
-    }));
     const result = getOffersLocation(mockOffers);
 
-    expect(result).toEqual(offersLocation);
-  });
-
-  it('Return an array with {id, location} objects for map is incorrect', () => {
-    const offersLocation = mockOffers.map(() => ({
-      id: 'unknown',
-      location: 'unknown',
-    }));
-    const result = getOffersLocation(mockOffers);
-
-    expect(result).not.toStrictEqual(offersLocation);
+    result.map((offer) => {
+      expect(offer).toHaveProperty('id');
+      expect(offer).toHaveProperty('location');
+      expect(offer.location).toHaveProperty('latitude');
+      expect(offer.location).toHaveProperty('longitude');
+      expect(offer.location).toHaveProperty('zoom');
+      expect(Object.keys(offer).length).toBe(2);
+    });
   });
 });

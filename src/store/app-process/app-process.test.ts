@@ -6,6 +6,8 @@ import {
   setError,
 } from './app-process';
 
+vi.mock('../root-reducer', () => ({ rootReducer: vi.fn() }));
+
 describe('AppProcess Slice', () => {
   it('should return initial state with empty action', () => {
     const emptyAction = { type: '' };

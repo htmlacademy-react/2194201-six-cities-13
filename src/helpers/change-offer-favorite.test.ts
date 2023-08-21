@@ -3,39 +3,49 @@ import { makeFakeActiveOffer } from '../utils/mocks/active-offer';
 import { makeFakeOffers } from '../utils/mocks/offers';
 import { changeOffersFavorite } from './change-offer-favorite';
 
-const checkOffersFavorite = (
-  offers: Card[],
-  activeOffer: OfferCard | null,
-  favoriteOffer: OfferCard
-) => {
-  offers.map((offer) => {
-    if (offer.id === favoriteOffer.id) {
-      offer.isFavorite = favoriteOffer.isFavorite;
-    }
+describe('Function: changeOffersFavorite', () => {
+  const OFFER_ID = 'adj4ag4k6a4jk6da8';
+
+  let mockOffers: Card[];
+  let mockActiveOffer: OfferCard | null;
+  let mockFavoriteOffer: OfferCard;
+
+  beforeEach(() => {
+    mockOffers = makeFakeOffers({
+      id: OFFER_ID,
+      isFavorite: false,
+    });
+    mockActiveOffer = makeFakeActiveOffer({
+      id: OFFER_ID,
+      isFavorite: false,
+    });
+    mockFavoriteOffer = makeFakeActiveOffer({
+      id: OFFER_ID,
+      isFavorite: true,
+    });
   });
 
-  if (activeOffer && activeOffer.isFavorite !== favoriteOffer.isFavorite) {
-    activeOffer.isFavorite = favoriteOffer.isFavorite;
-  }
-};
+  it('The expected offer ID matches at least one element of the array', () => {
+    changeOffersFavorite(mockOffers, mockActiveOffer, mockFavoriteOffer);
 
-describe('Function: changeOffersFavorite', () => {
-  const mockOffers = makeFakeOffers();
-  const mockActiveOffer = makeFakeActiveOffer();
-  const mockFavoriteOffer = makeFakeActiveOffer();
+    const result = mockOffers.find((offer) => offer.id === OFFER_ID);
 
-  it('Return an array with {id, location} objects for map is correct', () => {
-    const expectedOffers = checkOffersFavorite(
-      mockOffers,
-      mockActiveOffer,
-      mockFavoriteOffer
-    );
-    const result = changeOffersFavorite(
-      mockOffers,
-      mockActiveOffer,
-      mockFavoriteOffer
-    );
+    expect(result).toHaveProperty('id', OFFER_ID);
+  });
 
-    expect(result).toEqual(expectedOffers);
+  it('The selected offer in the array must have the property "isFavorite: true"', () => {
+    changeOffersFavorite(mockOffers, mockActiveOffer, mockFavoriteOffer);
+
+    const result = mockOffers.find((offer) => offer.id === OFFER_ID);
+
+    expect(result).toHaveProperty('isFavorite', true);
+  });
+
+  it('The active offer must have the "isFavorite: true" property', () => {
+    changeOffersFavorite(mockOffers, mockActiveOffer, mockFavoriteOffer);
+
+    const result = mockActiveOffer;
+
+    expect(result).toHaveProperty('isFavorite', true);
   });
 });

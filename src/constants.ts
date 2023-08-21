@@ -1,22 +1,10 @@
 import { PointExpression } from 'leaflet';
 
-const BACKEND_URL = 'https://13.design.pages.academy/six-cities';
-const REQUEST_TIMEOUT = 5000;
-const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
 const ONE_STAR_RATIO = 20;
 const MAX_OFFER_IMAGES = 6;
 const MAX_OFFERS_NEARBY = 3;
 const MAX_REVIEWS = 10;
 const TIMEOUT_SHOW_ERROR = 2000;
-const URL_PIN_DEFAULT = '/img/pin.svg';
-const URL_PIN_CURRENT = '/img/pin-active.svg';
-const ICON_SIZE = [27, 39] as PointExpression;
-const DATE = 'YYYY-MM-DD';
-const MONTH_TEXT = 'MMMM';
-const TILE_LAYER =
-  'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
-const COPYRIGHT =
-  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 const CITIES = [
   'Paris',
@@ -26,13 +14,6 @@ const CITIES = [
   'Hamburg',
   'Dusseldorf',
 ] as const;
-
-const SortName = {
-  Popular: 'Popular',
-  LowPrice: 'Price: low to high',
-  HighPrice: 'Price: high to low',
-  TopRating: 'Top rated first',
-} as const;
 
 const RATINGS = [
   { star: 5, title: 'perfect' },
@@ -47,7 +28,36 @@ const AUTH_FIELDS = [
   { name: 'password', label: 'Password' },
 ] as const;
 
-const TextLength = {
+const MapConfig = {
+  TileLayer:
+    'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+  Copyright:
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+  IconSize: [27, 39] as PointExpression,
+  IconAnchor: [13, 39] as PointExpression,
+  UrlPinDefault: '/img/pin.svg',
+  UrlPinCurrent: '/img/pin-active.svg',
+} as const;
+
+const APIConfig = {
+  BackendUrl: 'https://13.design.pages.academy/six-cities',
+  RequestTimeout: 5000,
+  AuthTokenKey: 'six-cities-token',
+} as const;
+
+const DateType = {
+  Date: 'YYYY-MM-DD',
+  Month: 'MMMM',
+} as const;
+
+const SortName = {
+  Popular: 'Popular',
+  LowPrice: 'Price: low to high',
+  HighPrice: 'Price: high to low',
+  TopRating: 'Top rated first',
+} as const;
+
+const TextareaLength = {
   Min: 50,
   Max: 300,
 } as const;
@@ -56,7 +66,7 @@ const FormLoginData = {
   Email: {
     TextError: 'Введите правильный Email!',
     RegEx:
-      /^[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*@(?:[A-Za-z0-9](?:[A-Za-z-]*[a-z])?\.)+[a-z]{2,4}$/,
+      /^[a-z0-9-]+(?:\.[a-z0-9-]+)*@(?:[a-z0-9](?:[a-z-]*[a-z])?\.)+[a-z]{2,4}$/i,
   },
   Password: {
     TextError: 'Минимум 1 цифра и 1 буква без пробелов!',
@@ -99,28 +109,21 @@ const Status = {
   Loading: 'loading',
   Success: 'success',
   Error: 'error',
-};
+} as const;
 
 export {
-  BACKEND_URL,
-  REQUEST_TIMEOUT,
-  AUTH_TOKEN_KEY_NAME,
   ONE_STAR_RATIO,
   MAX_OFFERS_NEARBY,
   MAX_OFFER_IMAGES,
   MAX_REVIEWS,
   TIMEOUT_SHOW_ERROR,
-  URL_PIN_DEFAULT,
-  URL_PIN_CURRENT,
-  ICON_SIZE,
-  DATE,
-  MONTH_TEXT,
-  TILE_LAYER,
-  COPYRIGHT,
   CITIES,
   RATINGS,
   AUTH_FIELDS,
-  TextLength,
+  MapConfig,
+  APIConfig,
+  DateType,
+  TextareaLength,
   FormLoginData,
   SortName,
   AppRoute,

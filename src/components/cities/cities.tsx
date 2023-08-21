@@ -5,11 +5,11 @@ import { getOffersLocation } from '../../helpers/get-offers-location';
 import { MainEmpty } from '../../components/main-empty/main-empty';
 import { Card } from '../../types';
 
-type currentOffersProps = {
+type CitiesProps = {
   currentOffers: Card[];
 };
 
-function Cities({ currentOffers }: currentOffersProps): JSX.Element {
+function Cities({ currentOffers }: CitiesProps): JSX.Element {
   const [offerId, setOfferId] = useState<string>('');
   const offersLocation = getOffersLocation(currentOffers);
   const isEmpty = !currentOffers.length;

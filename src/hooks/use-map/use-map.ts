@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, MutableRefObject } from 'react';
 import { Map, TileLayer, Browser } from 'leaflet';
 import { City } from '../../types';
-import { COPYRIGHT, TILE_LAYER } from '../../constants';
+import { MapConfig } from '../../constants';
 
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
@@ -25,8 +25,8 @@ function useMap(
         scrollWheelZoom: false,
       });
 
-      const layer = new TileLayer(TILE_LAYER, {
-        attribution: COPYRIGHT,
+      const layer = new TileLayer(MapConfig.TileLayer, {
+        attribution: MapConfig.Copyright,
       });
 
       instance.addLayer(layer);

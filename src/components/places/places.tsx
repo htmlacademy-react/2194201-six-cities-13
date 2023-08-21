@@ -8,13 +8,14 @@ import {
 } from '../../store/app-process/selectors';
 import PlaceCard from '../place-card/place-card';
 import { useCallback } from 'react';
+import { pluralize } from '../../helpers/pluralize';
 
-type CitiesProps = {
+type PlacesProps = {
   currentOffers: Card[];
   setOfferId: (id: string) => void;
 };
 
-function Places({ currentOffers, setOfferId }: CitiesProps): JSX.Element {
+function Places({ currentOffers, setOfferId }: PlacesProps): JSX.Element {
   const activeSort = useAppSelector(selectActiveSort);
   const activeCity = useAppSelector(selectActiveCity);
   const sortOffers = useSortOffers(activeSort, currentOffers);
@@ -29,7 +30,7 @@ function Places({ currentOffers, setOfferId }: CitiesProps): JSX.Element {
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">
-        {sortOffers.length} place{sortOffers.length > 1 && 's'} to stay in{' '}
+        {sortOffers.length} {pluralize('place', sortOffers.length)} to stay in{' '}
         {activeCity}
       </b>
       <SortOffers />

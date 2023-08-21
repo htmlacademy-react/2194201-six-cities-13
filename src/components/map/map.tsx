@@ -2,8 +2,22 @@ import { useRef, useEffect } from 'react';
 import leaflet, { Icon, Marker } from 'leaflet';
 import useMap from '../../hooks/use-map/use-map';
 import { City, LocationMap } from '../../types';
-import { URL_PIN_CURRENT, URL_PIN_DEFAULT, ICON_SIZE } from '../../constants';
+import { MapConfig } from '../../constants';
 import 'leaflet/dist/leaflet.css';
+
+const { IconSize, IconAnchor, UrlPinDefault, UrlPinCurrent } = MapConfig;
+
+const defaultCustomPin: Icon = new Icon({
+  iconUrl: UrlPinDefault,
+  iconSize: IconSize,
+  iconAnchor: IconAnchor,
+});
+
+const currentCustomPin: Icon = new Icon({
+  iconUrl: UrlPinCurrent,
+  iconSize: IconSize,
+  iconAnchor: IconAnchor,
+});
 
 type MapProps = {
   className: string;
@@ -12,18 +26,6 @@ type MapProps = {
   height: string;
   offerId?: string;
 };
-
-const defaultCustomPin: Icon = new Icon({
-  iconUrl: URL_PIN_DEFAULT,
-  iconSize: ICON_SIZE,
-  iconAnchor: ICON_SIZE,
-});
-
-const currentCustomPin: Icon = new Icon({
-  iconUrl: URL_PIN_CURRENT,
-  iconSize: ICON_SIZE,
-  iconAnchor: ICON_SIZE,
-});
 
 function Map({
   className,

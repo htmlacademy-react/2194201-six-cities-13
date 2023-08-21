@@ -6,7 +6,7 @@ import {
   useCallback,
 } from 'react';
 import { useParams } from 'react-router-dom';
-import { RATINGS, Status, TextLength } from '../../constants';
+import { RATINGS, Status, TextareaLength } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
 import { selectStatusPost } from '../../store/reviews-data/selectors';
@@ -17,7 +17,7 @@ function FormReview(): JSX.Element {
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectStatusPost);
   const { id } = useParams() as ParamsId;
-  const { Min, Max } = TextLength;
+  const { Min, Max } = TextareaLength;
 
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>('');
