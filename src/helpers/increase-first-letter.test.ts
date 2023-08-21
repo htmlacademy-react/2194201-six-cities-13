@@ -8,10 +8,4 @@ describe('Function: increaseFirstLetter', () => {
 
     expect(result).toBe('Bedroom');
   });
-
-  it('Incorrect output of replacing the first letter of a word with a capital one', () => {
-    const result = increaseFirstLetter(EXPECTED_WORD);
-
-    expect(result).not.toBe('bedroom');
-  });
 });
