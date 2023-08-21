@@ -124,6 +124,18 @@ export type ThunkConfig = {
   extra: AxiosInstance;
 };
 
+export type OffersConfig = {
+  id?: string;
+  location?: Location;
+  isFavorite?: boolean;
+  isOneIdLiteral?: boolean;
+};
+
+export type ActiveOfferConfig = {
+  id?: string;
+  isFavorite?: boolean;
+};
+
 export type AppRoutes = (typeof AppRoute)[keyof typeof AppRoute];
 
 export type AuthorizationStatuses =

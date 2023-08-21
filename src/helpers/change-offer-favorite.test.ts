@@ -30,7 +30,7 @@ describe('Function: changeOffersFavorite', () => {
 
     const result = mockOffers.find((offer) => offer.id === OFFER_ID);
 
-    expect(result).toHaveProperty('id', OFFER_ID);
+    expect(result).toHaveProperty('isFavorite', true);
   });
 
   it('The selected offer in the array must have the property "isFavorite: true"', () => {

@@ -1,14 +1,7 @@
 import { address, name, random, datatype, commerce, system } from 'faker';
-import { Card } from '../../types';
+import { Card, OffersConfig } from '../../types';
 
 const ARRAY_LENGTH = 5;
-
-type OffersConfig = {
-  id?: string;
-  location?: Location;
-  isFavorite?: boolean;
-  isOneIdLiteral?: boolean;
-};
 
 const getRandomIndex = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min) + min);

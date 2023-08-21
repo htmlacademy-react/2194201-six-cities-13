@@ -34,7 +34,7 @@ const MapConfig = {
   Copyright:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
   IconSize: [27, 39] as PointExpression,
-  IconAnchor: [13, 39] as PointExpression,
+  IconAnchor: [13.5, 39] as PointExpression,
   UrlPinDefault: '/img/pin.svg',
   UrlPinCurrent: '/img/pin-active.svg',
 } as const;

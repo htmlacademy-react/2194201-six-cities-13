@@ -7,14 +7,9 @@ import {
   lorem,
   system,
 } from 'faker';
-import { OfferCard } from '../../types';
+import { ActiveOfferConfig, OfferCard } from '../../types';
 
-type OfferConfig = {
-  id?: string;
-  isFavorite?: boolean;
-};
-
-const makeFakeActiveOffer = (config?: OfferConfig): OfferCard =>
+const makeFakeActiveOffer = (config?: ActiveOfferConfig): OfferCard =>
   ({
     id: config?.id ?? datatype.uuid(),
     title: name.title(),
