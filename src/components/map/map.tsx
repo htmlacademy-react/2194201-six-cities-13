@@ -17,14 +17,14 @@ const { IconSize, IconAnchor, UrlPinDefault, UrlPinCurrent } = MapConfig;
 
 const defaultCustomPin: Icon = new Icon({
   iconUrl: UrlPinDefault,
-  IconSize,
-  IconAnchor,
+  iconSize: IconSize,
+  iconAnchor: IconAnchor,
 });
 
 const currentCustomPin: Icon = new Icon({
   iconUrl: UrlPinCurrent,
-  IconSize,
-  IconAnchor,
+  iconSize: IconSize,
+  iconAnchor: IconAnchor,
 });
 
 function Map({
