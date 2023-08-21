@@ -124,7 +124,6 @@ function Offer(): JSX.Element {
                   {rating}
                 </span>
               </div>
-              s
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
                   {increaseFirstLetter(type)}
