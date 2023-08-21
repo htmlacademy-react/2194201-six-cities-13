@@ -13,18 +13,18 @@ type MapProps = {
   offerId?: string;
 };
 
-const { IconSize, UrlPinDefault, UrlPinCurrent } = MapConfig;
+const { IconSize, IconAnchor, UrlPinDefault, UrlPinCurrent } = MapConfig;
 
 const defaultCustomPin: Icon = new Icon({
   iconUrl: UrlPinDefault,
-  iconSize: IconSize,
-  iconAnchor: IconSize,
+  IconSize,
+  IconAnchor,
 });
 
 const currentCustomPin: Icon = new Icon({
   iconUrl: UrlPinCurrent,
-  iconSize: IconSize,
-  iconAnchor: IconSize,
+  IconSize,
+  IconAnchor,
 });
 
 function Map({
