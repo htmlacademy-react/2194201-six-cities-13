@@ -12,7 +12,9 @@ function useMap(
   const { latitude, longitude, zoom } = cityInfo.location;
 
   useEffect(() => {
-    if (mapRef.current !== null && !isRenderedRef.current) {
+    let isMounted = true;
+
+    if (isMounted && mapRef.current !== null && !isRenderedRef.current) {
       const instance = new Map(mapRef.current, {
         center: {
           lat: latitude,
@@ -42,6 +44,10 @@ function useMap(
         zoom
       );
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [mapRef, latitude, longitude, zoom, map]);
 
   return map;

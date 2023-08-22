@@ -23,10 +23,16 @@ function FormReview(): JSX.Element {
   const [comment, setComment] = useState<string>('');
 
   useEffect(() => {
-    if (status === Status.Success) {
+    let isMounted = true;
+
+    if (isMounted && status === Status.Success) {
       setRating(0);
       setComment('');
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [status]);
 
   const isValid = !!rating && comment.length >= Min && comment.length <= Max;
