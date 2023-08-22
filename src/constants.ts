@@ -5,6 +5,7 @@ const MAX_OFFER_IMAGES = 6;
 const MAX_OFFERS_NEARBY = 3;
 const MAX_REVIEWS = 10;
 const TIMEOUT_SHOW_ERROR = 2000;
+const REDIRECT_ACTION_NAME = 'app/redirectToRoute';
 
 const CITIES = [
   'Paris',
@@ -117,6 +118,7 @@ export {
   MAX_OFFER_IMAGES,
   MAX_REVIEWS,
   TIMEOUT_SHOW_ERROR,
+  REDIRECT_ACTION_NAME,
   CITIES,
   RATINGS,
   AUTH_FIELDS,
