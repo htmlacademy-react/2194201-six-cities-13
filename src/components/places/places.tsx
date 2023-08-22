@@ -20,11 +20,14 @@ function Places({ currentOffers, setOfferId }: PlacesProps): JSX.Element {
   const activeCity = useAppSelector(selectActiveCity);
   const sortOffers = useSortOffers(activeSort, currentOffers);
 
-  const onPlaceCardMouseOver = useCallback(
+  const handlePlaceCardMouseOver = useCallback(
     (id: string) => setOfferId(id),
     [setOfferId]
   );
-  const onPlaceCardMouseLeave = useCallback(() => setOfferId(''), [setOfferId]);
+  const handlePlaceCardMouseLeave = useCallback(
+    () => setOfferId(''),
+    [setOfferId]
+  );
 
   return (
     <section className="cities__places places">
@@ -40,8 +43,8 @@ function Places({ currentOffers, setOfferId }: PlacesProps): JSX.Element {
             card={offer}
             className="cities"
             key={offer.id}
-            onPlaceCardMouseOver={onPlaceCardMouseOver}
-            onPlaceCardMouseLeave={onPlaceCardMouseLeave}
+            handlePlaceCardMouseOver={handlePlaceCardMouseOver}
+            handlePlaceCardMouseLeave={handlePlaceCardMouseLeave}
           />
         ))}
       </div>

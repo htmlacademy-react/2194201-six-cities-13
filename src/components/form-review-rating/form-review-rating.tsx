@@ -7,16 +7,21 @@ type FormReviewRatingProps = {
   star: number;
   title: string;
   currentValue: number;
-  onInputsChange: (star: number) => void;
+  handleInputsChange: (star: number) => void;
 };
 
 const FormReviewRating = memo(
-  ({ star, title, currentValue, onInputsChange }: FormReviewRatingProps) => {
+  ({
+    star,
+    title,
+    currentValue,
+    handleInputsChange,
+  }: FormReviewRatingProps) => {
     const status = useAppSelector(selectStatusPost);
     return (
       <>
         <input
-          onChange={() => onInputsChange?.(star)}
+          onChange={() => handleInputsChange?.(star)}
           className="form__rating-input visually-hidden"
           name="rating"
           value={star}

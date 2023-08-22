@@ -45,7 +45,7 @@ function FormReview(): JSX.Element {
     }
   };
 
-  const onInputsChange = useCallback((star: number) => {
+  const handleInputsChange = useCallback((star: number) => {
     setRating(star);
   }, []);
 
@@ -67,7 +67,7 @@ function FormReview(): JSX.Element {
             star={star}
             title={title}
             currentValue={rating}
-            onInputsChange={onInputsChange}
+            handleInputsChange={handleInputsChange}
           />
         ))}
       </div>

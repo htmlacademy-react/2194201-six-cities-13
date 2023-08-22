@@ -41,7 +41,7 @@ function FormLogin(): JSX.Element {
     }
   };
 
-  const onInputsChange = (
+  const handleInputsChange = (
     name: (typeof AUTH_FIELDS)[number]['name'],
     value: string
   ) => {
@@ -68,7 +68,7 @@ function FormLogin(): JSX.Element {
             <label className="visually-hidden">{label}</label>
             <input
               onChange={(evt: ChangeEvent<HTMLInputElement>) =>
-                onInputsChange(name, evt.target.value)
+                handleInputsChange(name, evt.target.value)
               }
               className="login__input form__input"
               type={name}
