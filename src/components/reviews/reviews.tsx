@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import FormReview from '../form-review/form-review';
 import dayjs from 'dayjs';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectOfferReviews } from '../../store/reviews-data/selectors';
 import { selectAuthStatus } from '../../store/user-process/selectors';
 import {

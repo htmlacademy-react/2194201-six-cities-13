@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../constants';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectAuthStatus } from '../../store/user-process/selectors';
 import { logoutAction } from '../../store/api-actions';
 import ProfileLink from '../profile-link/profile-link';

@@ -4,7 +4,7 @@ import Loading from '../loading/loading';
 import Header from '../../components/header/header';
 import TabList from '../../components/tab-list/tab-list';
 import Cities from '../../components/cities/cities';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import {
   selectCurrentOffers,
   selectStatusAll,

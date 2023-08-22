@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { selectActiveCity } from '../../store/app-process/selectors';
 
 function MainEmpty(): JSX.Element {

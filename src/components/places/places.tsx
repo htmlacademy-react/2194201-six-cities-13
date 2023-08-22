@@ -1,6 +1,6 @@
 import SortOffers from '../sort-offers/sort-offers';
 import { useSortOffers } from '../../hooks/use-sort-offers/use-sort-offers';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { Card } from '../../types';
 import {
   selectActiveCity,

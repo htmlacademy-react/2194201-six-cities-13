@@ -9,7 +9,7 @@ import {
 } from '../types';
 import { saveToken, dropToken } from '../services/token';
 import { AuthData, UserData, OfferCard } from '../types';
-import { store } from '../store';
+import { store } from './store';
 import { redirectToRoute } from './action';
 import { TIMEOUT_SHOW_ERROR, APIRoute, AppRoute } from '../constants';
 import { setError } from './app-process/app-process';

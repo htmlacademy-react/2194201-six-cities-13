@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { selectStatusPost } from '../../store/reviews-data/selectors';
 import { Status } from '../../constants';
 

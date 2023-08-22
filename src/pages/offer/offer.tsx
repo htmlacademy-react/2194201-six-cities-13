@@ -10,7 +10,7 @@ import { ONE_STAR_RATIO, Status } from '../../constants';
 import { Card, ParamsId } from '../../types';
 import { MAX_OFFER_IMAGES, MAX_OFFERS_NEARBY } from '../../constants';
 import { getOffersLocation } from '../../helpers/get-offers-location';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import {
   fetchActiveOfferAction,
   fetchOffersNearbyAction,

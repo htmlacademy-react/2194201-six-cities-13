@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { selectErrorMessage } from '../../store/app-process/selectors';
 import styles from './error-message.module.css';
 

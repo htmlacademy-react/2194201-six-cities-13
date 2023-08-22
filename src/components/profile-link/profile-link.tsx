@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { selectUser } from '../../store/user-process/selectors';
 import { selectFavorites } from '../../store/favorites-data/selectors';
 import { AppRoute } from '../../constants';

@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { changeActiveCity } from '../../store/app-process/app-process';
 import { selectActiveCity } from '../../store/app-process/selectors';
 import { CityNames } from '../../types';
