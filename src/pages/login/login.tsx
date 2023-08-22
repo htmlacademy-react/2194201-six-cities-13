@@ -4,7 +4,7 @@ import Header from '../../components/header/header';
 import { AppRoute, AuthorizationStatus, CITIES } from '../../constants';
 import FormLogin from '../../components/form-login/form-login';
 import { selectAuthStatus } from '../../store/user-process/selectors';
-import { useAppSelector, useAppDispatch } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { changeActiveCity } from '../../store/app-process/app-process';
 import Loading from '../loading/loading';
 

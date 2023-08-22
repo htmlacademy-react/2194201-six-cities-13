@@ -8,16 +8,16 @@ import { memo } from 'react';
 type PlaceCardProps = {
   card: Card;
   className: 'cities' | 'favorites' | 'near-places';
-  onPlaceCardMouseOver?: (id: string) => void;
-  onPlaceCardMouseLeave?: () => void;
+  handlePlaceCardMouseOver?: (id: string) => void;
+  handlePlaceCardMouseLeave?: () => void;
 };
 
 const PlaceCard = memo(
   ({
     card,
     className,
-    onPlaceCardMouseOver,
-    onPlaceCardMouseLeave,
+    handlePlaceCardMouseOver,
+    handlePlaceCardMouseLeave,
   }: PlaceCardProps): JSX.Element => {
     const {
       id,
@@ -33,8 +33,8 @@ const PlaceCard = memo(
     return (
       <article
         className={`${className}__card place-card`}
-        onMouseOver={() => onPlaceCardMouseOver?.(id)}
-        onMouseLeave={onPlaceCardMouseLeave}
+        onMouseOver={() => handlePlaceCardMouseOver?.(id)}
+        onMouseLeave={handlePlaceCardMouseLeave}
       >
         {isPremium && (
           <div className="place-card__mark">

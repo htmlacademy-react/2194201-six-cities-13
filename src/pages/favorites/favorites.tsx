@@ -5,7 +5,7 @@ import Header from '../../components/header/header';
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import Footer from '../../components/footer/footer';
 import FavoriteList from '../../components/favorite-list/favorite-list';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import {
   selectFavorites,
   selectStatusAll,

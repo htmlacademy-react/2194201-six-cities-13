@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import { AuthorizationStatus, CITIES, AppRoute, SortName } from './constants';
-import { store } from './store/index';
+import { store } from './store/store';
 
 export type CityNames = (typeof CITIES)[number];
 export type SortNames = (typeof SortName)[keyof typeof SortName];

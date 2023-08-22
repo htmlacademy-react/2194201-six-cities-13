@@ -1,6 +1,6 @@
 import { CITIES } from '../../constants';
 import FavoriteItem from '../favorite-item/favorite-item';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { selectFavorites } from '../../store/favorites-data/selectors';
 
 function FavoriteList(): JSX.Element {

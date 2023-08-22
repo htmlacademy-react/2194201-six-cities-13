@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants';
 import { Card, CityNames } from '../../types';
 import PlaceCard from '../place-card/place-card';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../../hooks/hooks';
 import { changeActiveCity } from '../../store/app-process/app-process';
 
 type FavoriteItemProps = {

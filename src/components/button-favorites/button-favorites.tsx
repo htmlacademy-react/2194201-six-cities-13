@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectAuthStatus } from '../../store/user-process/selectors';
 import { AppRoute, AuthorizationStatus, Status } from '../../constants';
 import { changeFavoriteStatusAction } from '../../store/api-actions';

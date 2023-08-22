@@ -2,7 +2,7 @@ import { useState, FormEvent, ChangeEvent } from 'react';
 import { FormLoginData, Status } from '../../constants';
 import { UserAuth } from '../../types';
 import { AUTH_FIELDS } from '../../constants';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { loginAction } from '../../store/api-actions';
 import { selectStatusLogin } from '../../store/user-process/selectors';
 import styles from './error.module.css';
@@ -41,7 +41,7 @@ function FormLogin(): JSX.Element {
     }
   };
 
-  const onInputsChange = (
+  const handleInputsChange = (
     name: (typeof AUTH_FIELDS)[number]['name'],
     value: string
   ) => {
@@ -68,7 +68,7 @@ function FormLogin(): JSX.Element {
             <label className="visually-hidden">{label}</label>
             <input
               onChange={(evt: ChangeEvent<HTMLInputElement>) =>
-                onInputsChange(name, evt.target.value)
+                handleInputsChange(name, evt.target.value)
               }
               className="login__input form__input"
               type={name}

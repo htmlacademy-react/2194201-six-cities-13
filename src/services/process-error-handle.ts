@@ -1,4 +1,4 @@
-import { store } from '../store';
+import { store } from '../store/store';
 import { setError } from '../store/app-process/app-process';
 import { clearErrorAction } from '../store/api-actions';
 

@@ -2,7 +2,7 @@ import cn from 'classnames';
 import { useState, useEffect } from 'react';
 import { SortName } from '../../constants';
 import { SortNames } from '../../types';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectActiveSort } from '../../store/app-process/selectors';
 import { changeActiveSort } from '../../store/app-process/app-process';
 

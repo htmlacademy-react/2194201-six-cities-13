@@ -7,7 +7,7 @@ import {
 } from 'react';
 import { useParams } from 'react-router-dom';
 import { RATINGS, Status, TextareaLength } from '../../constants';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { postReviewAction } from '../../store/api-actions';
 import { selectStatusPost } from '../../store/reviews-data/selectors';
 import FormReviewRating from '../form-review-rating/form-review-rating';
@@ -23,10 +23,16 @@ function FormReview(): JSX.Element {
   const [comment, setComment] = useState<string>('');
 
   useEffect(() => {
-    if (status === Status.Success) {
+    let isMounted = true;
+
+    if (isMounted && status === Status.Success) {
       setRating(0);
       setComment('');
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [status]);
 
   const isValid = !!rating && comment.length >= Min && comment.length <= Max;
@@ -45,7 +51,7 @@ function FormReview(): JSX.Element {
     }
   };
 
-  const onInputsChange = useCallback((star: number) => {
+  const handleInputsChange = useCallback((star: number) => {
     setRating(star);
   }, []);
 
@@ -67,7 +73,7 @@ function FormReview(): JSX.Element {
             star={star}
             title={title}
             currentValue={rating}
-            onInputsChange={onInputsChange}
+            handleInputsChange={handleInputsChange}
           />
         ))}
       </div>
