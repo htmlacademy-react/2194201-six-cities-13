@@ -77,19 +77,6 @@ export type ReviewValues = {
   comment: string;
 };
 
-export type AppProcess = {
-  offers: Card[];
-  activeOffer: OfferCard | null;
-  offersNearby: OfferCard[];
-  offerReviews: Review[];
-  isOffersLoading: boolean;
-  authorizationStatus: AuthorizationStatuses;
-  user: string | null;
-  activeCity: CityNames;
-  activeSort: SortNames;
-  error: string | null;
-};
-
 export type AuthData = {
   login: string;
   password: string;
